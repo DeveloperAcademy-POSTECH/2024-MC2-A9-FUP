@@ -12,6 +12,7 @@
 		DFBE0BC72BF32CB400246814 /* Item.swift in Sources */ = {isa = PBXBuildFile; fileRef = DFBE0BC62BF32CB400246814 /* Item.swift */; };
 		DFBE0BC92BF32CB600246814 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DFBE0BC82BF32CB600246814 /* Assets.xcassets */; };
 		DFBE0BCC2BF32CB600246814 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DFBE0BCB2BF32CB600246814 /* Preview Assets.xcassets */; };
+		DFBE0BDA2BF4DB4E00246814 /* EnumManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = DFBE0BD92BF4DB4E00246814 /* EnumManager.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -21,6 +22,7 @@
 		DFBE0BC62BF32CB400246814 /* Item.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Item.swift; sourceTree = "<group>"; };
 		DFBE0BC82BF32CB600246814 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		DFBE0BCB2BF32CB600246814 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		DFBE0BD92BF4DB4E00246814 /* EnumManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EnumManager.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -53,6 +55,7 @@
 		DFBE0BC12BF32CB400246814 /* F-UP */ = {
 			isa = PBXGroup;
 			children = (
+				DFBE0BD92BF4DB4E00246814 /* EnumManager.swift */,
 				DFBE0BC22BF32CB400246814 /* F_UPApp.swift */,
 				DFBE0BC42BF32CB400246814 /* ContentView.swift */,
 				DFBE0BC62BF32CB400246814 /* Item.swift */,
@@ -140,6 +143,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DFBE0BDA2BF4DB4E00246814 /* EnumManager.swift in Sources */,
 				DFBE0BC52BF32CB400246814 /* ContentView.swift in Sources */,
 				DFBE0BC72BF32CB400246814 /* Item.swift in Sources */,
 				DFBE0BC32BF32CB400246814 /* F_UPApp.swift in Sources */,
@@ -276,6 +280,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"F-UP/Preview Content\"";
+				DEVELOPMENT_TEAM = 6RUVHQW43D;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
@@ -304,6 +309,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"F-UP/Preview Content\"";
+				DEVELOPMENT_TEAM = 6RUVHQW43D;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;

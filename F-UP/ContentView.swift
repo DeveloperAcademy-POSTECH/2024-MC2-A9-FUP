@@ -10,27 +10,27 @@ import SwiftData
 
 struct ContentView: View {
     @Environment(\.modelContext) private var modelContext
-    @Query private var items: [Item]
+    @Query private var items: [History]
 
     var body: some View {
         NavigationSplitView {
             List {
                 ForEach(items) { item in
                     NavigationLink {
-                        Text("Item at \(item.timestamp, format: Date.FormatStyle(date: .numeric, time: .standard))")
+                        Text("feeling: \(item.feelingValue.rawValue)")
                     } label: {
-                        Text(item.timestamp, format: Date.FormatStyle(date: .numeric, time: .standard))
+                        Text(item.expression)
                     }
                 }
-                .onDelete(perform: deleteItems)
+                .onDelete(perform: deleteHistorys)
             }
             .toolbar {
                 ToolbarItem(placement: .navigationBarTrailing) {
                     EditButton()
                 }
                 ToolbarItem {
-                    Button(action: addItem) {
-                        Label("Add Item", systemImage: "plus")
+                    Button(action: addHistory) {
+                        Label("Add History", systemImage: "plus")
                     }
                 }
             }
@@ -39,14 +39,30 @@ struct ContentView: View {
         }
     }
 
-    private func addItem() {
+    private func addHistory() {
         withAnimation {
-            let newItem = Item(timestamp: Date())
-            modelContext.insert(newItem)
+            guard let audioURL = URL(string: "https://www.example.com")
+            else {
+                print("Invalid URL")
+                return
+            }
+            
+            let newHistory = History(
+                date: Date(),
+                isPerformed: false,
+                challengeStep: .notStarted,
+                expression: "Test Expression",
+                audioURL: audioURL,
+                target: .family,
+                specificTarget: nil,
+                feelingValue: .veryComfortable,
+                reactionValue: .veryGood
+            )
+            modelContext.insert(newHistory)
         }
     }
 
-    private func deleteItems(offsets: IndexSet) {
+    private func deleteHistorys(offsets: IndexSet) {
         withAnimation {
             for index in offsets {
                 modelContext.delete(items[index])
@@ -57,5 +73,5 @@ struct ContentView: View {
 
 #Preview {
     ContentView()
-        .modelContainer(for: Item.self, inMemory: true)
+        .modelContainer(for: History.self, inMemory: true)
 }
