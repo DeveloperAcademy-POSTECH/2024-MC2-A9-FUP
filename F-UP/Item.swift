@@ -1,5 +1,5 @@
 //
-//  Item.swift
+//  History.swift
 //  F-UP
 //
 //  Created by 박현수 on 5/14/24.
@@ -8,11 +8,34 @@
 import Foundation
 import SwiftData
 
+enum Test: String, Codable {
+    case notStarted = "Not Started"
+    case inProgress = "In Progress"
+    case completed = "Completed"
+}
+
 @Model
-final class Item {
-    var timestamp: Date
+final class History {
+    let uuid = UUID()
+    var date: Date
+    var isPerformed = false
+    var challengeStep: ChallengeStep
+    var expression: String
+    var audioURL : URL
+    var target: Target
+    var specificTarget: String?
+    var feelingValue: FeelingValue
+    var reactionValue: ReactionValue
     
-    init(timestamp: Date) {
-        self.timestamp = timestamp
+    init(date: Date, isPerformed: Bool = false, challengeStep: ChallengeStep, expression: String, audioURL: URL, target: Target, specificTarget: String? = nil, feelingValue: FeelingValue, reactionValue: ReactionValue) {
+        self.date = date
+        self.isPerformed = isPerformed
+        self.challengeStep = challengeStep
+        self.expression = expression
+        self.audioURL = audioURL
+        self.target = target
+        self.specificTarget = specificTarget
+        self.feelingValue = feelingValue
+        self.reactionValue = reactionValue
     }
 }
