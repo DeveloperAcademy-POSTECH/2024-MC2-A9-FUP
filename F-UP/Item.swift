@@ -8,12 +8,6 @@
 import Foundation
 import SwiftData
 
-enum Test: String, Codable {
-    case notStarted = "Not Started"
-    case inProgress = "In Progress"
-    case completed = "Completed"
-}
-
 @Model
 final class History {
     let uuid = UUID()
