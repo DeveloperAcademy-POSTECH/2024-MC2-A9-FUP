@@ -12,7 +12,7 @@ struct TargetSelectView: View {
     @State var selectedTarget: String = ""
     
     let target: [Target] = Target.allCases
-    let columns = [GridItem(.adaptive(minimum: 172, maximum: 172), spacing: 9, alignment: .leading)]
+    let columns = [GridItem(.adaptive(minimum: 152, maximum: 192), spacing: 9, alignment: .leading)]
     
     var body: some View {
         GeometryReader { geo in
@@ -39,7 +39,7 @@ struct TargetSelectView: View {
                         ForEach(target, id: \.self) { target in
                             Rectangle()
                                 .foregroundColor(.clear)
-                                .frame(width: 172, height: 172)
+                                .frame(idealWidth: geo.size.width/2-9, idealHeight: geo.size.height/4-18)
                                 .background(selectedTarget == target.rawValue ? Theme.point : Theme.white)
                                 .cornerRadius(Theme.round)
                                 .dropShadow(opacity: 0.15)
@@ -81,7 +81,7 @@ struct TargetSelectView: View {
                 }, label: {
                     Rectangle()
                         .foregroundColor(.clear)
-                        .frame(width: 353, height: 50)
+                        .frame(idealWidth: 373, maxHeight: 50)
                         .background(isComplete ? Theme.point : Theme.subblack)
                         .cornerRadius(Theme.round)
                         .dropShadow(opacity: 0.15)
