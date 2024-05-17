@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		173B49DC2BF72C5600FC4FEC /* Theme.swift in Sources */ = {isa = PBXBuildFile; fileRef = 173B49DB2BF72C5600FC4FEC /* Theme.swift */; };
 		17756DB22BF5FE320067E10D /* ContentTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17756DAF2BF5FE320067E10D /* ContentTabView.swift */; };
 		17756DB32BF5FE320067E10D /* ChallengeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17756DB02BF5FE320067E10D /* ChallengeView.swift */; };
 		17756DB42BF5FE320067E10D /* HistoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17756DB12BF5FE320067E10D /* HistoryView.swift */; };
@@ -19,6 +20,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		173B49DB2BF72C5600FC4FEC /* Theme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Theme.swift; sourceTree = "<group>"; };
 		17756DAF2BF5FE320067E10D /* ContentTabView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContentTabView.swift; sourceTree = "<group>"; };
 		17756DB02BF5FE320067E10D /* ChallengeView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChallengeView.swift; sourceTree = "<group>"; };
 		17756DB12BF5FE320067E10D /* HistoryView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HistoryView.swift; sourceTree = "<group>"; };
@@ -47,6 +49,7 @@
 			children = (
 				DFBE0BD92BF4DB4E00246814 /* Enums.swift */,
 				DFBE0BC62BF32CB400246814 /* History.swift */,
+				173B49DB2BF72C5600FC4FEC /* Theme.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -185,6 +188,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				17756DB42BF5FE320067E10D /* HistoryView.swift in Sources */,
+				173B49DC2BF72C5600FC4FEC /* Theme.swift in Sources */,
 				DFBE0BDA2BF4DB4E00246814 /* Enums.swift in Sources */,
 				17756DB22BF5FE320067E10D /* ContentTabView.swift in Sources */,
 				17756DB32BF5FE320067E10D /* ChallengeView.swift in Sources */,
