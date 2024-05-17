@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1731C51D2BF74969002B59FE /* TargetSelectView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1731C51C2BF74969002B59FE /* TargetSelectView.swift */; };
 		173B49DC2BF72C5600FC4FEC /* Theme.swift in Sources */ = {isa = PBXBuildFile; fileRef = 173B49DB2BF72C5600FC4FEC /* Theme.swift */; };
 		17756DB22BF5FE320067E10D /* ContentTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17756DAF2BF5FE320067E10D /* ContentTabView.swift */; };
 		17756DB32BF5FE320067E10D /* ChallengeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17756DB02BF5FE320067E10D /* ChallengeView.swift */; };
@@ -22,6 +23,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		1731C51C2BF74969002B59FE /* TargetSelectView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TargetSelectView.swift; sourceTree = "<group>"; };
 		173B49DB2BF72C5600FC4FEC /* Theme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Theme.swift; sourceTree = "<group>"; };
 		17756DAF2BF5FE320067E10D /* ContentTabView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContentTabView.swift; sourceTree = "<group>"; };
 		17756DB02BF5FE320067E10D /* ChallengeView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChallengeView.swift; sourceTree = "<group>"; };
@@ -48,6 +50,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		1731C51E2BF749B0002B59FE /* RecordReview */ = {
+			isa = PBXGroup;
+			children = (
+				1731C51C2BF74969002B59FE /* TargetSelectView.swift */,
+			);
+			path = RecordReview;
+			sourceTree = "<group>";
+		};
 		173B49D62BF7240E00FC4FEC /* Models */ = {
 			isa = PBXGroup;
 			children = (
@@ -77,6 +87,7 @@
 		17756DAE2BF5FE320067E10D /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				1731C51E2BF749B0002B59FE /* RecordReview */,
 				DFBE0BC42BF32CB400246814 /* ContentView.swift */,
 				17756DAF2BF5FE320067E10D /* ContentTabView.swift */,
 				17756DB02BF5FE320067E10D /* ChallengeView.swift */,
@@ -198,6 +209,7 @@
 				DFBE0BDA2BF4DB4E00246814 /* Enums.swift in Sources */,
 				17756DB22BF5FE320067E10D /* ContentTabView.swift in Sources */,
 				CC0CCA412BF73998001DEEC3 /* HistoryDetailView.swift in Sources */,
+				1731C51D2BF74969002B59FE /* TargetSelectView.swift in Sources */,
 				17756DB32BF5FE320067E10D /* ChallengeView.swift in Sources */,
 				DFBE0BC52BF32CB400246814 /* ContentView.swift in Sources */,
 				DFBE0BC72BF32CB400246814 /* History.swift in Sources */,
