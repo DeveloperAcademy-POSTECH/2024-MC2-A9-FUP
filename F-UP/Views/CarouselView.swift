@@ -54,6 +54,7 @@ struct CarouselView: View {
                         .clipShape(
                             RoundedRectangle(cornerRadius: Theme.round)
                         )
+                        .dropShadow(opacity: 0.4)
                     }.scrollTransition(.animated, axis: .horizontal) { content, phase in
                         content
                             .opacity(phase.isIdentity ? 1.0 : 0.5)
@@ -61,7 +62,7 @@ struct CarouselView: View {
                     }
 
                 }
-            }.safeAreaPadding(.horizontal, 37) 
+            }.safeAreaPadding(.horizontal, 37)
         }
     }
 }
