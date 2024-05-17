@@ -61,8 +61,7 @@ struct CarouselView: View {
                     }
 
                 }
-            }.safeAreaPadding(.horizontal, 37)
-                .background(.red)
+            }.safeAreaPadding(.horizontal, 37) 
         }
     }
 }
