@@ -29,7 +29,7 @@ struct RecordView: View {
                         .foregroundColor(Theme.black)
                         .padding(.bottom, 34)
                     
-                    Rectangle()
+                    RoundedRectangle(cornerRadius: Theme.round)
                         .fill(Theme.white)
                         .frame(maxHeight: 418)
                         .overlay {
