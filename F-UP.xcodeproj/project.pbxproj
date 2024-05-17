@@ -42,14 +42,40 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		17756DAE2BF5FE320067E10D /* View */ = {
+		173B49D62BF7240E00FC4FEC /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				DFBE0BD92BF4DB4E00246814 /* Enums.swift */,
+				DFBE0BC62BF32CB400246814 /* History.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		173B49D72BF7241200FC4FEC /* App */ = {
+			isa = PBXGroup;
+			children = (
+				DFBE0BC22BF32CB400246814 /* F_UPApp.swift */,
+			);
+			path = App;
+			sourceTree = "<group>";
+		};
+		173B49D82BF7241900FC4FEC /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				DFBE0BC82BF32CB600246814 /* Assets.xcassets */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
+		17756DAE2BF5FE320067E10D /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				DFBE0BC42BF32CB400246814 /* ContentView.swift */,
 				17756DAF2BF5FE320067E10D /* ContentTabView.swift */,
 				17756DB02BF5FE320067E10D /* ChallengeView.swift */,
 				17756DB12BF5FE320067E10D /* HistoryView.swift */,
 			);
-			path = View;
+			path = Views;
 			sourceTree = "<group>";
 		};
 		DFBE0BB62BF32CB400246814 = {
@@ -71,12 +97,10 @@
 		DFBE0BC12BF32CB400246814 /* F-UP */ = {
 			isa = PBXGroup;
 			children = (
-				17756DAE2BF5FE320067E10D /* View */,
-				DFBE0BD92BF4DB4E00246814 /* Enums.swift */,
-				DFBE0BC22BF32CB400246814 /* F_UPApp.swift */,
-				DFBE0BC42BF32CB400246814 /* ContentView.swift */,
-				DFBE0BC62BF32CB400246814 /* History.swift */,
-				DFBE0BC82BF32CB600246814 /* Assets.xcassets */,
+				173B49D72BF7241200FC4FEC /* App */,
+				173B49D62BF7240E00FC4FEC /* Models */,
+				17756DAE2BF5FE320067E10D /* Views */,
+				173B49D82BF7241900FC4FEC /* Resources */,
 				DFBE0BCA2BF32CB600246814 /* Preview Content */,
 			);
 			path = "F-UP";
@@ -300,7 +324,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"F-UP/Preview Content\"";
-				DEVELOPMENT_TEAM = 6RUVHQW43D;
+				DEVELOPMENT_TEAM = 47PZ53ZAF2;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
@@ -329,7 +353,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"F-UP/Preview Content\"";
-				DEVELOPMENT_TEAM = 6RUVHQW43D;
+				DEVELOPMENT_TEAM = 47PZ53ZAF2;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
