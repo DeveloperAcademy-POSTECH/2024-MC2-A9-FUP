@@ -59,6 +59,7 @@ struct RecordView: View {
                     } label : {
                         RoundedRectangle(cornerRadius: Theme.round)
                             .fill(Theme.white)
+                            .dropShadow(opacity: 0.1)
                             .frame(width: 353, height: 50)
                             .overlay {
                                 Text("다시 녹음하기")
@@ -73,6 +74,7 @@ struct RecordView: View {
                     } label : {
                         RoundedRectangle(cornerRadius: Theme.round)
                             .fill(Theme.point)
+                            .dropShadow(opacity: 0.2)
                             .frame(width: 353, height: 50)
                             .overlay {
                                 Text("다음으로 넘어가기")
