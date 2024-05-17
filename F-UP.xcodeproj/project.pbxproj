@@ -17,6 +17,7 @@
 		DFBE0BC92BF32CB600246814 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DFBE0BC82BF32CB600246814 /* Assets.xcassets */; };
 		DFBE0BCC2BF32CB600246814 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DFBE0BCB2BF32CB600246814 /* Preview Assets.xcassets */; };
 		DFBE0BDA2BF4DB4E00246814 /* Enums.swift in Sources */ = {isa = PBXBuildFile; fileRef = DFBE0BD92BF4DB4E00246814 /* Enums.swift */; };
+		DFBE0BEF2BF7289A00246814 /* CarouselView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DFBE0BEE2BF7289A00246814 /* CarouselView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -31,6 +32,7 @@
 		DFBE0BC82BF32CB600246814 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		DFBE0BCB2BF32CB600246814 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		DFBE0BD92BF4DB4E00246814 /* Enums.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Enums.swift; sourceTree = "<group>"; };
+		DFBE0BEE2BF7289A00246814 /* CarouselView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CarouselView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -77,6 +79,7 @@
 				17756DAF2BF5FE320067E10D /* ContentTabView.swift */,
 				17756DB02BF5FE320067E10D /* ChallengeView.swift */,
 				17756DB12BF5FE320067E10D /* HistoryView.swift */,
+				DFBE0BEE2BF7289A00246814 /* CarouselView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -194,6 +197,7 @@
 				17756DB32BF5FE320067E10D /* ChallengeView.swift in Sources */,
 				DFBE0BC52BF32CB400246814 /* ContentView.swift in Sources */,
 				DFBE0BC72BF32CB400246814 /* History.swift in Sources */,
+				DFBE0BEF2BF7289A00246814 /* CarouselView.swift in Sources */,
 				DFBE0BC32BF32CB400246814 /* F_UPApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
