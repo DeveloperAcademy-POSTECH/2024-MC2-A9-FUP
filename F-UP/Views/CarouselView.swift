@@ -8,6 +8,8 @@
 import SwiftUI
 
 struct CarouselView: View {
+    @State private var showModal: Bool = false
+    
     var body: some View {
         GeometryReader { geometry in
             ScrollView(.horizontal, showsIndicators: false) {
@@ -31,21 +33,7 @@ struct CarouselView: View {
                                 .padding(.top, 41)
                                 .padding(.bottom, 50)
                             
-                            Button {
-                                //
-                            } label: {
-                                Text("따라 말하기")
-                                    .font(.headline)
-                                    .foregroundStyle(Theme.black)
-                                    .fontWeight(.bold)
-                                    .padding(.vertical, 14)
-                                    .frame(maxWidth: .infinity)
-                                    .background(Theme.white)
-                                    .clipShape(
-                                        RoundedRectangle(cornerRadius: Theme.round)
-                                    )
-                            }.padding(.horizontal, 20)
-                                .padding(.bottom, 20)
+                            challengeButton(index: index)
                         }
                         .containerRelativeFrame(.horizontal)
                         .scrollTargetBehavior(.viewAligned)
@@ -60,9 +48,42 @@ struct CarouselView: View {
                             .opacity(phase.isIdentity ? 1.0 : 0.5)
                             .scaleEffect(phase.isIdentity ? 1.0 : 0.8)
                     }
-
                 }
             }.safeAreaPadding(.horizontal, 37)
+        }
+    }
+}
+
+fileprivate struct challengeButton: View {
+    @State private var showModal: Bool = false
+    var index: Int
+    
+    var body: some View {
+        Button {
+            showModal = true
+        } label: {
+            Text("따라 말하기")
+                .font(.headline)
+                .foregroundStyle(Theme.black)
+                .fontWeight(.bold)
+                .padding(.vertical, 14)
+                .frame(maxWidth: .infinity)
+                .background(Theme.white)
+                .clipShape(
+                    RoundedRectangle(cornerRadius: Theme.round)
+                )
+        }
+        .padding(.horizontal, 20)
+        .padding(.bottom, 20)
+        .sheet(isPresented: $showModal) {
+            switch index {
+            case 1:
+                RecordingView(showModal: $showModal)
+            case 2:
+                TargetSelectView()
+            default:
+                EmptyView()
+            }
         }
     }
 }
