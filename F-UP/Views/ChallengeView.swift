@@ -13,7 +13,7 @@ struct ChallengeView: View {
             Color(Theme.background).ignoresSafeArea()
             
             //Title
-            VStack {
+            VStack(spacing: 0) {
                 HStack {
                     Text("챌린지")
                         .font(.title)
@@ -66,7 +66,7 @@ struct ChallengeView: View {
                 
                 
             //progress bar (애니메이션으로 제작 가능성 있음)
-                VStack{
+                VStack(spacing: 0) {
                     HStack(spacing: 0){
                         Text("1. 말하기")
                             .font(.caption2 .weight(.bold))
