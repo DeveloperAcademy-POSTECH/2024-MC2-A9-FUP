@@ -10,8 +10,13 @@ import SwiftData
 
 struct ContentView: View {
     @Environment(\.modelContext) private var modelContext
+//    @Environment(SwiftDataManager.self) private var swiftDataManager
     @Query private var items: [History]
 
+    var swiftDataManager: SwiftDataManager {
+        SwiftDataManager(modelContext: modelContext)
+    }
+    
     var body: some View {
         NavigationSplitView {
             List {
@@ -29,7 +34,9 @@ struct ContentView: View {
                     EditButton()
                 }
                 ToolbarItem {
-                    Button(action: addHistory) {
+                    Button {
+                        swiftDataManager.addHistory()
+                    } label: {
                         Label("Add History", systemImage: "plus")
                     }
                 }

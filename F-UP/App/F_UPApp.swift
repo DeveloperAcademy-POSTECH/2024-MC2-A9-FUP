@@ -10,6 +10,8 @@ import SwiftData
 
 @main
 struct F_UPApp: App {
+//    @State private var swiftDataManager = SwiftDataManager()
+    @State private var avfoundationManager = AVFoundationManager()
     var sharedModelContainer: ModelContainer = {
         let schema = Schema([
             History.self,
@@ -25,9 +27,12 @@ struct F_UPApp: App {
 
     var body: some Scene {
         WindowGroup {
-            ContentTabView()
+//            ContentTabView()
+            AVFoundationTestView()
 //            ContentView()
         }
         .modelContainer(sharedModelContainer)
+        .environment(avfoundationManager)
+//        .environment(swiftDataManager)
     }
 }
