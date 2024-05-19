@@ -1,5 +1,5 @@
 //
-//  RecordView.swift
+//  ReviewRecordingView.swift
 //  F-UP
 //
 //  Created by namdghyun on 5/18/24.
@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct RecordView: View {
+struct ReviewRecordingView: View {
     var body: some View {
         ZStack {
             Theme.background
@@ -90,5 +90,5 @@ struct RecordView: View {
 }
 
 #Preview {
-    RecordView()
+    ReviewRecordingView()
 }
