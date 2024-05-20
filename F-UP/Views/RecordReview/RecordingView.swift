@@ -73,6 +73,9 @@ struct RecordingView: View {
                             isRecording = true
                         }
                     }
+                    .navigationDestination(isPresented: $navigationToNextView) {
+                        ReviewRecordingView(showModal: $showModal)
+                    }
                     
                     Text(isMicSelected ? "듣고 있어요" : "오늘의 표현을 실제로 따라해보세요")
                         .font(.body .weight(.bold))
@@ -81,9 +84,6 @@ struct RecordingView: View {
                     Spacer()
                 }
                 .padding(.horizontal, Theme.padding)
-                .navigationDestination(isPresented: $navigationToNextView) {
-                    ReviewRecordingView(showModal: $showModal)
-                }
                 .navigationTitle("말하기")
                 .navigationBarTitleDisplayMode(.inline)
                 .toolbar {

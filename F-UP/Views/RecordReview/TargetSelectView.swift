@@ -12,9 +12,13 @@ struct TargetSelectView: View {
     
     @State private var nameTextField = ""
     @State private var selectedTarget: String = ""
+    @State private var navigationToNextView: Bool = false
     
     let target: [Target] = Target.allCases
     let columns = [GridItem(.adaptive(minimum: 152, maximum: 192), spacing: 9, alignment: .leading)]
+    var isComplete: Bool {
+        selectedTarget != ""
+    }
     
     var body: some View {
         NavigationStack {
@@ -60,6 +64,7 @@ struct TargetSelectView: View {
                                                 let isSelected = selectedTarget == target.rawValue
                                                 isSelected ? (selectedTarget = "") : (selectedTarget = target.rawValue)
                                             }
+                                            nameTextField = ""
                                         }
                                 }
                             }
@@ -77,10 +82,14 @@ struct TargetSelectView: View {
                             }
                         }
                         Spacer()
-                        let isComplete: Bool = selectedTarget != ""
-                        Button(action: {
-                            ///
-                        }, label: {
+                        
+                        Button {
+                            if navigationToNextView {
+                                navigationToNextView = false
+                            } else {
+                                navigationToNextView = true
+                            }
+                        } label: {
                             Rectangle()
                                 .foregroundColor(.clear)
                                 .frame(idealWidth: 373, maxHeight: 50)
@@ -93,7 +102,14 @@ struct TargetSelectView: View {
                                         .multilineTextAlignment(.center)
                                         .foregroundColor(isComplete ? Theme.white : Theme.white)
                                 }
-                        }).disabled(!isComplete)
+                        }
+                        .disabled(!isComplete)
+                        .navigationDestination(isPresented: $navigationToNextView) {
+                            MyMoodView(showModal: $showModal)
+                        }
+                        
+                        
+                        
                     }
                     .padding(.horizontal, Theme.padding)
                     .navigationTitle("기록하기")
