@@ -77,7 +77,7 @@ struct RecordingView: View {
                     
                     Text(isMicSelected ? "듣고 있어요" : "오늘의 표현을 실제로 따라해보세요")
                         .font(.body .weight(.bold))
-                        .foregroundStyle(Theme.semiblack)
+                        .foregroundStyle(isMicSelected ? Theme.black : Theme.semiblack)
                     
                     Spacer()
                 }
