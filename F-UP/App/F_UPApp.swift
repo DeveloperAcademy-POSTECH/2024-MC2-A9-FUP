@@ -27,8 +27,8 @@ struct F_UPApp: App {
 
     var body: some Scene {
         WindowGroup {
-//            ContentTabView()
-            AVFoundationTestView()
+            ContentTabView()
+//            AVFoundationTestView()
 //            ContentView()
         }
         .modelContainer(sharedModelContainer)
