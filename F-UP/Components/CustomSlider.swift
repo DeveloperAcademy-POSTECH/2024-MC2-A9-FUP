@@ -127,5 +127,5 @@ struct CustomSlider<V>: View where V : BinaryFloatingPoint, V.Stride : BinaryFlo
 
 #Preview {
     CustomSlider(value: .constant(0.5), in: 1...100)
-        .frame(width: 300, height: 100)
+        .frame(height: 38)
 }

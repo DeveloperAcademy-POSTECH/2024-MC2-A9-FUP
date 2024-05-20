@@ -78,7 +78,7 @@ struct ReviewRecordingView: View {
                         .dropShadow(opacity: 0.2)
                         .frame(width: 353, height: 50)
                         .overlay {
-                            Text("다음으로 넘어가기")
+                            Text("첫 번째 챌린지 완료하기")
                                 .font(.headline .weight(.bold))
                                 .foregroundStyle(Theme.white)
                         }
