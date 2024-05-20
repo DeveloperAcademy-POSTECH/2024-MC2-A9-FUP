@@ -10,8 +10,10 @@ import SwiftData
 
 @main
 struct F_UPApp: App {
-//    @State private var swiftDataManager = SwiftDataManager()
+    @State private var swiftDataManager = SwiftDataManager()
     @State private var avfoundationManager = AVFoundationManager()
+    @AppStorage("streak") private var streak: Int = 0
+    
     var sharedModelContainer: ModelContainer = {
         let schema = Schema([
             History.self,
@@ -33,6 +35,6 @@ struct F_UPApp: App {
         }
         .modelContainer(sharedModelContainer)
         .environment(avfoundationManager)
-//        .environment(swiftDataManager)
+        .environment(swiftDataManager)
     }
 }

@@ -10,25 +10,19 @@ import SwiftUI
 
 @Observable
 final class SwiftDataManager {
-    let modelContext: ModelContext
     
-    init(modelContext: ModelContext) {
-        self.modelContext = modelContext
-    }
-    
-    func addHistory() {
+    func addHistory(modelContext: ModelContext) {
         withAnimation {
             guard let audioURL = URL(string: "https://www.example.com")
             else {
                 print("Invalid URL")
                 return
             }
-            
             let newHistory = History(
                 date: Date(),
                 isPerformed: false,
                 challengeStep: .notStarted,
-                expression: "Test Expression",
+                expression: "Test Expression0520",
                 audioURL: audioURL,
                 target: .family,
                 specificTarget: nil,
@@ -37,13 +31,25 @@ final class SwiftDataManager {
             )
             modelContext.insert(newHistory)
         }
+        
+        do {
+            try modelContext.save()
+        } catch {
+            print(error.localizedDescription)
+        }
     }
 
-    func deleteHistorys(offsets: IndexSet, histories: [History]) {
+    func deleteHistorys(modelContext: ModelContext, offsets: IndexSet, histories: [History]) {
         withAnimation {
             for index in offsets {
                 modelContext.delete(histories[index])
             }
         }
+        do {
+            try modelContext.save()
+        } catch {
+            print(error.localizedDescription)
+        }
     }
+    
 }

@@ -20,6 +20,7 @@
 		DF32E1822BFA40780084B28C /* SwiftDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF32E1812BFA40780084B28C /* SwiftDataManager.swift */; };
 		DF32E1842BFA48660084B28C /* AVFoundationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF32E1832BFA48660084B28C /* AVFoundationManager.swift */; };
 		DF32E1862BFA4B3A0084B28C /* AVFoundationTestView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF32E1852BFA4B3A0084B28C /* AVFoundationTestView.swift */; };
+		DF81E15E2BFB35EB00A562B2 /* DateFormatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF81E15D2BFB35EB00A562B2 /* DateFormatter.swift */; };
 		DFBE0BC32BF32CB400246814 /* F_UPApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = DFBE0BC22BF32CB400246814 /* F_UPApp.swift */; };
 		DFBE0BC52BF32CB400246814 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DFBE0BC42BF32CB400246814 /* ContentView.swift */; };
 		DFBE0BC72BF32CB400246814 /* History.swift in Sources */ = {isa = PBXBuildFile; fileRef = DFBE0BC62BF32CB400246814 /* History.swift */; };
@@ -43,6 +44,7 @@
 		DF32E1812BFA40780084B28C /* SwiftDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftDataManager.swift; sourceTree = "<group>"; };
 		DF32E1832BFA48660084B28C /* AVFoundationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AVFoundationManager.swift; sourceTree = "<group>"; };
 		DF32E1852BFA4B3A0084B28C /* AVFoundationTestView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AVFoundationTestView.swift; sourceTree = "<group>"; };
+		DF81E15D2BFB35EB00A562B2 /* DateFormatter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateFormatter.swift; sourceTree = "<group>"; };
 		DFBE0BBF2BF32CB400246814 /* F-UP.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "F-UP.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		DFBE0BC22BF32CB400246814 /* F_UPApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = F_UPApp.swift; sourceTree = "<group>"; };
 		DFBE0BC42BF32CB400246814 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -103,13 +105,11 @@
 		17756DAE2BF5FE320067E10D /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				DF81E1612BFB5B2900A562B2 /* Challenge */,
 				CCC074232BFB1E9F00401B25 /* History */,
 				DF32E1872BFA642D0084B28C /* Temp */,
 				1731C51E2BF749B0002B59FE /* RecordReview */,
-				DFBE0BC42BF32CB400246814 /* ContentView.swift */,
 				17756DAF2BF5FE320067E10D /* ContentTabView.swift */,
-				17756DB02BF5FE320067E10D /* ChallengeView.swift */,
-				DFBE0BEE2BF7289A00246814 /* CarouselView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -144,9 +144,19 @@
 		DF32E1872BFA642D0084B28C /* Temp */ = {
 			isa = PBXGroup;
 			children = (
+				DFBE0BC42BF32CB400246814 /* ContentView.swift */,
 				DF32E1852BFA4B3A0084B28C /* AVFoundationTestView.swift */,
 			);
 			path = Temp;
+			sourceTree = "<group>";
+		};
+		DF81E1612BFB5B2900A562B2 /* Challenge */ = {
+			isa = PBXGroup;
+			children = (
+				17756DB02BF5FE320067E10D /* ChallengeView.swift */,
+				DFBE0BEE2BF7289A00246814 /* CarouselView.swift */,
+			);
+			path = Challenge;
 			sourceTree = "<group>";
 		};
 		DFBE0BB62BF32CB400246814 = {
@@ -175,6 +185,7 @@
 				17756DAE2BF5FE320067E10D /* Views */,
 				173B49D82BF7241900FC4FEC /* Resources */,
 				DFBE0BCA2BF32CB600246814 /* Preview Content */,
+				DF81E15D2BFB35EB00A562B2 /* DateFormatter.swift */,
 			);
 			path = "F-UP";
 			sourceTree = "<group>";
@@ -262,6 +273,7 @@
 				DF32E1822BFA40780084B28C /* SwiftDataManager.swift in Sources */,
 				17AB3C152BF7D12C00A725B7 /* ReviewRecordingView.swift in Sources */,
 				173B49DC2BF72C5600FC4FEC /* Theme.swift in Sources */,
+				DF81E15E2BFB35EB00A562B2 /* DateFormatter.swift in Sources */,
 				DFBE0BDA2BF4DB4E00246814 /* Enums.swift in Sources */,
 				17756DB22BF5FE320067E10D /* ContentTabView.swift in Sources */,
 				CCC074292BFB1F5000401B25 /* HistoryFilterView.swift in Sources */,
@@ -408,7 +420,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"F-UP/Preview Content\"";
-				DEVELOPMENT_TEAM = 47PZ53ZAF2;
+				DEVELOPMENT_TEAM = 6RUVHQW43D;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
@@ -437,7 +449,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"F-UP/Preview Content\"";
-				DEVELOPMENT_TEAM = 47PZ53ZAF2;
+				DEVELOPMENT_TEAM = 6RUVHQW43D;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
