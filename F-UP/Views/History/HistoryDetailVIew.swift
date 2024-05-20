@@ -117,7 +117,7 @@ private func RecoderPlay(dummy: History) -> some View {
                     .foregroundStyle(Theme.black)
                     .padding(.bottom, 21)
                 HStack(spacing: 0) {
-                    Image("waves")
+                    Image("TempWaveImage")
                         .resizable()
                         .frame(width: 241, height: 31)
                     Button {
