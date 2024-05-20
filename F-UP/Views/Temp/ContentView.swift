@@ -43,8 +43,9 @@ struct ContentView: View {
             .onChange(of: currentDateString) {
                 checkAndAddHistory()
             }
-            .onReceive(Timer.publish(every: 30, on: .main, in: .common).autoconnect()) { _ in
+            .onReceive(Timer.publish(every: 3, on: .main, in: .common).autoconnect()) { _ in
                 let newDateString = DateFormatter.localizedString(from: Date(), dateStyle: .short, timeStyle: .none)
+                print(newDateString)
                 if newDateString != currentDateString {
                     currentDateString = newDateString
                 }
