@@ -25,6 +25,7 @@ struct ContentTabView: View {
                     Text("히스토리")
                 }
         }
+        .tint(Theme.point)
     }
 }
 
