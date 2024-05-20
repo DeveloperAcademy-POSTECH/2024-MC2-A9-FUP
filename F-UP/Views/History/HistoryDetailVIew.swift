@@ -7,7 +7,6 @@
 
 // TODO: SwiftData로 Data 대체
 // TODO: 녹음 재생
-// TODO: 그라데이션 넣기
 import SwiftUI
 
 struct HistoryDetailView: View {
@@ -167,27 +166,33 @@ private struct CustomProgressViewStyle: ProgressViewStyle {
     func makeBody(configuration: Configuration) -> some View {
         let emojis = ["😂", "😅", "😊", "😁", "🥰"]
         
-        ZStack(alignment: .leading) {
+        let progress = CGFloat(configuration.fractionCompleted ?? 0)
+        
+        return ZStack(alignment: .leading) {
             RoundedRectangle(cornerRadius: 20.5)
-                .fill(Theme.subblack)
+                .fill(LinearGradient(gradient: Gradient(colors: [Theme.subblack.opacity(0.5), Theme.subblack]), startPoint: .leading, endPoint: .trailing))
+                .opacity(0.6)
                 .frame(width: 353, height: 38)
-            
-            RoundedRectangle(cornerRadius: 20.5)
-                .fill(Theme.point)
-                .frame(width: CGFloat(configuration.fractionCompleted ?? 0) * 353, height: 38)
-            
-            if let fractionCompleted = configuration.fractionCompleted {
-                Text(emojis[min(Int(fractionCompleted * 4), 4)])
-                    .font(Font.system(size: 34))
-                    .offset(x: fractionCompleted == 0 ? 0 : CGFloat(fractionCompleted) * 353 - 40)
-            }
+                .overlay(
+                    RoundedRectangle(cornerRadius: 20.5)
+                        .fill(LinearGradient(gradient: Gradient(colors: [Color(hex: 0x94D9D7), Color(hex: 0x58C8C2)]), startPoint: .leading, endPoint: .trailing))
+                        .opacity(0.8)
+                        .frame(width: progress * 353, height: 38),
+                    alignment: .leading
+                )
+                .overlay(
+                    Text(emojis[Int(progress * 4)])
+                        .font(Font.system(size: 34))
+                        .offset(x: progress == 0 ? 0 : progress * 353 - 40),
+                    alignment: .leading
+                )
         }
     }
 }
 
 #Preview {
     NavigationStack {
-        HistoryDetailView(dummy: History(date: Date(), challengeStep: .ChallengeCompleted, expression: "오늘 하루도 정말 수고 많았어", audioURL: URL(string: "www.exmaple.com")!, target: .family, specificTarget: "도리" ,feelingValue: .comfortable, reactionValue: .good))
+        HistoryDetailView(dummy: History(date: Date(), challengeStep: .ChallengeCompleted, expression: "오늘 하루도 정말 수고 많았어", audioURL: URL(string: "www.exmaple.com")!, target: .family, specificTarget: "도리" ,feelingValue: .veryUncomfortable, reactionValue: .veryGood))
     }
 }
 
