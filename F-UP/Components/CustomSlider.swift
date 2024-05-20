@@ -8,21 +8,19 @@
 import SwiftUI
 
 struct CustomSlider<V>: View where V : BinaryFloatingPoint, V.Stride : BinaryFloatingPoint {
-    
-    // MARK: - Value
+    // MARK: - 프로퍼티
     // MARK: Private
     @Binding private var value: V
     private let bounds: ClosedRange<V>
     private let step: V.Stride
     
-    private let length: CGFloat    = 45
+    private let length: CGFloat    = 38
     private let lineWidth: CGFloat = 2
     
     @State private var ratio: CGFloat   = 0
     @State private var startX: CGFloat? = nil
     
-    
-    // MARK: - Initializer
+    // MARK: - 생성자
     init(value: Binding<V>, in bounds: ClosedRange<V>, step: V.Stride = 1) {
         _value  = value
         
@@ -30,24 +28,19 @@ struct CustomSlider<V>: View where V : BinaryFloatingPoint, V.Stride : BinaryFlo
         self.step   = step
     }
     
-    
-    // MARK: - View
+    // MARK: - 뷰
     // MARK: Public
     var body: some View {
         GeometryReader { proxy in
             ZStack(alignment: .leading) {
                 // Track
-                LinearGradient(
-                    stops: [
-                        Gradient.Stop(color: Color(red: 0.73, green: 0.75, blue: 0.8).opacity(0.7), location: 0.00),
-                        Gradient.Stop(color: Color(red: 0.73, green: 0.75, blue: 0.8).opacity(0.5), location: 1.00),
-                    ],
-                    startPoint: UnitPoint(x: 1, y: 1),
-                    endPoint: UnitPoint(x: 0, y: 0)
-                )
-                .background(.white)
-                .clipShape(Capsule())
-                .dropShadow(opacity: 0.15)
+                gradientView(firstColor: Color(red: 0.73, green: 0.75, blue: 0.8).opacity(0.7),
+                             secondColor: Color(red: 0.73, green: 0.75, blue: 0.8).opacity(0.5),
+                             isPresentFirst: true)
+                
+                gradientView(firstColor: Theme.point,
+                             secondColor: Theme.point.opacity(0.6),
+                             isPresentFirst: false)
                 
                 // Thumb
                 Circle()
@@ -68,8 +61,26 @@ struct CustomSlider<V>: View where V : BinaryFloatingPoint, V.Stride : BinaryFlo
         }
     }
     
+    // MARK: - 트랙 (배경)
+    private func gradientView(firstColor: Color, secondColor: Color, isPresentFirst: Bool) -> some View {
+        return LinearGradient(
+            stops: [
+                Gradient.Stop(color: firstColor, location: 0.00),
+                Gradient.Stop(color: secondColor, location: 1.00),
+            ],
+            startPoint: UnitPoint(x: 1, y: 1),
+            endPoint: UnitPoint(x: 0, y: 0)
+        )
+        .background(.white)
+        .clipShape(Capsule())
+        .dropShadow(opacity: 0.15)
+        .opacity(isPresentFirst
+                 ? 1 - Double(value) / Double(bounds.upperBound)
+                 : Double(value) / Double(bounds.upperBound)
+        )
+    }
     
-    // MARK: - Function
+    // MARK: - 메소드
     // MARK: Private
     private func updateStatus(value: DragGesture.Value, proxy: GeometryProxy) {
         guard startX == nil else { return }
@@ -115,9 +126,6 @@ struct CustomSlider<V>: View where V : BinaryFloatingPoint, V.Stride : BinaryFlo
 }
 
 #Preview {
-    ZStack {
-        Theme.background.ignoresSafeArea()
-        CustomSlider(value: .constant(0), in: 1...100)
-            .frame(width: 300, height: 100)
-    }
+    CustomSlider(value: .constant(0.5), in: 1...100)
+        .frame(width: 300, height: 100)
 }
