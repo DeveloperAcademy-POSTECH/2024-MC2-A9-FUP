@@ -1,5 +1,5 @@
 //
-//  SliderView.swift
+//  CustomSlider.swift
 //  F-UP
 //
 //  Created by namdghyun on 5/20/24.
@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct LockerSlider<V>: View where V : BinaryFloatingPoint, V.Stride : BinaryFloatingPoint {
+struct CustomSlider<V>: View where V : BinaryFloatingPoint, V.Stride : BinaryFloatingPoint {
     
     // MARK: - Value
     // MARK: Private
@@ -117,7 +117,7 @@ struct LockerSlider<V>: View where V : BinaryFloatingPoint, V.Stride : BinaryFlo
 #Preview {
     ZStack {
         Theme.background.ignoresSafeArea()
-        LockerSlider(value: .constant(0), in: 1...100)
+        CustomSlider(value: .constant(0), in: 1...100)
             .frame(width: 300, height: 100)
     }
 }
