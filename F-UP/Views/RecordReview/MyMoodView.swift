@@ -35,8 +35,9 @@ struct MyMoodView: View {
                 .clipShape(RoundedRectangle(cornerRadius: Theme.round))
                 .padding(.top, 27)
                 
-                CustomSlider(value: $sliderValue, in: 0...100)
-                    .padding(.top, 50)
+                CustomSlider(value: $sliderValue, in: 0...100, step: 25)
+                    .padding(.top, 22)
+                    .animation(.spring, value: sliderValue)
                 
                 Spacer()
             }
