@@ -15,11 +15,10 @@ struct RecordingView: View {
     @State private var navigationToNextView: Bool = false
     
     var body: some View {
-        ZStack {
-            Theme.background
-                .ignoresSafeArea()
-            
-            NavigationStack {
+        NavigationStack {
+            ZStack {
+                Theme.background.ignoresSafeArea()
+                
                 VStack(alignment: .center, spacing: 0) {
                     Text("오늘의 표현")
                         .font(.footnote .weight(.regular))

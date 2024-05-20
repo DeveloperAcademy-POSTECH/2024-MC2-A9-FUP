@@ -80,7 +80,7 @@ fileprivate struct challengeButton: View {
             case 1:
                 RecordingView(showModal: $showModal)
             case 2:
-                TargetSelectView()
+                TargetSelectView(showModal: $showModal)
             default:
                 EmptyView()
             }
