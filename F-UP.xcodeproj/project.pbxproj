@@ -11,10 +11,11 @@
 		173B49DC2BF72C5600FC4FEC /* Theme.swift in Sources */ = {isa = PBXBuildFile; fileRef = 173B49DB2BF72C5600FC4FEC /* Theme.swift */; };
 		17756DB22BF5FE320067E10D /* ContentTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17756DAF2BF5FE320067E10D /* ContentTabView.swift */; };
 		17756DB32BF5FE320067E10D /* ChallengeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17756DB02BF5FE320067E10D /* ChallengeView.swift */; };
-		17756DB42BF5FE320067E10D /* HistoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17756DB12BF5FE320067E10D /* HistoryView.swift */; };
 		17AB3C152BF7D12C00A725B7 /* ReviewRecordingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17AB3C142BF7D12C00A725B7 /* ReviewRecordingView.swift */; };
 		17AB3C172BFA3E9600A725B7 /* RecordingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17AB3C162BFA3E9600A725B7 /* RecordingView.swift */; };
-		CC0CCA412BF73998001DEEC3 /* HistoryDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC0CCA402BF73998001DEEC3 /* HistoryDetailView.swift */; };
+		CCC074252BFB1EC000401B25 /* HistoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCC074242BFB1EC000401B25 /* HistoryView.swift */; };
+		CCC074272BFB1F2E00401B25 /* HistoryDetailVIew.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCC074262BFB1F2E00401B25 /* HistoryDetailVIew.swift */; };
+		CCC074292BFB1F5000401B25 /* HistoryFilterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCC074282BFB1F5000401B25 /* HistoryFilterView.swift */; };
 		DF32E17F2BFA1B730084B28C /* DottedDivider.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF32E17E2BFA1B730084B28C /* DottedDivider.swift */; };
 		DF32E1822BFA40780084B28C /* SwiftDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF32E1812BFA40780084B28C /* SwiftDataManager.swift */; };
 		DF32E1842BFA48660084B28C /* AVFoundationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF32E1832BFA48660084B28C /* AVFoundationManager.swift */; };
@@ -33,10 +34,11 @@
 		173B49DB2BF72C5600FC4FEC /* Theme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Theme.swift; sourceTree = "<group>"; };
 		17756DAF2BF5FE320067E10D /* ContentTabView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContentTabView.swift; sourceTree = "<group>"; };
 		17756DB02BF5FE320067E10D /* ChallengeView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChallengeView.swift; sourceTree = "<group>"; };
-		17756DB12BF5FE320067E10D /* HistoryView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HistoryView.swift; sourceTree = "<group>"; };
 		17AB3C142BF7D12C00A725B7 /* ReviewRecordingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewRecordingView.swift; sourceTree = "<group>"; };
 		17AB3C162BFA3E9600A725B7 /* RecordingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordingView.swift; sourceTree = "<group>"; };
-		CC0CCA402BF73998001DEEC3 /* HistoryDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryDetailView.swift; sourceTree = "<group>"; };
+		CCC074242BFB1EC000401B25 /* HistoryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryView.swift; sourceTree = "<group>"; };
+		CCC074262BFB1F2E00401B25 /* HistoryDetailVIew.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryDetailVIew.swift; sourceTree = "<group>"; };
+		CCC074282BFB1F5000401B25 /* HistoryFilterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryFilterView.swift; sourceTree = "<group>"; };
 		DF32E17E2BFA1B730084B28C /* DottedDivider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DottedDivider.swift; sourceTree = "<group>"; };
 		DF32E1812BFA40780084B28C /* SwiftDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftDataManager.swift; sourceTree = "<group>"; };
 		DF32E1832BFA48660084B28C /* AVFoundationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AVFoundationManager.swift; sourceTree = "<group>"; };
@@ -101,16 +103,25 @@
 		17756DAE2BF5FE320067E10D /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				CCC074232BFB1E9F00401B25 /* History */,
 				DF32E1872BFA642D0084B28C /* Temp */,
 				1731C51E2BF749B0002B59FE /* RecordReview */,
 				DFBE0BC42BF32CB400246814 /* ContentView.swift */,
 				17756DAF2BF5FE320067E10D /* ContentTabView.swift */,
 				17756DB02BF5FE320067E10D /* ChallengeView.swift */,
-				17756DB12BF5FE320067E10D /* HistoryView.swift */,
 				DFBE0BEE2BF7289A00246814 /* CarouselView.swift */,
-				CC0CCA402BF73998001DEEC3 /* HistoryDetailView.swift */,
 			);
 			path = Views;
+			sourceTree = "<group>";
+		};
+		CCC074232BFB1E9F00401B25 /* History */ = {
+			isa = PBXGroup;
+			children = (
+				CCC074242BFB1EC000401B25 /* HistoryView.swift */,
+				CCC074262BFB1F2E00401B25 /* HistoryDetailVIew.swift */,
+				CCC074282BFB1F5000401B25 /* HistoryFilterView.swift */,
+			);
+			path = History;
 			sourceTree = "<group>";
 		};
 		DF32E17D2BFA1B580084B28C /* Components */ = {
@@ -246,14 +257,15 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CCC074272BFB1F2E00401B25 /* HistoryDetailVIew.swift in Sources */,
 				DF32E17F2BFA1B730084B28C /* DottedDivider.swift in Sources */,
 				DF32E1822BFA40780084B28C /* SwiftDataManager.swift in Sources */,
-				17756DB42BF5FE320067E10D /* HistoryView.swift in Sources */,
 				17AB3C152BF7D12C00A725B7 /* ReviewRecordingView.swift in Sources */,
 				173B49DC2BF72C5600FC4FEC /* Theme.swift in Sources */,
 				DFBE0BDA2BF4DB4E00246814 /* Enums.swift in Sources */,
 				17756DB22BF5FE320067E10D /* ContentTabView.swift in Sources */,
-				CC0CCA412BF73998001DEEC3 /* HistoryDetailView.swift in Sources */,
+				CCC074292BFB1F5000401B25 /* HistoryFilterView.swift in Sources */,
+				CCC074252BFB1EC000401B25 /* HistoryView.swift in Sources */,
 				1731C51D2BF74969002B59FE /* TargetSelectView.swift in Sources */,
 				17756DB32BF5FE320067E10D /* ChallengeView.swift in Sources */,
 				DFBE0BC52BF32CB400246814 /* ContentView.swift in Sources */,
