@@ -66,6 +66,7 @@ struct ReviewRecordingView: View {
                 
                 Button {
                     // 녹음 삭제하고 다시 녹음
+                    avfoundationManager.stopPlaying()
                     avfoundationManager.deleteRecording()
                     dismiss()
                 } label : {
@@ -82,6 +83,7 @@ struct ReviewRecordingView: View {
                 }
                 
                 Button {
+                    avfoundationManager.stopPlaying()
                     showModal = false
                     
                     // 녹음한 내용 저장하고 챌린지 단계 변경
