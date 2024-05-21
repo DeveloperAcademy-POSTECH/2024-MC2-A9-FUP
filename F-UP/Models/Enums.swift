@@ -10,7 +10,7 @@ import Foundation
 enum ChallengeStep: Int, Codable {
     case notStarted = 0
     case recordingCompleted = 1
-    case ChallengeCompleted = 2
+    case challengeCompleted = 2
 }
 
 enum Target: String, Codable, CaseIterable {

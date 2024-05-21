@@ -206,7 +206,7 @@ extension HistoryDetailView {
 
 #Preview {
     NavigationStack {
-        HistoryDetailView(history: History(date: Date(), challengeStep: .ChallengeCompleted, expression: "오늘 하루도 정말 수고 많았어", audioURL: URL(string: "www.exmaple.com")!, target: .family, specificTarget: "도리" ,feelingValue: .veryUncomfortable, reactionValue: .veryGood))
+        HistoryDetailView(history: History(date: Date(), challengeStep: .challengeCompleted, expression: "오늘 하루도 정말 수고 많았어", audioURL: URL(string: "www.exmaple.com")!, target: .family, specificTarget: "도리" ,feelingValue: .veryUncomfortable, reactionValue: .veryGood))
     }
 }
 

@@ -9,13 +9,17 @@ import Foundation
 import SwiftUI
 
 struct DottedDivider: View {
-    var gradient = LinearGradient(
-                    gradient: Gradient(
-                        colors: [Theme.point.opacity(1), Theme.point, Theme.point.opacity(0.6)]
-                    ),
-                    startPoint: .leading,
-                    endPoint: .trailing)
+    let step: ChallengeStep
+    
     var body: some View {
+        let gradient = LinearGradient(
+            gradient: Gradient(
+                colors: [Theme.point.opacity(step == .notStarted ? 1 : 0.6), Theme.point, Theme.point.opacity(step == .notStarted ? 0.6 : 1)]
+            ),
+            startPoint: .leading,
+            endPoint: .trailing
+        )
+        
         GeometryReader { geometry in
             Path { path in
                 path.move(to: CGPoint(x: 0, y: geometry.size.height / 2))
