@@ -31,6 +31,7 @@ struct ChallengeView: View {
                 HStack {
                     Text("챌린지")
                         .font(.title)
+                        .foregroundStyle(Theme.black)
                         .fontWeight(.bold)
                         .padding(.leading, 20)
                     
