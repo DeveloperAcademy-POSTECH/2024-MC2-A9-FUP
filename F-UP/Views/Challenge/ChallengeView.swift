@@ -12,15 +12,31 @@ import SwiftData
 struct ChallengeView: View {
     @Environment(\.modelContext) private var modelContext
     @Environment(SwiftDataManager.self) private var swiftDataManager
+    @Environment(AVFoundationManager.self) private var avFoundationManager
+    @Environment(RefreshTrigger.self) var refreshTrigger
+    
     @Query private var histories: [History]
 
     @State var todayHistories: [History] = []
     @State var yesterdayHistories: [History] = []
     @State private var currentDateString: String = Date().formatted(date: .abbreviated, time: .omitted)
-    
+    @State private var expressionIndex: Int = 0
     @State var currentChallengeStep: ChallengeStep = .notStarted
     
     @AppStorage("streak") var streak: Int = 0
+    
+    let dummyExpression = [
+        "생각나서 연락했어.",
+        "보람찬 하루 보내",
+        "항상 널 생각하고 있어",
+        "알찬 하루 보내",
+        "오늘 하루도 화이팅!",
+        "행복한 하루 보내!",
+        "즐거운 하루 보내",
+        "오늘 뭐 먹었어?",
+        "에구 많이 힘들었겠다",
+        "너는 최고야"
+    ]
     
     var body: some View {
         ZStack(alignment: .top){
@@ -28,6 +44,14 @@ struct ChallengeView: View {
             
             //Title
             VStack(spacing: 0) {
+//                if currentChallengeStep == .recordingCompleted {
+//                    Button("start") {
+//                        avFoundationManager.playRecorded(audioFilename: todayHistories[0].audioURL)
+//                    }
+//                    Button("stop") {
+//                        avFoundationManager.stopPlaying()
+//                    }
+//                }
                 HStack {
                     Text("챌린지")
                         .font(.title)
@@ -68,20 +92,25 @@ struct ChallengeView: View {
                         .font(.footnote .weight(.regular))
                         .foregroundColor(Theme.semiblack)
                         .padding(.bottom, 3)
-                    Text("“오늘 하루도 정말 수고 많았어.”")
+                    Text("“\(dummyExpression[expressionIndex])”")
                         .font(.title3 .weight(.bold))
                         .foregroundColor(Theme.black)
                 }
-                .padding(.horizontal, 30)
+                .frame(maxWidth: .infinity)
                 .padding(.vertical, 22)
                 .background(Theme.white)
                 .clipShape(RoundedRectangle(cornerRadius: Theme.round))
+                .padding(.horizontal, 37)
                 .padding(.bottom, 50)
-                
                 
                 ProgressIndicatorView
                 
-                CarouselView(currentChallengeStep: $currentChallengeStep)
+                if !todayHistories.isEmpty {
+                    CarouselView(
+                        currentChallengeStep: $currentChallengeStep,
+                        history: todayHistories[0]
+                    )
+                }
                 
                 Spacer()
 
@@ -89,10 +118,10 @@ struct ChallengeView: View {
             }
         }
         .onAppear() {
+            expressionIndex = (Int(Date().timeIntervalSinceReferenceDate) / (60 * 60 * 24)) % dummyExpression.count
             checkAndAddHistory()
-            print(Date().formatted(date: .abbreviated, time: .omitted))
         }
-        .onChange(of: histories) {
+        .onChange(of: refreshTrigger.trigger) {
             updateHistories()
         }
         .onChange(of: currentDateString) {
@@ -103,6 +132,7 @@ struct ChallengeView: View {
         }
         .onReceive(Timer.publish(every: 30, on: .main, in: .common).autoconnect()) { _ in
             let newDateString = Date().formatted(date: .abbreviated, time: .omitted)
+            expressionIndex = (Int(Date().timeIntervalSinceReferenceDate) / (60 * 60 * 24)) % dummyExpression.count
             if newDateString != currentDateString {
                 print("날짜바뀜")
                 currentDateString = newDateString
@@ -131,6 +161,9 @@ extension ChallengeView {
             ==
             yesterday.formatted(date: .abbreviated, time: .omitted)
         }
+        if !todayHistories.isEmpty {
+            currentChallengeStep = todayHistories[0].challengeStep
+        }
     }
     
     func setUpStreak() {
@@ -150,16 +183,14 @@ extension ChallengeView {
     func checkAndAddHistory() {
         updateHistories()
         if todayHistories.isEmpty {
-            swiftDataManager.addHistory(modelContext: modelContext)
+            swiftDataManager.addHistory(modelContext: modelContext, expression: dummyExpression[expressionIndex])
         }
         updateHistories()
-        
-        // 여기에 todayHistories[0]
-        currentChallengeStep = todayHistories[0].challengeStep
-        
         setUpStreak()
     }
 }
+
+
 
 // 뷰빌더
 extension ChallengeView {
@@ -224,6 +255,7 @@ extension ChallengeView {
             }
             .padding(.bottom, 19)
             .padding(.horizontal, 50)
+            
         case .challengeCompleted:
             Text("챌린지 완료")
                 .font(.caption2 .weight(.bold))
@@ -239,6 +271,8 @@ extension ChallengeView {
         }
     }
 }
+
+
 
 #Preview {
     ChallengeView()

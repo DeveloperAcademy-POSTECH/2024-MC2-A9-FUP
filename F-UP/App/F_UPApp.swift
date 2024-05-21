@@ -12,6 +12,8 @@ import SwiftData
 struct F_UPApp: App {
     @State private var swiftDataManager = SwiftDataManager()
     @State private var avfoundationManager = AVFoundationManager()
+    @State private var refreshTrigger = RefreshTrigger()
+
     @AppStorage("streak") private var streak: Int = 0
     
     var sharedModelContainer: ModelContainer = {
@@ -36,5 +38,6 @@ struct F_UPApp: App {
         .modelContainer(sharedModelContainer)
         .environment(avfoundationManager)
         .environment(swiftDataManager)
+        .environment(refreshTrigger)
     }
 }
