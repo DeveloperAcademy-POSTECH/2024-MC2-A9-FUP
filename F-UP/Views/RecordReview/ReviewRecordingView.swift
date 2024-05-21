@@ -9,6 +9,8 @@ import SwiftUI
 
 struct ReviewRecordingView: View {
     @Environment(\.dismiss) private var dismiss
+    @Environment(AVFoundationManager.self) var avfoundationManager
+    
     @Binding var showModal: Bool
     
     var body: some View {
@@ -30,28 +32,40 @@ struct ReviewRecordingView: View {
                     .fill(Theme.white)
                     .frame(maxHeight: 418)
                     .overlay {
-                        VStack {
-                            Spacer()
-                            Image("TempWaveImage")
-                            Spacer()
-                            Button {
-                                // 녹음 재생 기능 구현
-                            } label: {
-                                Label(
-                                    title: { Text("Play") },
-                                    icon: { Image(systemName: "play.fill") }
-                                )
+                        if avfoundationManager.audioFilename != nil {
+                            VStack {
+                                Spacer()
+                                Image("TempWaveImage")
+                                Spacer()
+                                Button {
+                                    // 녹음 재생 기능 구현
+                                    if avfoundationManager.isPlaying {
+                                        avfoundationManager.stopPlaying()
+                                    } else {
+                                        avfoundationManager.playRecording()
+                                    }
+                                    
+                                } label: {
+                                    Label(
+                                        title: { Text(avfoundationManager.isPlaying ? "Stop" : "Play") },
+                                        icon: { Image(systemName: avfoundationManager.isPlaying ? "square.fill" : "play.fill") }
+                                    )
+                                }
+                                .controlSize(.small)
+                                .buttonStyle(.borderedProminent)
+                                .buttonBorderShape(.roundedRectangle(radius: 20))
+                                .tint(Theme.point)
+                                .padding(.bottom, 24)
                             }
-                            .controlSize(.small)
-                            .buttonStyle(.borderedProminent)
-                            .buttonBorderShape(.roundedRectangle(radius: 20))
-                            .tint(Theme.point)
-                            .padding(.bottom, 24)
+                        } else {
+                            Text("녹음한 내용이 없습니다.").font(.callout .weight(.semibold)).foregroundStyle(Theme.semiblack)
                         }
                     }
                     .padding(.bottom, 38)
                 
                 Button {
+                    // 녹음 삭제하고 다시 녹음
+                    avfoundationManager.deleteRecording()
                     dismiss()
                 } label : {
                     RoundedRectangle(cornerRadius: Theme.round)
@@ -92,6 +106,8 @@ struct ReviewRecordingView: View {
         .navigationBarBackButtonHidden()
         .toolbar {
             Button("취소") {
+                avfoundationManager.deleteRecording()
+                
                 showModal = false
             }
             .tint(Theme.point)
@@ -101,4 +117,5 @@ struct ReviewRecordingView: View {
 
 #Preview {
     ReviewRecordingView(showModal: .constant(true))
+        .environment(AVFoundationManager())
 }

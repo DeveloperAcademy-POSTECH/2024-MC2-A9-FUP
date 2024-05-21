@@ -34,11 +34,11 @@ struct CustomSlider<V>: View where V : BinaryFloatingPoint, V.Stride : BinaryFlo
         GeometryReader { proxy in
             ZStack(alignment: .leading) {
                 // Track
-                gradientView(firstColor: Color(red: 0.73, green: 0.75, blue: 0.8).opacity(0.7),
+                GradientView(firstColor: Color(red: 0.73, green: 0.75, blue: 0.8).opacity(0.7),
                              secondColor: Color(red: 0.73, green: 0.75, blue: 0.8).opacity(0.5),
                              isPresentFirst: true)
                 
-                gradientView(firstColor: Theme.point,
+                GradientView(firstColor: Theme.point,
                              secondColor: Theme.point.opacity(0.6),
                              isPresentFirst: false)
                 
@@ -62,7 +62,7 @@ struct CustomSlider<V>: View where V : BinaryFloatingPoint, V.Stride : BinaryFlo
     }
     
     // MARK: - 트랙 (배경)
-    private func gradientView(firstColor: Color, secondColor: Color, isPresentFirst: Bool) -> some View {
+    private func GradientView(firstColor: Color, secondColor: Color, isPresentFirst: Bool) -> some View {
         return LinearGradient(
             stops: [
                 Gradient.Stop(color: firstColor, location: 0.00),
