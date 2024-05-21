@@ -15,7 +15,6 @@ struct HistoryView: View {
     @State private var isShowingModal = false
     @State private var selectedMonth: String = "선택없음"
     @State private var selectedTarget: Target?
-    @State private var settingsDetent = PresentationDetent.medium
     @State private var filterData: [History] = []
     @Query private var items: [History]
     
@@ -27,8 +26,7 @@ struct HistoryView: View {
             .sheet(isPresented: $isShowingModal, content: {
                 HistoryFilterView(selectedMonth: $selectedMonth, selectedTarget: $selectedTarget, isShowingModal: $isShowingModal)
                     .presentationDetents(
-                        [.medium],
-                        selection: $settingsDetent
+                        [.height(330)]
                     )
                     .onDisappear {
                         combinedFilter()
