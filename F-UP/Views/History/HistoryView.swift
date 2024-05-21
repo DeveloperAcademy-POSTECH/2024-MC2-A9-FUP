@@ -6,35 +6,47 @@
 //
 
 // TODO: 필터 구현 시 클릭된 필터 히스토리 뷰에 표출
+// 선택된 타겟을 갖고 있는 녀석들만.
 // TODO: SwiftData로 Data 대체
 import SwiftUI
+import SwiftData
 
 struct HistoryView: View {
-    @State var isShowingModal = false
+    @State private var isShowingModal = false
+    @State private var selectedMonth: String = "선택없음"
+    @State private var selectedTarget: Target?
     @State private var settingsDetent = PresentationDetent.medium
+    @State private var filterData: [History] = []
+    @Query private var items: [History]
     
     var body: some View {
-        HistoryViewHandler(count: dummyData.count, isShowingModal: $isShowingModal)
+        HistoryViewHandler(count: items.count, isShowingModal: $isShowingModal, filterData: filterData)
+                .onAppear {
+                    filterData = items
+                }
             .sheet(isPresented: $isShowingModal, content: {
-                HistoryFilterView(isShowingModal: $isShowingModal)
+                HistoryFilterView(selectedMonth: $selectedMonth, selectedTarget: $selectedTarget, isShowingModal: $isShowingModal)
                     .presentationDetents(
                         [.medium],
                         selection: $settingsDetent
                     )
+                    .onDisappear {
+                        combinedFilter()
+                    }
             })
     }
 }
 
 @ViewBuilder
-private func HistoryViewHandler(count: Int, isShowingModal: Binding<Bool>) -> some View {
+private func HistoryViewHandler(count: Int, isShowingModal: Binding<Bool>, filterData: [History]) -> some View {
     if count == 0 {
-        emptyHistoryView()
+        EmptyHistoryView()
     } else {
-        hasDateHistoryView(isShowingModal: isShowingModal)
+        HasDateHistoryView(isShowingModal: isShowingModal, filterData: filterData)
     }
 }
 
-private func hasDateHistoryView(isShowingModal: Binding<Bool>) -> some View {
+private func HasDateHistoryView(isShowingModal: Binding<Bool>, filterData: [History]) -> some View {
     return NavigationStack {
         VStack(spacing: 0) {
             HStack(spacing: 0) {
@@ -42,7 +54,7 @@ private func hasDateHistoryView(isShowingModal: Binding<Bool>) -> some View {
                     .font(.title)
                     .foregroundStyle(Theme.black)
                     .bold()
-                Text("\(dummyData.count)")
+                Text("\(filterData.count)")
                     .font(.footnote)
                     .foregroundStyle(Theme.point)
                     .padding(.leading, 8)
@@ -59,14 +71,14 @@ private func hasDateHistoryView(isShowingModal: Binding<Bool>) -> some View {
             .padding(.bottom, 28)
             
             ScrollView {
-                ForEach(dummyData, id: \.id) { dummy in
-                    NavigationLink(destination: HistoryDetailView(dummy: dummy)) {
+                ForEach(filterData, id: \.id) { history in
+                    NavigationLink(destination: HistoryDetailView(history: history)) {
                         RoundedRectangle(cornerRadius: Theme.round)
                             .fill(Theme.white)
                             .frame(width: 353, height: 92)
                             .dropShadow(opacity: 0.15)
                             .overlay {
-                                Text(dummy.expression)
+                                Text(history.expression)
                                     .font(.title3)
                                     .foregroundStyle(Theme.black)
                                     .fontWeight(.bold)
@@ -81,7 +93,7 @@ private func hasDateHistoryView(isShowingModal: Binding<Bool>) -> some View {
     }
 }
 
-private func emptyHistoryView() -> some View {
+private func EmptyHistoryView() -> some View {
     return NavigationStack {
         VStack(spacing: 0) {
             HStack(spacing: 0) {
@@ -109,15 +121,19 @@ private func emptyHistoryView() -> some View {
     }
 }
 
+extension HistoryView {
+    private func combinedFilter() {
+           let dateFormatter = DateFormatter()
+           dateFormatter.dateFormat = "yy년MM월"
+           
+           filterData = items.filter { item in
+               let targetCondition = (selectedTarget == nil || item.target == selectedTarget) && item.isPerformed
+               let dateCondition = selectedMonth == "전체" || dateFormatter.string(from: item.date).contains(selectedMonth)
+               return targetCondition && dateCondition
+           }
+       }
+}
+
 #Preview {
     HistoryView()
 }
-
-var dummyData: [History] = [
-    History(date: Date(), challengeStep: .ChallengeCompleted, expression: "오늘 하루도 정말 수고 많았어", audioURL: URL(string: "www.example.com")!, target: .friend, specificTarget: "이안", feelingValue: .veryUncomfortable, reactionValue: .veryBad),
-    History(date: Date(), challengeStep: .ChallengeCompleted, expression: "고생했다 이안, 칭찬해", audioURL: URL(string: "www.example.com")!, target: .family, specificTarget: "진토", feelingValue: .uncomfortable, reactionValue: .bad),
-    History(date: Date(), challengeStep: .ChallengeCompleted, expression: "너도 오늘 하루 고생 많았어", audioURL: URL(string: "www.example.com")!, target: .acquaintance, specificTarget: "보노", feelingValue: .neutral, reactionValue: .neutral),
-    History(date: Date(), challengeStep: .ChallengeCompleted, expression: "나무디 밤새 개발하느라 고생하셨어요", audioURL: URL(string: "www.example.com")! ,target: .lover, feelingValue: .comfortable, reactionValue: .good),
-    History(date: Date(), challengeStep: .ChallengeCompleted, expression: "수박도 깃 알려주시느라 너무 고생하셨어요", audioURL: URL(string: "www.example.com")!, target: .friend, feelingValue: .veryComfortable, reactionValue: .veryGood),
-    History(date: Date(), challengeStep: .ChallengeCompleted, expression: "디자인도 너무 고생 많으셨어요", audioURL: URL(string: "www.example.com")!, target: .friend, feelingValue: .veryUncomfortable, reactionValue: .veryBad),
-]

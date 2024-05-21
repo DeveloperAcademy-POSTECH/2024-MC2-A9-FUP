@@ -7,12 +7,11 @@
 
 import SwiftUI
 
-// TODO: 데이터 필터링 구현
 struct HistoryFilterView: View {
-    var months = ["1월", "2월", "3월", "4월", "5월", "6월", "7월", "8월", "9월", "10월", "11월", "12월"]
-    @State private var selectedMonth: String = "전체"
-    @State private var selectedTarget: Target = .family
+    @Binding var selectedMonth: String
+    @Binding var selectedTarget: Target?
     @Binding var isShowingModal: Bool
+    var months = ["전체","01월", "02월", "03월", "04월", "05월", "06월", "07월", "08월", "09월", "10월", "11월", "12월"]
     
     var body: some View {
         VStack(spacing: 0) {
@@ -30,7 +29,11 @@ struct HistoryFilterView: View {
                         target: target,
                         isSelected: selectedTarget == target
                     ) {
-                        selectedTarget = target
+                        if selectedTarget == target {
+                            selectedTarget = nil
+                        } else {
+                            selectedTarget = target
+                        }
                     }
                 }
             }
@@ -113,5 +116,5 @@ private struct TargetButton: View {
 }
 
 #Preview {
-    HistoryFilterView(isShowingModal: .constant(true))
+    HistoryFilterView(selectedMonth: .constant("1월"), selectedTarget: .constant(.family), isShowingModal: .constant(false))
 }

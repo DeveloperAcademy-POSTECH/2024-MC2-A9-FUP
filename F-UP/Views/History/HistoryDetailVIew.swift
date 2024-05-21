@@ -10,7 +10,8 @@
 import SwiftUI
 
 struct HistoryDetailView: View {
-    var dummy: History
+    var history: History
+    @State private var formattedDate: String = ""
     @Environment(\.dismiss) var dismiss
     @State private var sliderValue = 0.0
     
@@ -19,24 +20,24 @@ struct HistoryDetailView: View {
             Theme.background
             
             VStack(spacing: 0) {
-                RecoderPlay(dummy: dummy)
+                RecoderPlay(history: history, formattedDate: formattedDate)
                 
                 VStack(alignment: .leading ,spacing: 0) {
                     Text("누구에게 이 따뜻함을 건냈나요?")
                         .font(.body .weight(.bold))
                     HStack {
                         ForEach(Target.allCases, id: \.self) { target in
-                            TargetButton(target: target, history: dummy)
+                            TargetButton(target: target, history: history)
                         }
                     }
                     .padding(.vertical, Theme.padding)
                     
-                    if dummy.specificTarget != nil {
+                    if history.specificTarget != nil {
                         Text("* 친구인 ")
                             .font(.caption)
                             .foregroundStyle(Theme.semiblack)
                         +
-                        Text(dummy.specificTarget ?? "")
+                        Text(history.specificTarget ?? "")
                             .font(.caption .weight(.bold))
                             .foregroundStyle(Theme.semiblack)
                         +
@@ -49,18 +50,21 @@ struct HistoryDetailView: View {
                 
                 VStack(spacing: 0) {
                     FeelingProgressTitle(headLine: "내 기분", minValueTitle: "어색해요", maxValueTitle: "익숙해요")
-                    ProgressView(value: Double(dummy.feelingValue.rawValue), total: 4)
+                    ProgressView(value: Double(history.feelingValue.rawValue), total: 4)
                         .progressViewStyle(CustomProgressViewStyle())
                         .dropShadow(opacity: 0.15)
                 }
                 VStack(spacing: 0) {
                     FeelingProgressTitle(headLine: "타인의 반응", minValueTitle: "별로에요", maxValueTitle: "좋아요")
-                    ProgressView(value: Double(dummy.reactionValue.rawValue), total: 4)
+                    ProgressView(value: Double(history.reactionValue.rawValue), total: 4)
                         .progressViewStyle(CustomProgressViewStyle())
                         .dropShadow(opacity: 0.15)
                 }
                 Spacer()
             }
+        }
+        .onAppear {
+            dateFormatted()
         }
         .navigationTitle("챌린지 표현")
         .navigationBarTitleDisplayMode(.inline)
@@ -101,40 +105,42 @@ private struct TargetButton: View {
     }
 }
 
-private func RecoderPlay(dummy: History) -> some View {
-    return RoundedRectangle(cornerRadius: Theme.round)
-        .fill(Theme.white)
-        .frame(width: 353, height: 140)
-        .overlay {
-            VStack(alignment: .leading, spacing: 0) {
-                Text("23.05.13의 표현") // formatting해서 변경하기
-                    .font(.footnote .weight(.bold))
-                    .foregroundStyle(Theme.semiblack)
-                    .padding(.bottom, 5)
-                Text("\"\(dummy.expression)\"")
-                    .font(.headline)
-                    .foregroundStyle(Theme.black)
-                    .padding(.bottom, 21)
-                HStack(spacing: 0) {
-                    Image("TempWaveImage")
-                        .resizable()
-                        .frame(width: 241, height: 31)
-                    Button {
-                        // 녹음 실행 event
-                    }label: {
-                        Image(systemName: "play.circle.fill")
+private func RecoderPlay(history: History, formattedDate: String) -> some View {
+    return VStack(spacing: 0) {
+        RoundedRectangle(cornerRadius: Theme.round)
+            .fill(Theme.white)
+            .frame(width: 353, height: 140)
+            .dropShadow(opacity: 0.15)
+            .overlay {
+                VStack(alignment: .leading, spacing: 0) {
+                    Text("\(formattedDate)의 표현")
+                        .font(.footnote .weight(.bold))
+                        .foregroundStyle(Theme.semiblack)
+                        .padding(.bottom, 5)
+                    Text("\"\(history.expression)\"")
+                        .font(.headline)
+                        .foregroundStyle(Theme.black)
+                        .padding(.bottom, 21)
+                    HStack(spacing: 0) {
+                        Image("TempWaveImage")
                             .resizable()
-                            .frame(width: 28, height: 28)
-                            .foregroundStyle(Theme.point)
+                            .frame(width: 241, height: 31)
+                        Button {
+                            // 녹음 실행 event
+                        }label: {
+                            Image(systemName: "play.circle.fill")
+                                .resizable()
+                                .frame(width: 28, height: 28)
+                                .foregroundStyle(Theme.point)
+                        }
+                        .padding(.leading, 39)
                     }
-                    .padding(.leading, 39)
                 }
             }
-        }
-        .dropShadow(opacity: 0.15)
-        .padding(.horizontal, Theme.padding)
-        .padding(.bottom, 40)
-        .padding(.top, 35)
+            .padding(.horizontal, Theme.padding)
+            .padding(.bottom, 40)
+            .padding(.top, 35)
+    }
 }
 
 private func FeelingProgressTitle(headLine: String, minValueTitle: String, maxValueTitle: String) -> some View {
@@ -190,9 +196,17 @@ private struct CustomProgressViewStyle: ProgressViewStyle {
     }
 }
 
+extension HistoryDetailView {
+    private func dateFormatted() {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "yy.MM.dd"
+        formattedDate = dateFormatter.string(from: history.date)
+        }
+    }
+
 #Preview {
     NavigationStack {
-        HistoryDetailView(dummy: History(date: Date(), challengeStep: .ChallengeCompleted, expression: "오늘 하루도 정말 수고 많았어", audioURL: URL(string: "www.exmaple.com")!, target: .family, specificTarget: "도리" ,feelingValue: .veryUncomfortable, reactionValue: .veryGood))
+        HistoryDetailView(history: History(date: Date(), challengeStep: .ChallengeCompleted, expression: "오늘 하루도 정말 수고 많았어", audioURL: URL(string: "www.exmaple.com")!, target: .family, specificTarget: "도리" ,feelingValue: .veryUncomfortable, reactionValue: .veryGood))
     }
 }
 
