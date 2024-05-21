@@ -32,4 +32,6 @@ struct ContentTabView: View {
 
 #Preview {
     ContentTabView()
+        .modelContainer(for: History.self, inMemory: true)
+        .environment(SwiftDataManager())
 }

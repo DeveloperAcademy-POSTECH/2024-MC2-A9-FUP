@@ -15,7 +15,10 @@ struct TargetSelectView: View {
     @State private var navigationToNextView: Bool = false
     
     let target: [Target] = Target.allCases
-    let columns = [GridItem(.adaptive(minimum: 152, maximum: 192), spacing: 9, alignment: .leading)]
+    let columns = [
+        GridItem(.flexible(), spacing: 9, alignment: .leading),
+        GridItem(.flexible(), alignment: .leading)
+    ]
     var isComplete: Bool {
         selectedTarget != ""
     }
@@ -118,6 +121,7 @@ struct TargetSelectView: View {
                     .navigationDestination(isPresented: $navigationToNextView) {
                         MyMoodView(showModal: $showModal)
                     }
+                    .padding(.bottom, 13)
                 }
             }
         }

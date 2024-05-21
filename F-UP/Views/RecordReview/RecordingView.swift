@@ -8,11 +8,13 @@
 import SwiftUI
 
 struct RecordingView: View {
+    @Environment(AVFoundationManager.self) var avfoundationManager
     @Binding var showModal: Bool
     
     @State private var isMicSelected: Bool = false
-    @State private var isRecording: Bool = false
     @State private var navigationToNextView: Bool = false
+    
+    var dummyAudioUrl: String = "dummy"
     
     var body: some View {
         NavigationStack {
@@ -65,12 +67,15 @@ struct RecordingView: View {
                         }
                         
                         // Recording..
-                        if isRecording {
+                        if avfoundationManager.isRecording {
                             isMicSelected = false
-                            isRecording = false
                             navigationToNextView = true
+                            avfoundationManager.isRecording = false
+                            avfoundationManager.stopRecording()
+                            
                         } else {
-                            isRecording = true
+                            avfoundationManager.isRecording = true
+                            avfoundationManager.startRecording(fileName: dummyAudioUrl)
                         }
                     }
                     .navigationDestination(isPresented: $navigationToNextView) {
@@ -88,6 +93,7 @@ struct RecordingView: View {
                 .navigationBarTitleDisplayMode(.inline)
                 .toolbar {
                     Button("취소") {
+                        avfoundationManager.deleteRecording()
                         showModal = false
                     }
                     .tint(Theme.point)
@@ -98,5 +104,7 @@ struct RecordingView: View {
 }
 
 #Preview {
+    
     RecordingView(showModal: .constant(true))
+        .environment(AVFoundationManager())
 }

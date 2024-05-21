@@ -34,6 +34,7 @@ final class AVFoundationManager: NSObject {
         }
     }
     
+    // MARK: - 녹음
     func startRecording(fileName: String) {
         if audioFilename != nil {
             deleteRecording()
@@ -64,6 +65,7 @@ final class AVFoundationManager: NSObject {
         isRecording = false
     }
     
+    // MARK: - 재생
     func playRecording() {
         guard let audioFilename = audioFilename else { return }
         
@@ -83,6 +85,7 @@ final class AVFoundationManager: NSObject {
         isPlaying = false
     }
     
+    // MARK: - 삭제
     func deleteRecording() {
         guard let audioFilename = audioFilename else { return }
         
@@ -95,6 +98,7 @@ final class AVFoundationManager: NSObject {
         }
     }
     
+    // MARK: - 경로
     func getCurrentRecordingPath() -> URL? {
         return audioFilename
     }
@@ -109,6 +113,7 @@ final class AVFoundationManager: NSObject {
     }
 }
 
+// MARK: - 델리게이트
 extension AVFoundationManager: AVAudioRecorderDelegate, AVAudioPlayerDelegate {
     // 녹음이 완료되면 호출. 성공적으로 완료되지 않은 경우 stopRecording 메서드 호출
     func audioRecorderDidFinishRecording(_ recorder: AVAudioRecorder, successfully flag: Bool) {

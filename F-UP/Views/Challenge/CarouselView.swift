@@ -155,7 +155,7 @@ fileprivate struct challengeButton: View {
             .padding(.horizontal, 20)
             .padding(.bottom, 20)
             .sheet(isPresented: $showModal) {
-                RecordingView(showModal: $showModal)
+                RecordingView(showModal: $showModal).interactiveDismissDisabled()
             }
         case 2:
             Button {
@@ -176,7 +176,7 @@ fileprivate struct challengeButton: View {
             .padding(.horizontal, 20)
             .padding(.bottom, 20)
             .sheet(isPresented: $showModal) {
-                TargetSelectView(showModal: $showModal)
+                TargetSelectView(showModal: $showModal).interactiveDismissDisabled()
             }
         default:
             Button {
@@ -195,9 +195,6 @@ fileprivate struct challengeButton: View {
             }
             .padding(.horizontal, 20)
             .padding(.bottom, 20)
-            .sheet(isPresented: $showModal) {
-                EmptyView()
-            }
         }
     }
 }
