@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		172BA22B2BFD0954007AC28A /* AudioPlayingComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 172BA22A2BFD0954007AC28A /* AudioPlayingComponent.swift */; };
 		1731C51D2BF74969002B59FE /* TargetSelectView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1731C51C2BF74969002B59FE /* TargetSelectView.swift */; };
 		173B49DC2BF72C5600FC4FEC /* Theme.swift in Sources */ = {isa = PBXBuildFile; fileRef = 173B49DB2BF72C5600FC4FEC /* Theme.swift */; };
 		17756DB22BF5FE320067E10D /* ContentTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17756DAF2BF5FE320067E10D /* ContentTabView.swift */; };
@@ -34,6 +35,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		172BA22A2BFD0954007AC28A /* AudioPlayingComponent.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AudioPlayingComponent.swift; sourceTree = "<group>"; };
 		1731C51C2BF74969002B59FE /* TargetSelectView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TargetSelectView.swift; sourceTree = "<group>"; };
 		173B49DB2BF72C5600FC4FEC /* Theme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Theme.swift; sourceTree = "<group>"; };
 		17756DAF2BF5FE320067E10D /* ContentTabView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContentTabView.swift; sourceTree = "<group>"; };
@@ -135,6 +137,7 @@
 		DF32E17D2BFA1B580084B28C /* Components */ = {
 			isa = PBXGroup;
 			children = (
+				172BA22A2BFD0954007AC28A /* AudioPlayingComponent.swift */,
 				DF32E17E2BFA1B730084B28C /* DottedDivider.swift */,
 				17B7627E2BFB4C1100BE8599 /* CustomSlider.swift */,
 			);
@@ -277,6 +280,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				172BA22B2BFD0954007AC28A /* AudioPlayingComponent.swift in Sources */,
 				CCC074272BFB1F2E00401B25 /* HistoryDetailVIew.swift in Sources */,
 				DF32E17F2BFA1B730084B28C /* DottedDivider.swift in Sources */,
 				17B7627B2BFB347100BE8599 /* MyMoodView.swift in Sources */,

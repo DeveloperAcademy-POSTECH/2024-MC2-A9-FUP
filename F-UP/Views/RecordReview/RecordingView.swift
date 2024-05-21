@@ -11,7 +11,7 @@ struct RecordingView: View {
     @Environment(AVFoundationManager.self) var avfoundationManager
     @Binding var showModal: Bool
     
-//    @State private var isMicSelected: Bool = true
+    //    @State private var isMicSelected: Bool = true
     @State private var navigationToNextView: Bool = false
     
     var dummyAudioUrl: String = "dummy"
@@ -34,21 +34,21 @@ struct RecordingView: View {
                     
                     ZStack {
                         if avfoundationManager.isRecording {
-                            if avfoundationManager.audioLevel > 0.25 {
+                            if avfoundationManager.audioLevel > 0.1 {
                                 Circle()
                                     .fill(Color(hex: 0xFF8E75))
                                     .frame(width: 321, height: 321)
                                     .opacity(0.1)
                             }
                             
-                            if avfoundationManager.audioLevel > 0.1 {
+                            if avfoundationManager.audioLevel > 0.07 {
                                 Circle()
                                     .fill(Color(hex: 0xFF8E75))
                                     .frame(width: 283, height: 283)
                                     .opacity(0.15)
                             }
                             
-                            if avfoundationManager.audioLevel > 0.05 {
+                            if avfoundationManager.audioLevel > 0.03 {
                                 Circle()
                                     .fill(Color(hex: 0xFF8E75))
                                     .frame(width: 241, height: 241)
