@@ -32,34 +32,35 @@ struct ReviewRecordingView: View {
                     .fill(Theme.white)
                     .frame(maxHeight: 418)
                     .overlay {
-                        if avfoundationManager.audioFilename != nil {
-                            VStack {
-                                Spacer()
-                                Image("TempWaveImage")
-                                Spacer()
-                                Button {
-                                    // 녹음 재생 기능 구현
-                                    if avfoundationManager.isPlaying {
-                                        avfoundationManager.stopPlaying()
-                                    } else {
-                                        avfoundationManager.playRecording()
-                                    }
-                                    
-                                } label: {
-                                    Label(
-                                        title: { Text(avfoundationManager.isPlaying ? "Stop" : "Play") },
-                                        icon: { Image(systemName: avfoundationManager.isPlaying ? "square.fill" : "play.fill") }
-                                    )
+                        //                        if avfoundationManager.audioFilename != nil {
+                        VStack {
+                            Spacer()
+                            //                                Image("TempWaveImage")
+                            AudioPlayingComponent()
+                            Spacer()
+                            Button {
+                                // 녹음 재생 기능 구현
+                                if avfoundationManager.isPlaying {
+                                    avfoundationManager.stopPlaying()
+                                } else {
+                                    avfoundationManager.playRecording()
                                 }
-                                .controlSize(.small)
-                                .buttonStyle(.borderedProminent)
-                                .buttonBorderShape(.roundedRectangle(radius: 20))
-                                .tint(Theme.point)
-                                .padding(.bottom, 24)
+                                
+                            } label: {
+                                Label(
+                                    title: { Text(avfoundationManager.isPlaying ? "Stop" : "Play") },
+                                    icon: { Image(systemName: avfoundationManager.isPlaying ? "square.fill" : "play.fill") }
+                                )
                             }
-                        } else {
-                            Text("녹음한 내용이 없습니다.").font(.callout .weight(.semibold)).foregroundStyle(Theme.semiblack)
+                            .controlSize(.small)
+                            .buttonStyle(.borderedProminent)
+                            .buttonBorderShape(.roundedRectangle(radius: 20))
+                            .tint(Theme.point)
+                            .padding(.bottom, 24)
                         }
+                        //                        } else {
+                        //                            Text("녹음한 내용이 없습니다.").font(.callout .weight(.semibold)).foregroundStyle(Theme.semiblack)
+                        //                        }
                     }
                     .padding(.bottom, 38)
                 

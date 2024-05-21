@@ -15,11 +15,26 @@ final class AVFoundationManager: NSObject {
     private var recordingSession: AVAudioSession = AVAudioSession.sharedInstance()
     private var recordBarTimer: Timer?
     
+    // 컴포넌트의 재생 싱크를 맞추기 위한 변수
+    var playingTime: TimeInterval = 0
+    var recordLength: TimeInterval = 0
+    
+    // 녹음, 재생을 추적하기 위한 변수
     var isRecording = false
     var isPlaying = false
+    
     var audioFilename: URL?
+    
+    // 녹음 중 실시간으로 변경되는 오디오레벨을 저장하기 위한 변수
     var audioLevel: CGFloat = 0
     
+    // 녹음이 끝나고 전체 길이에서 30개의 구간별 평균 오디오레벨을 저장하기 위한 배열
+    var audioLevels: [CGFloat] = Array(repeating: 0, count: 30)
+    
+    // 녹음 중 0.1초마다 생성되는 모든 오디오레벨을 저장하기 위한 임시 배열
+    private var tempAudioLevels: [CGFloat] = []
+    
+    // MARK: - 초기화
     override init() {
         super.init()
         setupSession()
@@ -41,6 +56,8 @@ final class AVFoundationManager: NSObject {
         if audioFilename != nil {
             deleteRecording()
         }
+        tempAudioLevels.removeAll()
+        
         // 녹음 파일 경로 설정
         let audioFilename = getDocumentsDirectory().appendingPathComponent("\(fileName).m4a")
         let settings = [
@@ -53,7 +70,8 @@ final class AVFoundationManager: NSObject {
         do {
             audioRecorder = try AVAudioRecorder(url: audioFilename, settings: settings)
             audioRecorder?.delegate = self
-            audioRecorder?.isMeteringEnabled = true // 이걸 켜줘야 AudioLevel을 측정할 수 있음
+            // audioLevel을 Update하기 위해 필요
+            audioRecorder?.isMeteringEnabled = true
             audioRecorder?.record()
             
             self.audioFilename = audioFilename
@@ -62,14 +80,20 @@ final class AVFoundationManager: NSObject {
             print("Could not start recording: \(error.localizedDescription)")
         }
         
+        // 오디오 레벨 추적 시작
         startUpdatingAudioLevels()
     }
     
     func stopRecording() {
+        // 녹음한 총 길이
+        recordLength = audioRecorder?.currentTime ?? 1
+        
         audioRecorder?.stop()
         isRecording = false
         
         stopUpdatingAudioLevels()
+        calculateAudioLevels()
+        
     }
     
     // MARK: - 재생
@@ -80,9 +104,19 @@ final class AVFoundationManager: NSObject {
             audioPlayer = try AVAudioPlayer(contentsOf: audioFilename)
             audioPlayer?.delegate = self
             audioPlayer?.play()
-            audioPlayer?.volume = 70
             
+            // 재생 시 볼륨 설정
+            audioPlayer?.volume = 70
             isPlaying = true
+            
+            // 0.1초마다 현재 재생 위치 업데이트, 업데이트되면서 애니메이션
+            Timer.scheduledTimer(withTimeInterval: 0.1, repeats: true) { [weak self] _ in
+                guard let self = self else { return }
+                withAnimation(.bouncy) {
+                    self.playingTime = self.audioPlayer?.currentTime ?? 0
+                }
+            }
+            
         } catch {
             print("Could not play audio: \(error.localizedDescription)")
         }
@@ -103,15 +137,17 @@ final class AVFoundationManager: NSObject {
     func updateAudioLevels() {
         audioRecorder?.updateMeters()
         
+        // 데시벨로 된 오디오 레벨을 정규화
         let averagePower = audioRecorder?.averagePower(forChannel: 0) ?? 0
         let normalizedAveragePower = pow(10, (0.05 * averagePower))
         
+        // RecordingView에서 원이 작아졌다 커졌다 하는 애니메이션
         withAnimation {
             self.audioLevel = CGFloat(normalizedAveragePower)
         }
         
-        print(audioLevel)
-        
+        // 오디오 레벨을 시각화하기 위해 임시 배열에 오디오 레벨을 전부 저장
+        tempAudioLevels.append(CGFloat(normalizedAveragePower))
     }
     
     func stopUpdatingAudioLevels() {
@@ -119,18 +155,23 @@ final class AVFoundationManager: NSObject {
         self.audioLevel = 0
     }
     
-    private func normalizeSoundLevel(level: Float) -> Float {
-        // 화면에 표시되는 rawSoundLevel 기준
-        // white noise만 존재할 때의 값을 lowLevel 에 할당
-        // 가장 큰 소리를 냈을 때 값을 highLevel 에 할당
+    /// tempAudioLevels에 있는 모든 오디오 레벨을 재생 막대의 개수인 30개의 구간으로 나눠서 audioLevels에 저장하는 메소드
+    func calculateAudioLevels() {
         
-        let lowLevel: Float = -50
-        let highLevel: Float = -10
+        let intervalLength = recordLength / 30
+        for i in 0..<30 {
+            let startTime = TimeInterval(i) * intervalLength
+            let endTime = startTime + intervalLength
+            
+            let intervalLevels = tempAudioLevels.enumerated()
+                .filter { $0.offset >= Int(startTime * 10) && $0.offset < Int(endTime * 10) }
+                .map { $0.element }
+            
+            let averageLevel = intervalLevels.reduce(0, +) / CGFloat(intervalLevels.count)
+            audioLevels[i] = averageLevel
+        }
         
-        var level = max(0.0, level - lowLevel) // low level이 0이 되도록 shift
-        level = min(level, highLevel - lowLevel) // high level 도 shift
-        // 이제 level은 0.0 ~ 40까지의 값으로 설정 됨.
-        return level / (highLevel - lowLevel) // scaled to 0.0 ~ 1
+        tempAudioLevels.removeAll()
     }
     
     // MARK: - 삭제
