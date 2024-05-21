@@ -18,6 +18,8 @@ struct ChallengeView: View {
     @State var yesterdayHistories: [History] = []
     @State private var currentDateString: String = Date().formatted(date: .abbreviated, time: .omitted)
     
+    @State var currentChallengeStep: ChallengeStep = .notStarted
+    
     @AppStorage("streak") var streak: Int = 0
     
     var body: some View {
@@ -54,7 +56,6 @@ struct ChallengeView: View {
                         .inset(by: 0.65)
                         .stroke(Theme.point, lineWidth: 1.3)
                     )
-//                    Text("\(streak)")
                     Spacer()
                 }
                 .padding(.bottom, 20)
@@ -77,39 +78,13 @@ struct ChallengeView: View {
                 .padding(.bottom, 50)
                 
                 
-                VStack(spacing: 0) {
-                    HStack(spacing: 0){
-                        Text("1. 말하기")
-                            .font(.caption2 .weight(.bold))
-                            .multilineTextAlignment(.center)
-                            .foregroundStyle(Theme.white)
-                            .padding(.horizontal, 10)
-                            .padding(.vertical, 3)
-                            .frame(height: 21, alignment: .center)
-                            .background(Theme.point)
-                            .clipShape(RoundedRectangle(cornerRadius: 10.5))
+                ProgressIndicatorView
+                
+                CarouselView(currentChallengeStep: $currentChallengeStep)
+                
+                Spacer()
 
-                        DottedDivider()
-                        
-                        Circle()
-                            .fill(Theme.point)
-                            .frame(width: 20,height: 20)
-                            .opacity(0.6)
-                            .overlay {
-                                Text("2")
-                                    .font(.caption2 .weight(.bold))
-                                    .foregroundColor(Theme.white)
-                            }
-                        
-                    }
-                    .padding(.bottom, 19)
-                    .padding(.horizontal, 50)
-                    
-                    CarouselView()
-                    
-                    Spacer()
-
-                }
+                
             }
         }
         .onAppear() {
@@ -135,6 +110,10 @@ struct ChallengeView: View {
     }
 }
 
+
+
+
+// 데이터 관련 메소드
 extension ChallengeView {
     
     func updateHistories() {
@@ -175,11 +154,90 @@ extension ChallengeView {
         updateHistories()
         
         // 여기에 todayHistories[0]
+        currentChallengeStep = todayHistories[0].challengeStep
         
         setUpStreak()
     }
 }
 
+// 뷰빌더
+extension ChallengeView {
+    @ViewBuilder
+    private var ProgressIndicatorView: some View {
+        switch currentChallengeStep {
+            
+        case .notStarted:
+            HStack(spacing: 0){
+                Text("1. 말하기")
+                    .font(.caption2 .weight(.bold))
+                    .multilineTextAlignment(.center)
+                    .foregroundStyle(Theme.white)
+                    .padding(.horizontal, 10)
+                    .padding(.vertical, 3)
+                    .frame(height: 21, alignment: .center)
+                    .background(Theme.point)
+                    .clipShape(RoundedRectangle(cornerRadius: 10.5))
+
+                DottedDivider(step: currentChallengeStep)
+                
+                Circle()
+                    .fill(Theme.point)
+                    .frame(width: 20,height: 20)
+                    .opacity(0.6)
+                    .overlay {
+                        Text("2")
+                            .font(.caption2 .weight(.bold))
+                            .foregroundColor(Theme.white)
+                    }
+                
+            }
+            .padding(.bottom, 19)
+            .padding(.horizontal, 50)
+            
+        case .recordingCompleted:
+            HStack(spacing: 0){
+                Circle()
+                    .fill(Theme.point)
+                    .frame(width: 20,height: 20)
+                    .opacity(0.6)
+                    .overlay {
+                        Image(systemName: "checkmark")
+                            .resizable()
+                            .renderingMode(.template)
+                            .scaledToFit()
+                            .frame(height: 10)
+                            .foregroundColor(Theme.white)
+                    }
+                
+                DottedDivider(step: currentChallengeStep)
+                
+                Text("2. 기록하기")
+                    .font(.caption2 .weight(.bold))
+                    .multilineTextAlignment(.center)
+                    .foregroundStyle(Theme.white)
+                    .padding(.horizontal, 10)
+                    .padding(.vertical, 3)
+                    .frame(height: 21, alignment: .center)
+                    .background(Theme.point)
+                    .clipShape(RoundedRectangle(cornerRadius: 10.5))
+            }
+            .padding(.bottom, 19)
+            .padding(.horizontal, 50)
+        case .challengeCompleted:
+            Text("챌린지 완료")
+                .font(.caption2 .weight(.bold))
+                .multilineTextAlignment(.center)
+                .foregroundStyle(Theme.white)
+                .padding(.horizontal, 10)
+                .padding(.vertical, 3)
+                .frame(height: 21, alignment: .center)
+                .background(Theme.point)
+                .clipShape(RoundedRectangle(cornerRadius: 10.5))
+                .padding(.bottom, 19)
+                .padding(.horizontal, 50)
+        }
+    }
+}
 
 #Preview {
     ChallengeView()

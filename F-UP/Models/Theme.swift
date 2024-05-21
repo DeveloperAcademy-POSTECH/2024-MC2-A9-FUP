@@ -10,6 +10,7 @@ import SwiftUI
 // MARK: - Color Pallete
 struct Theme {
     static let white: Color = Color(hex: 0xFEFEFE)
+    static let whiteWithOpacity: Color = Color(hex: 0xFEFEFE, opacity: 0.4)
     static let black: Color = Color(hex: 0x2D2F33)
     static let point: Color = Color(hex: 0x2DBBB3)
     
