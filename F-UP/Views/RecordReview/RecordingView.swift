@@ -11,7 +11,7 @@ struct RecordingView: View {
     @Environment(AVFoundationManager.self) var avfoundationManager
     @Binding var showModal: Bool
     
-    @State private var isMicSelected: Bool = false
+//    @State private var isMicSelected: Bool = true
     @State private var navigationToNextView: Bool = false
     
     var dummyAudioUrl: String = "dummy"
@@ -33,25 +33,31 @@ struct RecordingView: View {
                         .padding(.bottom, 115)
                     
                     ZStack {
-                        if isMicSelected {
-                            Circle()
-                                .fill(Theme.point)
-                                .frame(width: 321, height: 321)
-                                .opacity(0.1)
+                        if avfoundationManager.isRecording {
+                            if avfoundationManager.audioLevel > 0.25 {
+                                Circle()
+                                    .fill(Color(hex: 0xFF8E75))
+                                    .frame(width: 321, height: 321)
+                                    .opacity(0.1)
+                            }
                             
-                            Circle()
-                                .fill(Theme.point)
-                                .frame(width: 283, height: 283)
-                                .opacity(0.15)
+                            if avfoundationManager.audioLevel > 0.1 {
+                                Circle()
+                                    .fill(Color(hex: 0xFF8E75))
+                                    .frame(width: 283, height: 283)
+                                    .opacity(0.15)
+                            }
                             
-                            Circle()
-                                .fill(Theme.point)
-                                .frame(width: 241, height: 241)
-                                .opacity(0.25)
+                            if avfoundationManager.audioLevel > 0.05 {
+                                Circle()
+                                    .fill(Color(hex: 0xFF8E75))
+                                    .frame(width: 241, height: 241)
+                                    .opacity(0.25)
+                            }
                         }
                         
                         Circle()
-                            .fill(Theme.point)
+                            .fill(avfoundationManager.isRecording ? Color(hex: 0xFF8E75) : Theme.point)
                             .frame(width: 204, height: 204)
                         
                         Image(systemName: "mic")
@@ -63,28 +69,27 @@ struct RecordingView: View {
                     .padding(.bottom, 115)
                     .onTapGesture {
                         withAnimation(.easeInOut(duration: 0.5)) {
-                            isMicSelected = true
+                            // Recording..
+                            if avfoundationManager.isRecording {
+                                navigationToNextView = true
+                                avfoundationManager.isRecording = false
+                                avfoundationManager.stopRecording()
+                                
+                            } else {
+                                avfoundationManager.isRecording = true
+                                avfoundationManager.startRecording(fileName: dummyAudioUrl)
+                            }
                         }
                         
-                        // Recording..
-                        if avfoundationManager.isRecording {
-                            isMicSelected = false
-                            navigationToNextView = true
-                            avfoundationManager.isRecording = false
-                            avfoundationManager.stopRecording()
-                            
-                        } else {
-                            avfoundationManager.isRecording = true
-                            avfoundationManager.startRecording(fileName: dummyAudioUrl)
-                        }
+                        
                     }
                     .navigationDestination(isPresented: $navigationToNextView) {
                         ReviewRecordingView(showModal: $showModal)
                     }
                     
-                    Text(isMicSelected ? "듣고 있어요" : "오늘의 표현을 실제로 따라해보세요")
+                    Text(avfoundationManager.isRecording ? "듣고 있어요" : "오늘의 표현을 실제로 따라해보세요")
                         .font(.body .weight(.bold))
-                        .foregroundStyle(isMicSelected ? Theme.black : Theme.semiblack)
+                        .foregroundStyle(avfoundationManager.isRecording ? Theme.black : Theme.semiblack)
                     
                     Spacer()
                 }
@@ -93,6 +98,7 @@ struct RecordingView: View {
                 .navigationBarTitleDisplayMode(.inline)
                 .toolbar {
                     Button("취소") {
+                        avfoundationManager.stopRecording()
                         avfoundationManager.deleteRecording()
                         showModal = false
                     }
