@@ -52,6 +52,9 @@ struct ChallengeView: View {
 //                        avFoundationManager.stopPlaying()
 //                    }
 //                }
+//                Button("ss") {
+//                    swiftDataManager.deleteHistory(modelContext: modelContext, history: todayHistories[0])
+//                }
                 HStack {
                     Text("챌린지")
                         .font(.title)
@@ -120,6 +123,7 @@ struct ChallengeView: View {
         .onAppear() {
             expressionIndex = (Int(Date().timeIntervalSinceReferenceDate) / (60 * 60 * 24)) % dummyExpression.count
             checkAndAddHistory()
+            print("onappear")
         }
         .onChange(of: refreshTrigger.trigger) {
             updateHistories()
@@ -135,7 +139,9 @@ struct ChallengeView: View {
             expressionIndex = (Int(Date().timeIntervalSinceReferenceDate) / (60 * 60 * 24)) % dummyExpression.count
             if newDateString != currentDateString {
                 print("날짜바뀜")
-                currentDateString = newDateString
+                if currentChallengeStep != .recordingCompleted {
+                    currentDateString = newDateString
+                }
             }
         }
     }

@@ -12,7 +12,10 @@ struct TargetSelectView: View {
     
     @State private var nameTextField = ""
     @State private var selectedTarget: String = ""
+    @State private var selectedTargetEnum: Target? = nil
     @State private var navigationToNextView: Bool = false
+    
+    @State var history: History
     
     let target: [Target] = Target.allCases
     let columns = [
@@ -67,6 +70,13 @@ struct TargetSelectView: View {
                                                 withAnimation(.easeIn(duration: 0.1)) {
                                                     let isSelected = selectedTarget == target.rawValue
                                                     isSelected ? (selectedTarget = "") : (selectedTarget = target.rawValue)
+                                                    
+                                                    if selectedTargetEnum == target {
+                                                        selectedTargetEnum = nil
+                                                    }
+                                                    else {
+                                                        selectedTargetEnum = target
+                                                    }
                                                 }
                                                 nameTextField = ""
                                             }
@@ -98,11 +108,12 @@ struct TargetSelectView: View {
                     }
                     
                     Button {
-                        if navigationToNextView {
-                            navigationToNextView = false
-                        } else {
-                            navigationToNextView = true
-                        }
+//                        if navigationToNextView {
+//                            navigationToNextView = false
+//                        } else {
+//                            navigationToNextView = true
+//                        }
+                        navigationToNextView = true
                     } label: {
                         Rectangle()
                             .foregroundColor(.clear)
@@ -119,7 +130,13 @@ struct TargetSelectView: View {
                     }
                     .disabled(!isComplete)
                     .navigationDestination(isPresented: $navigationToNextView) {
-                        MyMoodView(showModal: $showModal)
+                        if nameTextField.isEmpty {
+                            MyMoodView(showModal: $showModal, history: history, target: selectedTargetEnum ?? .family, specificTarget: nil)
+                        }
+                        else {
+                            MyMoodView(showModal: $showModal, history: history, target: selectedTargetEnum ?? .family, specificTarget: nameTextField)
+                        }
+                        
                     }
                     .padding(.bottom, 13)
                 }
@@ -129,5 +146,6 @@ struct TargetSelectView: View {
 }
 
 #Preview {
-    TargetSelectView(showModal: .constant(true))
+    TargetSelectView(showModal: .constant(true), history: History(date: Date(), challengeStep: .challengeCompleted, expression: "ds", audioURL: URL(string: "https://www.example.com")!, target: .acquaintance, feelingValue: .neutral, reactionValue: .neutral))
+        .environment(AVFoundationManager())
 }
