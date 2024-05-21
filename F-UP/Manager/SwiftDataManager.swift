@@ -40,11 +40,11 @@ final class SwiftDataManager {
         }
     }
 
-    func deleteHistorys(modelContext: ModelContext, offsets: IndexSet, histories: [History]) {
+    func deleteHistory(modelContext: ModelContext, history: History) {
         withAnimation {
-            for index in offsets {
-                modelContext.delete(histories[index])
-            }
+//            for index in offsets {
+            modelContext.delete(history)
+//            }
         }
         do {
             try modelContext.save()
@@ -58,6 +58,23 @@ final class SwiftDataManager {
                 history.audioURL = audioURL
                 history.challengeStep = .recordingCompleted
                 print("ok")
+                do {
+                    try modelContext.save()
+                } catch {
+                    print(error.localizedDescription)
+                }
+            }
+    }
+    
+    func updateHistoryAfterChallenge(modelContext: ModelContext, history: History, target: Target, specificTarget: String?, feelingValue: FeelingValue, reactionValue: ReactionValue) {
+            withAnimation {
+                history.isPerformed = true
+                history.challengeStep = .challengeCompleted
+                history.target = target
+                history.specificTarget = specificTarget
+                history.feelingValue = feelingValue
+                history.reactionValue = reactionValue
+                print("ok2")
                 do {
                     try modelContext.save()
                 } catch {

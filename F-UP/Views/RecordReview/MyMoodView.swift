@@ -14,6 +14,11 @@ struct MyMoodView: View {
     @State private var sliderValue: Double = 0
     @State private var navigationToNextView: Bool = false
     
+    @State var history: History
+    
+    let target: Target
+    let specificTarget: String?
+    
     private let emojis = ["😂", "😅", "😊", "😁", "🥰"]
     private let strings = ["많이 어색해요", "어색해요", "보통이에요", "익숙해요", "많이 익숙해요"]
     
@@ -71,7 +76,21 @@ struct MyMoodView: View {
                         }
                 }
                 .navigationDestination(isPresented: $navigationToNextView) {
-                    ReactionView(showModal: $showModal)
+                    switch Int(sliderValue / 25) {
+                    case 0:
+                        ReactionView(showModal: $showModal, history: history, target: target, specificTarget: specificTarget, feelingValue: .veryUncomfortable)
+                    case 1:
+                        ReactionView(showModal: $showModal, history: history, target: target, specificTarget: specificTarget, feelingValue: .uncomfortable)
+                    case 2:
+                        ReactionView(showModal: $showModal, history: history, target: target, specificTarget: specificTarget, feelingValue: .neutral)
+                    case 3:
+                        ReactionView(showModal: $showModal, history: history, target: target, specificTarget: specificTarget, feelingValue: .comfortable)
+                    case 4:
+                        ReactionView(showModal: $showModal, history: history, target: target, specificTarget: specificTarget, feelingValue: .veryComfortable)
+                    default:
+                        ReactionView(showModal: $showModal, history: history, target: target, specificTarget: specificTarget, feelingValue: .veryUncomfortable)
+                    }
+                    
                 }
                 
                 
@@ -106,6 +125,6 @@ struct MyMoodView: View {
 }
 
 
-#Preview {
-    MyMoodView(showModal: .constant(true))
-}
+//#Preview {
+//    MyMoodView(showModal: .constant(true))
+//}

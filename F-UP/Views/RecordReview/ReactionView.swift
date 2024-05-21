@@ -9,9 +9,18 @@ import SwiftUI
 
 struct ReactionView: View {
     @Environment(\.dismiss) private var dismiss
+    @Environment(\.modelContext) var modelContext
+    @Environment(SwiftDataManager.self) var swiftDataManager
+    @Environment(RefreshTrigger.self) var refreshTrigger
     @Binding var showModal: Bool
     
     @State private var sliderValue: Double = 0
+    
+    @State var history: History
+    
+    let target: Target
+    let specificTarget: String?
+    let feelingValue: FeelingValue
     
     private let emojis = ["😂", "😅", "😊", "😁", "🥰"]
     private let strings = ["많이 별로에요", "별로에요", "보통이에요", "좋아요", "너무 좋아요"]
@@ -53,6 +62,21 @@ struct ReactionView: View {
                 Spacer()
                 
                 Button {
+                    switch Int(sliderValue / 25) {
+                    case 0:
+                        swiftDataManager.updateHistoryAfterChallenge(modelContext: modelContext, history: history, target: target, specificTarget: specificTarget, feelingValue: feelingValue, reactionValue: .veryBad)
+                    case 1:
+                        swiftDataManager.updateHistoryAfterChallenge(modelContext: modelContext, history: history, target: target, specificTarget: specificTarget, feelingValue: feelingValue, reactionValue: .bad)
+                    case 2:
+                        swiftDataManager.updateHistoryAfterChallenge(modelContext: modelContext, history: history, target: target, specificTarget: specificTarget, feelingValue: feelingValue, reactionValue: .neutral)
+                    case 3:
+                        swiftDataManager.updateHistoryAfterChallenge(modelContext: modelContext, history: history, target: target, specificTarget: specificTarget, feelingValue: feelingValue, reactionValue: .good)
+                    case 4:
+                        swiftDataManager.updateHistoryAfterChallenge(modelContext: modelContext, history: history, target: target, specificTarget: specificTarget, feelingValue: feelingValue, reactionValue: .veryGood)
+                    default:
+                        swiftDataManager.updateHistoryAfterChallenge(modelContext: modelContext, history: history, target: target, specificTarget: specificTarget, feelingValue: feelingValue, reactionValue: .veryBad)
+                    }
+                    refreshTrigger.trigger.toggle()
                     showModal = false
                 } label : {
                     RoundedRectangle(cornerRadius: Theme.round)
@@ -98,6 +122,6 @@ struct ReactionView: View {
 }
 
 
-#Preview {
-    ReactionView(showModal: .constant(true))
-}
+//#Preview {
+//    ReactionView(showModal: .constant(true))
+//}
