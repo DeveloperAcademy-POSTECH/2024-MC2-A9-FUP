@@ -106,6 +106,7 @@ struct ReviewRecordingView: View {
         .navigationBarBackButtonHidden()
         .toolbar {
             Button("취소") {
+                avfoundationManager.stopPlaying()
                 avfoundationManager.deleteRecording()
                 
                 showModal = false
