@@ -10,8 +10,12 @@ import SwiftUI
 struct ReviewRecordingView: View {
     @Environment(\.dismiss) private var dismiss
     @Environment(AVFoundationManager.self) var avfoundationManager
+    @Environment(SwiftDataManager.self) var swiftDataManager
+    @Environment(RefreshTrigger.self) var refreshTrigger
+    @Environment(\.modelContext) var modelContext
     
     @Binding var showModal: Bool
+    @State var history: History
     
     var body: some View {
         ZStack {
@@ -84,8 +88,9 @@ struct ReviewRecordingView: View {
                 
                 Button {
                     avfoundationManager.stopPlaying()
+                    swiftDataManager.updateHistoryAfterRecording(modelContext: modelContext, history: history, audioURL: avfoundationManager.getCurrentRecordingPath()!)
+                    refreshTrigger.trigger.toggle()
                     showModal = false
-                    
                     // 녹음한 내용 저장하고 챌린지 단계 변경
                     // ...
                     
@@ -120,6 +125,6 @@ struct ReviewRecordingView: View {
 }
 
 #Preview {
-    ReviewRecordingView(showModal: .constant(true))
+    ReviewRecordingView(showModal: .constant(true), history: History(date: Date(), challengeStep: .challengeCompleted, expression: "ds", audioURL: URL(string: "https://www.example.com")!, target: .acquaintance, feelingValue: .neutral, reactionValue: .neutral))
         .environment(AVFoundationManager())
 }

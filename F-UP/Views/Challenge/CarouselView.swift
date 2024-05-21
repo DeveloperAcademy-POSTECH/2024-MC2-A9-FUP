@@ -9,6 +9,7 @@ import SwiftUI
 
 struct CarouselView: View {
     @Binding var currentChallengeStep: ChallengeStep
+    @State var history: History
     @State private var showModal: Bool = false
     
     var body: some View {
@@ -51,7 +52,7 @@ extension CarouselView {
                     .padding(.top, 41)
                     .padding(.bottom, 50)
                 if (currentChallengeStep == .notStarted) {
-                    challengeButton(currentChallengeStep: $currentChallengeStep, index: index)
+                    challengeButton(history: history, currentChallengeStep: $currentChallengeStep, index: index)
                 }
                 else {
                     Text("챌린지 완료!")
@@ -105,7 +106,7 @@ extension CarouselView {
                 }
                 
                 if !(currentChallengeStep == .challengeCompleted) {
-                    challengeButton(currentChallengeStep: $currentChallengeStep, index: index)
+                    challengeButton(history: history, currentChallengeStep: $currentChallengeStep, index: index)
                 }
                 else {
                     Text("챌린지 완료!")
@@ -132,6 +133,7 @@ extension CarouselView {
 
 fileprivate struct challengeButton: View {
     @State private var showModal: Bool = false
+    @State var history: History
     @Binding var currentChallengeStep: ChallengeStep
     var index: Int
     
@@ -154,8 +156,10 @@ fileprivate struct challengeButton: View {
             }
             .padding(.horizontal, 20)
             .padding(.bottom, 20)
-            .sheet(isPresented: $showModal) {
-                RecordingView(showModal: $showModal).interactiveDismissDisabled()
+            .sheet(isPresented: $showModal, onDismiss: {
+                
+            }) {
+                RecordingView(showModal: $showModal, history: history).interactiveDismissDisabled()
             }
         case 2:
             Button {
@@ -200,5 +204,5 @@ fileprivate struct challengeButton: View {
 }
 
 #Preview {
-    CarouselView(currentChallengeStep: .constant(.notStarted))
+    CarouselView(currentChallengeStep: .constant(.notStarted), history: History(date: Date(), challengeStep: .challengeCompleted, expression: "ds", audioURL: URL(string: "https://www.example.com")!, target: .acquaintance, feelingValue: .neutral, reactionValue: .neutral))
 }

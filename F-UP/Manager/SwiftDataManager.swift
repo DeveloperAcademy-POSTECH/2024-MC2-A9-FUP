@@ -11,7 +11,7 @@ import SwiftUI
 @Observable
 final class SwiftDataManager {
     
-    func addHistory(modelContext: ModelContext) {
+    func addHistory(modelContext: ModelContext, expression: String) {
         withAnimation {
             guard let audioURL = URL(string: "https://www.example.com")
             else {
@@ -23,7 +23,7 @@ final class SwiftDataManager {
                 date: Date(),
                 isPerformed: false,
                 challengeStep: .notStarted,
-                expression: "Test Expression0520",
+                expression: expression,
                 audioURL: audioURL,
                 target: .family,
                 specificTarget: nil,
@@ -53,21 +53,17 @@ final class SwiftDataManager {
         }
     }
     
-    func updateHistory(modelContext: ModelContext, history: History, newDate: Date, newExpression: String, newFeelingValue: FeelingValue, newReactionValue: ReactionValue) {
+    func updateHistoryAfterRecording(modelContext: ModelContext, history: History, audioURL: URL) {
             withAnimation {
-                history.date = newDate
-                history.expression = newExpression
-                history.feelingValue = newFeelingValue
-                history.reactionValue = newReactionValue
-                
+                history.audioURL = audioURL
+                history.challengeStep = .recordingCompleted
+                print("ok")
                 do {
                     try modelContext.save()
                 } catch {
                     print(error.localizedDescription)
                 }
             }
-            
-            
     }
     
 }

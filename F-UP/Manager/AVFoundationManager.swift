@@ -124,6 +124,19 @@ final class AVFoundationManager: NSObject {
         }
     }
     
+    func playRecorded(audioFilename: URL) {
+        do {
+            audioPlayer = try AVAudioPlayer(contentsOf: audioFilename)
+            audioPlayer?.delegate = self
+            audioPlayer?.play()
+            audioPlayer?.volume = 70
+            
+            isPlaying = true
+        } catch {
+            print("Could not play audio: \(error.localizedDescription)")
+        }
+    }
+    
     func stopPlaying() {
         audioPlayer?.stop()
         isPlaying = false

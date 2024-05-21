@@ -10,6 +10,7 @@ import SwiftUI
 struct RecordingView: View {
     @Environment(AVFoundationManager.self) var avfoundationManager
     @Binding var showModal: Bool
+    @State var history: History
     
     //    @State private var isMicSelected: Bool = true
     @State private var navigationToNextView: Bool = false
@@ -84,7 +85,7 @@ struct RecordingView: View {
                         
                     }
                     .navigationDestination(isPresented: $navigationToNextView) {
-                        ReviewRecordingView(showModal: $showModal)
+                        ReviewRecordingView(showModal: $showModal, history: history)
                     }
                     
                     Text(avfoundationManager.isRecording ? "듣고 있어요" : "오늘의 표현을 실제로 따라해보세요")
@@ -111,6 +112,6 @@ struct RecordingView: View {
 
 #Preview {
     
-    RecordingView(showModal: .constant(true))
+    RecordingView(showModal: .constant(true), history: History(date: Date(), challengeStep: .challengeCompleted, expression: "ds", audioURL: URL(string: "https://www.example.com")!, target: .acquaintance, feelingValue: .neutral, reactionValue: .neutral))
         .environment(AVFoundationManager())
 }
