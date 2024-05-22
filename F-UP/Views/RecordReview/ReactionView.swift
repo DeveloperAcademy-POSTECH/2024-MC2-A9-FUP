@@ -122,6 +122,9 @@ struct ReactionView: View {
 }
 
 
-//#Preview {
-//    ReactionView(showModal: .constant(true))
-//}
+#Preview {
+    ReactionView(showModal: .constant(true), history: History(date: Date(), challengeStep: .challengeCompleted, expression: "ds", audioURL: URL(string: "https://www.example.com")!, target: .acquaintance, feelingValue: .neutral, reactionValue: .neutral), target: .acquaintance, specificTarget: "", feelingValue: .comfortable)
+        .environment(AVFoundationManager())
+        .environment(SwiftDataManager())
+        .environment(RefreshTrigger())
+}
