@@ -187,6 +187,9 @@ final class AVFoundationManager: NSObject {
             
             let averageLevel = intervalLevels.reduce(0, +) / CGFloat(intervalLevels.count)
             audioLevels[i] = averageLevel
+            if audioLevels[i].isNaN {
+                audioLevels[i] = 0
+            }
         }
         
         tempAudioLevels.removeAll()

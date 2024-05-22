@@ -9,6 +9,7 @@
 import SwiftUI
 
 struct HistoryDetailView: View {
+    @Environment(AVFoundationManager.self) var avFoundationManager
     var history: History
     @State private var formattedDate: String = ""
     @State private var sliderValue = 0.0
@@ -19,7 +20,7 @@ struct HistoryDetailView: View {
             Theme.background
             
             VStack(spacing: 0) {
-                RecoderPlay(history: history, formattedDate: formattedDate)
+                RecoderPlay(history: history, formattedDate: formattedDate, manager: avFoundationManager)
                 
                 VStack(alignment: .leading ,spacing: 0) {
                     Text("누구에게 이 따뜻함을 건냈나요?")
@@ -104,9 +105,7 @@ private struct TargetButton: View {
     }
 }
 
-private func RecoderPlay(history: History, formattedDate: String) -> some View {
-    @Environment(AVFoundationManager.self) var avFoundationManager
-    
+private func RecoderPlay(history: History, formattedDate: String, manager: AVFoundationManager) -> some View {
     return VStack(spacing: 0) {
         RoundedRectangle(cornerRadius: Theme.round)
             .fill(Theme.white)
@@ -126,7 +125,8 @@ private func RecoderPlay(history: History, formattedDate: String) -> some View {
                         AudioPlayingComponent(audioLevels: history.audioLevels, audioLength: history.audioLength)
                         Button {
                             // 녹음 실행 event
-                            
+                            print(history.audioURL)
+                            manager.playRecorded(audioFilename: history.audioURL)
                         }label: {
                             Image(systemName: "play.circle.fill")
                                 .resizable()
@@ -206,7 +206,7 @@ extension HistoryDetailView {
 
 #Preview {
     NavigationStack {
-        HistoryDetailView(history: History(date: Date(), challengeStep: .challengeCompleted, expression: "ds", audioURL: URL(string: "https://www.example.com")!, audioLevels: Array(repeating: CGFloat(0.1), count: 30), audioLength: 0, target: .acquaintance, feelingValue: .neutral, reactionValue: .neutral))
+        HistoryDetailView(history: History(date: Date(), challengeStep: .challengeCompleted, expression: "오늘의 표현", audioURL: URL(string: "https://www.example.com")!, audioLevels: Array(repeating: CGFloat(0.1), count: 30), audioLength: 0, target: .acquaintance, feelingValue: .neutral, reactionValue: .neutral))
             .environment(AVFoundationManager())
             .environment(SwiftDataManager())
             .environment(RefreshTrigger())
