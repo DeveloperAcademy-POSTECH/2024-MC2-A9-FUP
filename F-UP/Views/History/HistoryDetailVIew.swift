@@ -5,15 +5,14 @@
 //  Created by LeeWanJae on 5/17/24.
 //
 
-// TODO: SwiftData로 Data 대체
 // TODO: 녹음 재생
 import SwiftUI
 
 struct HistoryDetailView: View {
     var history: History
     @State private var formattedDate: String = ""
-    @Environment(\.dismiss) var dismiss
     @State private var sliderValue = 0.0
+    @Environment(\.dismiss) var dismiss
     
     var body: some View {
         ZStack {

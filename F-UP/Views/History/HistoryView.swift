@@ -5,15 +5,12 @@
 //  Created by namdghyun on 5/16/24.
 //
 
-// TODO: 필터 구현 시 클릭된 필터 히스토리 뷰에 표출
-// 선택된 타겟을 갖고 있는 녀석들만.
-// TODO: SwiftData로 Data 대체
 import SwiftUI
 import SwiftData
 
 struct HistoryView: View {
     @State private var isShowingModal = false
-    @State private var selectedMonth: String = "선택없음"
+    @State private var selectedMonth: String = "전체"
     @State private var selectedTarget: Target?
     @State private var filterData: [History] = []
     @Query private var items: [History]
@@ -64,7 +61,7 @@ private func HasDateHistoryView(isShowingModal: Binding<Bool>, filterData: [Hist
                     if selectedTarget.wrappedValue != nil {
                         CurrentTargetFilter(selectedTarget: selectedTarget)
                     }
-                    if selectedMonth.wrappedValue !=  "선택없음" {
+                    if selectedMonth.wrappedValue !=  "전체" {
                         CurrentMonthFilter(selectedMonth: selectedMonth)
                     }
                 }
