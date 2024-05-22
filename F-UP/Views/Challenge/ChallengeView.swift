@@ -73,7 +73,7 @@ struct ChallengeView: View {
                     )
                     
                     Spacer()
-                    #if DEBUG
+//                    #if DEBUG
                     if currentChallengeStep == .recordingCompleted || currentChallengeStep == .challengeCompleted {
                         Button(avFoundationManager.isPlaying ? "정지" : "재생") {
                             if avFoundationManager.isPlaying {
@@ -86,7 +86,7 @@ struct ChallengeView: View {
                     Button("초기화") {
                         swiftDataManager.deleteHistory(modelContext: modelContext, history: todayHistories[0])
                     }.buttonStyle(.borderedProminent).padding(.trailing, Theme.padding)
-                    #endif
+//                    #endif
                 }
                 .padding(.bottom, 20)
                 .padding(.top, 11)
