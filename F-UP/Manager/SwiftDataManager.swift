@@ -25,6 +25,8 @@ final class SwiftDataManager {
                 challengeStep: .notStarted,
                 expression: expression,
                 audioURL: audioURL,
+                audioLevels: [],
+                audioLength: 0,
                 target: .family,
                 specificTarget: nil,
                 feelingValue: .veryComfortable,
@@ -53,9 +55,11 @@ final class SwiftDataManager {
         }
     }
     
-    func updateHistoryAfterRecording(modelContext: ModelContext, history: History, audioURL: URL) {
+    func updateHistoryAfterRecording(modelContext: ModelContext, history: History, audioURL: URL, audioLevels: [CGFloat], audioLength: TimeInterval) {
             withAnimation {
                 history.audioURL = audioURL
+                history.audioLevels = audioLevels
+                history.audioLength = audioLength
                 history.challengeStep = .recordingCompleted
                 print("ok")
                 do {

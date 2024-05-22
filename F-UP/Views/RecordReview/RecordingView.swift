@@ -112,6 +112,6 @@ struct RecordingView: View {
 
 #Preview {
     
-    RecordingView(showModal: .constant(true), history: History(date: Date(), challengeStep: .challengeCompleted, expression: "ds", audioURL: URL(string: "https://www.example.com")!, target: .acquaintance, feelingValue: .neutral, reactionValue: .neutral))
+    RecordingView(showModal: .constant(true), history: History(date: Date(), challengeStep: .challengeCompleted, expression: "ds", audioURL: URL(string: "https://www.example.com")!, audioLevels: Array(repeating: CGFloat(0.1), count: 30), audioLength: 0, target: .acquaintance, feelingValue: .neutral, reactionValue: .neutral))
         .environment(AVFoundationManager())
 }
