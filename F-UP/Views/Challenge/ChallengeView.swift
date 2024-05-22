@@ -121,14 +121,15 @@ struct ChallengeView: View {
             }
         }
         .onAppear() {
-            expressionIndex = (Int(Date().timeIntervalSinceReferenceDate) / (60 * 60 * 24)) % dummyExpression.count
+            updateExpressionIndex()
             checkAndAddHistory()
-            print("onappear")
         }
         .onChange(of: refreshTrigger.trigger) {
+            updateExpressionIndex()
             updateHistories()
         }
         .onChange(of: currentDateString) {
+            updateExpressionIndex()
             checkAndAddHistory()
             print(histories)
             print(todayHistories)
@@ -136,7 +137,7 @@ struct ChallengeView: View {
         }
         .onReceive(Timer.publish(every: 30, on: .main, in: .common).autoconnect()) { _ in
             let newDateString = Date().formatted(date: .abbreviated, time: .omitted)
-            expressionIndex = (Int(Date().timeIntervalSinceReferenceDate) / (60 * 60 * 24)) % dummyExpression.count
+            
             if newDateString != currentDateString {
                 print("날짜바뀜")
                 if currentChallengeStep != .recordingCompleted {
@@ -153,10 +154,35 @@ struct ChallengeView: View {
 // 데이터 관련 메소드
 extension ChallengeView {
     
+    func updateExpressionIndex() {
+        let calendar = Calendar.current
+        
+        let currentDate = Date()
+        
+        var dateComponents = DateComponents()
+        dateComponents.year = 2024
+        dateComponents.month = 1
+        dateComponents.day = 1
+
+        guard let specificDate = calendar.date(from: dateComponents) else {
+            print("날짜를 생성할 수 없습니다.")
+            return
+        }
+
+        let components = calendar.dateComponents([.day], from: specificDate, to: currentDate)
+
+        guard let daysElapsed = components.day else {
+            print("일수를 계산할 수 없습니다.")
+            return
+        }
+        
+        expressionIndex = daysElapsed % dummyExpression.count
+    }
+    
     func updateHistories() {
         let calendar = Calendar.current
         let yesterday = calendar.date(byAdding: .day, value: -1, to: Date())!
-        
+                
         todayHistories = histories.filter {
             $0.date.formatted(date: .abbreviated, time: .omitted)
             ==
