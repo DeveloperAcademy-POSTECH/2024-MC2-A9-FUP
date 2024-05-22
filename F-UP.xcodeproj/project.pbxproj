@@ -20,8 +20,8 @@
 		CCC074252BFB1EC000401B25 /* HistoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCC074242BFB1EC000401B25 /* HistoryView.swift */; };
 		CCC074272BFB1F2E00401B25 /* HistoryDetailVIew.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCC074262BFB1F2E00401B25 /* HistoryDetailVIew.swift */; };
 		CCC074292BFB1F5000401B25 /* HistoryFilterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCC074282BFB1F5000401B25 /* HistoryFilterView.swift */; };
-		DF0ABEC42BFCE6A1000F2C03 /* RefreshTrigger.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF0ABEC32BFCE6A1000F2C03 /* RefreshTrigger.swift */; };
 		CCC0A14B2BFCFD4B00C14B8C /* NotificationManger.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCC0A14A2BFCFD4B00C14B8C /* NotificationManger.swift */; };
+		DF0ABEC42BFCE6A1000F2C03 /* RefreshTrigger.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF0ABEC32BFCE6A1000F2C03 /* RefreshTrigger.swift */; };
 		DF32E17F2BFA1B730084B28C /* DottedDivider.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF32E17E2BFA1B730084B28C /* DottedDivider.swift */; };
 		DF32E1822BFA40780084B28C /* SwiftDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF32E1812BFA40780084B28C /* SwiftDataManager.swift */; };
 		DF32E1842BFA48660084B28C /* AVFoundationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF32E1832BFA48660084B28C /* AVFoundationManager.swift */; };
@@ -50,8 +50,8 @@
 		CCC074242BFB1EC000401B25 /* HistoryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryView.swift; sourceTree = "<group>"; };
 		CCC074262BFB1F2E00401B25 /* HistoryDetailVIew.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryDetailVIew.swift; sourceTree = "<group>"; };
 		CCC074282BFB1F5000401B25 /* HistoryFilterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryFilterView.swift; sourceTree = "<group>"; };
-		DF0ABEC32BFCE6A1000F2C03 /* RefreshTrigger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RefreshTrigger.swift; sourceTree = "<group>"; };
 		CCC0A14A2BFCFD4B00C14B8C /* NotificationManger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationManger.swift; sourceTree = "<group>"; };
+		DF0ABEC32BFCE6A1000F2C03 /* RefreshTrigger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RefreshTrigger.swift; sourceTree = "<group>"; };
 		DF32E17E2BFA1B730084B28C /* DottedDivider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DottedDivider.swift; sourceTree = "<group>"; };
 		DF32E1812BFA40780084B28C /* SwiftDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftDataManager.swift; sourceTree = "<group>"; };
 		DF32E1832BFA48660084B28C /* AVFoundationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AVFoundationManager.swift; sourceTree = "<group>"; };
@@ -444,7 +444,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"F-UP/Preview Content\"";
-				DEVELOPMENT_TEAM = GKWM8Q6TMS;
+				DEVELOPMENT_TEAM = 47PZ53ZAF2;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_NSMicrophoneUsageDescription = "말하기 기능을 활성화하기 위해 마이크 권한이 필요합니다.";
@@ -475,7 +475,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"F-UP/Preview Content\"";
-				DEVELOPMENT_TEAM = GKWM8Q6TMS;
+				DEVELOPMENT_TEAM = 47PZ53ZAF2;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_NSMicrophoneUsageDescription = "말하기 기능을 활성화하기 위해 마이크 권한이 필요합니다.";

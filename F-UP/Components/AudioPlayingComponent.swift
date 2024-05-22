@@ -13,19 +13,20 @@ struct AudioPlayingComponent: View {
     @State private var isPlayedArray: [Bool] = Array(repeating: false, count: 30)
     var audioLevels: [CGFloat]
     var audioLength: TimeInterval
+    var maxHeight: CGFloat = 150
     
     var body: some View {
         HStack(alignment: .center, spacing: 8) {
             ForEach(audioLevels.indices, id: \.self) { index in
-                let height = max(8, audioLevels[index] * 200)
+                let height = min(max(8, audioLevels[index] * 200), maxHeight)
                 
                 RoundedRectangle(cornerRadius: 25.0)
-                    .fill(isPlayedArray[index] ? Theme.point : Color.gray)
+                    .fill(isPlayedArray[index] ? Theme.point : Theme.subblack)
                     .frame(width: 3, height: height)
                     .padding(.horizontal, -5)
             }
         }
-        .onChange(of: avfoundationManager.playingTime) { oldValue, newValue in
+        .onChange(of: avfoundationManager.playingTime) { _, _ in
             updateIsPlayedArray()
         }
     }
@@ -36,13 +37,13 @@ struct AudioPlayingComponent: View {
     /// 4. 인덱스의 정규화된 값이 현재 재생 위치의 비율보다 작으면 해당 인덱스의 막대는 재생된 상태로 간주한다.
     /// 5. 30개 구간 각각의 재생 상태를 업데이트한다. "다시 녹음하기"를 누르면 재생 상태가 초기화되도록 onChnage에 넣는다.
     private func updateIsPlayedArray() {
-        for index in avfoundationManager.audioLevels.indices {
-            isPlayedArray[index] = Double(index) / Double(audioLevels.count) < avfoundationManager.playingTime / avfoundationManager.recordLength
+        for index in audioLevels.indices {
+            isPlayedArray[index] = Double(index) / Double(audioLevels.count) < avfoundationManager.playingTime / audioLength
         }
     }
 }
 
-//#Preview {
-//    AudioPlayingComponent()
-//        .environment(AVFoundationManager())
-//}
+#Preview {
+    AudioPlayingComponent(audioLevels: Array(repeating: CGFloat(0.5), count: 30), audioLength: 3)
+        .environment(AVFoundationManager())
+}

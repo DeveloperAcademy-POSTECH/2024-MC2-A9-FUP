@@ -57,8 +57,9 @@ final class SwiftDataManager {
     
     func updateHistoryAfterRecording(modelContext: ModelContext, history: History, audioURL: URL, audioLevels: [CGFloat], audioLength: TimeInterval) {
             withAnimation {
+                
                 history.audioURL = audioURL
-                history.audioLevels = audioLevels
+                history.audioLevels = audioLevels.map { $0 * 0.7 } // 히스토리에 표시되는 오디오레벨의 크기 줄이기
                 history.audioLength = audioLength
                 history.challengeStep = .recordingCompleted
                 print("ok")
