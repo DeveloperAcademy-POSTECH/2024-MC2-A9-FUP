@@ -15,6 +15,7 @@ struct F_UPApp: App {
     @State private var refreshTrigger = RefreshTrigger()
 
     @AppStorage("streak") private var streak: Int = 0
+    @UIApplicationDelegateAdaptor(AppDelegate.self) var appDelegate
     
     var sharedModelContainer: ModelContainer = {
         let schema = Schema([
@@ -39,5 +40,12 @@ struct F_UPApp: App {
         .environment(avfoundationManager)
         .environment(swiftDataManager)
         .environment(refreshTrigger)
+    }
+}
+
+class AppDelegate: NSObject, UIApplicationDelegate {
+    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey : Any]? = nil) -> Bool {
+        NotificationManger.shared.setNotiAuth()
+        return true
     }
 }

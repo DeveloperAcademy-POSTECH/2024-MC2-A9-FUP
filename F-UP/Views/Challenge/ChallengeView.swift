@@ -8,6 +8,18 @@
 import SwiftUI
 import SwiftData
 
+let dummyExpression = [
+    "생각나서 연락했어.",
+    "보람찬 하루 보내",
+    "항상 널 생각하고 있어",
+    "알찬 하루 보내",
+    "오늘 하루도 화이팅!",
+    "행복한 하루 보내!",
+    "즐거운 하루 보내",
+    "오늘 뭐 먹었어?",
+    "에구 많이 힘들었겠다",
+    "너는 최고야"
+]
 
 struct ChallengeView: View {
     @Environment(\.modelContext) private var modelContext
@@ -24,19 +36,6 @@ struct ChallengeView: View {
     @State var currentChallengeStep: ChallengeStep = .notStarted
     
     @AppStorage("streak") var streak: Int = 0
-    
-    let dummyExpression = [
-        "생각나서 연락했어.",
-        "보람찬 하루 보내",
-        "항상 널 생각하고 있어",
-        "알찬 하루 보내",
-        "오늘 하루도 화이팅!",
-        "행복한 하루 보내!",
-        "즐거운 하루 보내",
-        "오늘 뭐 먹었어?",
-        "에구 많이 힘들었겠다",
-        "너는 최고야"
-    ]
     
     var body: some View {
         ZStack(alignment: .top){
@@ -143,6 +142,7 @@ struct ChallengeView: View {
             
             if newDateString != currentDateString {
                 print("날짜바뀜")
+
                 if currentChallengeStep != .recordingCompleted {
                     currentDateString = newDateString
                 }
@@ -180,6 +180,8 @@ extension ChallengeView {
         }
         
         expressionIndex = daysElapsed % dummyExpression.count
+        print("expressionIndex: \(expressionIndex)")
+        NotificationManger.shared.setDailyNoti(expressionIndex: $expressionIndex)
     }
     
     func updateHistories() {
