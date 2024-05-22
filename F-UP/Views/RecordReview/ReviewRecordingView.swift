@@ -40,7 +40,7 @@ struct ReviewRecordingView: View {
                         VStack {
                             Spacer()
                             //                                Image("TempWaveImage")
-                            AudioPlayingComponent()
+                            AudioPlayingComponent(audioLevels: avFoundationManager.audioLevels, audioLength: avFoundationManager.recordLength)
                             Spacer()
                             Button {
                                 // 녹음 재생 기능 구현
@@ -88,11 +88,9 @@ struct ReviewRecordingView: View {
                 
                 Button {
                     avFoundationManager.stopPlaying()
-                    swiftDataManager.updateHistoryAfterRecording(modelContext: modelContext, history: history, audioURL: avFoundationManager.getCurrentRecordingPath()!)
+                    swiftDataManager.updateHistoryAfterRecording(modelContext: modelContext, history: history, audioURL: avFoundationManager.getCurrentRecordingPath()!, audioLevels: avFoundationManager.audioLevels, audioLength: avFoundationManager.recordLength)
                     refreshTrigger.trigger.toggle()
                     showModal = false
-                    // 녹음한 내용 저장하고 챌린지 단계 변경
-                    // ...
                     
                 } label : {
                     RoundedRectangle(cornerRadius: Theme.round)
@@ -125,7 +123,7 @@ struct ReviewRecordingView: View {
 }
 
 #Preview {
-    ReviewRecordingView(showModal: .constant(true), history: History(date: Date(), challengeStep: .challengeCompleted, expression: "ds", audioURL: URL(string: "https://www.example.com")!, target: .acquaintance, feelingValue: .neutral, reactionValue: .neutral))
+    ReviewRecordingView(showModal: .constant(true), history: History(date: Date(), challengeStep: .challengeCompleted, expression: "ds", audioURL: URL(string: "https://www.example.com")!, audioLevels: Array(repeating: CGFloat(0.1), count: 30), audioLength: 0, target: .acquaintance, feelingValue: .neutral, reactionValue: .neutral))
         .environment(AVFoundationManager())
         .environment(SwiftDataManager())
         .environment(RefreshTrigger())

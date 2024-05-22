@@ -105,6 +105,8 @@ private struct TargetButton: View {
 }
 
 private func RecoderPlay(history: History, formattedDate: String) -> some View {
+    @Environment(AVFoundationManager.self) var avFoundationManager
+    
     return VStack(spacing: 0) {
         RoundedRectangle(cornerRadius: Theme.round)
             .fill(Theme.white)
@@ -121,11 +123,10 @@ private func RecoderPlay(history: History, formattedDate: String) -> some View {
                         .foregroundStyle(Theme.black)
                         .padding(.bottom, 21)
                     HStack(spacing: 0) {
-                        Image("TempWaveImage")
-                            .resizable()
-                            .frame(width: 241, height: 31)
+                        AudioPlayingComponent(audioLevels: history.audioLevels, audioLength: history.audioLength)
                         Button {
                             // 녹음 실행 event
+                            
                         }label: {
                             Image(systemName: "play.circle.fill")
                                 .resizable()
@@ -205,7 +206,10 @@ extension HistoryDetailView {
 
 #Preview {
     NavigationStack {
-        HistoryDetailView(history: History(date: Date(), challengeStep: .challengeCompleted, expression: "오늘 하루도 정말 수고 많았어", audioURL: URL(string: "www.exmaple.com")!, target: .family, specificTarget: "도리" ,feelingValue: .veryUncomfortable, reactionValue: .veryGood))
+        HistoryDetailView(history: History(date: Date(), challengeStep: .challengeCompleted, expression: "ds", audioURL: URL(string: "https://www.example.com")!, audioLevels: Array(repeating: CGFloat(0.1), count: 30), audioLength: 0, target: .acquaintance, feelingValue: .neutral, reactionValue: .neutral))
+            .environment(AVFoundationManager())
+            .environment(SwiftDataManager())
+            .environment(RefreshTrigger())
     }
 }
 
