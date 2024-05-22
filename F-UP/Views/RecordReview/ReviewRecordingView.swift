@@ -9,7 +9,7 @@ import SwiftUI
 
 struct ReviewRecordingView: View {
     @Environment(\.dismiss) private var dismiss
-    @Environment(AVFoundationManager.self) var avfoundationManager
+    @Environment(AVFoundationManager.self) var avFoundationManager
     @Environment(SwiftDataManager.self) var swiftDataManager
     @Environment(RefreshTrigger.self) var refreshTrigger
     @Environment(\.modelContext) var modelContext
@@ -44,16 +44,16 @@ struct ReviewRecordingView: View {
                             Spacer()
                             Button {
                                 // 녹음 재생 기능 구현
-                                if avfoundationManager.isPlaying {
-                                    avfoundationManager.stopPlaying()
+                                if avFoundationManager.isPlaying {
+                                    avFoundationManager.stopPlaying()
                                 } else {
-                                    avfoundationManager.playRecording()
+                                    avFoundationManager.playRecording()
                                 }
                                 
                             } label: {
                                 Label(
-                                    title: { Text(avfoundationManager.isPlaying ? "Stop" : "Play") },
-                                    icon: { Image(systemName: avfoundationManager.isPlaying ? "square.fill" : "play.fill") }
+                                    title: { Text(avFoundationManager.isPlaying ? "Stop" : "Play") },
+                                    icon: { Image(systemName: avFoundationManager.isPlaying ? "square.fill" : "play.fill") }
                                 )
                             }
                             .controlSize(.small)
@@ -70,8 +70,8 @@ struct ReviewRecordingView: View {
                 
                 Button {
                     // 녹음 삭제하고 다시 녹음
-                    avfoundationManager.stopPlaying()
-                    avfoundationManager.deleteRecording()
+                    avFoundationManager.stopPlaying()
+                    avFoundationManager.deleteRecording()
                     dismiss()
                 } label : {
                     RoundedRectangle(cornerRadius: Theme.round)
@@ -87,8 +87,8 @@ struct ReviewRecordingView: View {
                 }
                 
                 Button {
-                    avfoundationManager.stopPlaying()
-                    swiftDataManager.updateHistoryAfterRecording(modelContext: modelContext, history: history, audioURL: avfoundationManager.getCurrentRecordingPath()!)
+                    avFoundationManager.stopPlaying()
+                    swiftDataManager.updateHistoryAfterRecording(modelContext: modelContext, history: history, audioURL: avFoundationManager.getCurrentRecordingPath()!)
                     refreshTrigger.trigger.toggle()
                     showModal = false
                     // 녹음한 내용 저장하고 챌린지 단계 변경
@@ -114,8 +114,8 @@ struct ReviewRecordingView: View {
         .navigationBarBackButtonHidden()
         .toolbar {
             Button("취소") {
-                avfoundationManager.stopPlaying()
-                avfoundationManager.deleteRecording()
+                avFoundationManager.stopPlaying()
+                avFoundationManager.deleteRecording()
                 
                 showModal = false
             }
