@@ -128,7 +128,7 @@ struct ChallengeView: View {
         }
         .onChange(of: refreshTrigger.trigger) {
             updateExpressionIndex()
-            updateHistories()
+            checkAndAddHistory()
         }
         .onChange(of: currentDateString) {
             updateExpressionIndex()
