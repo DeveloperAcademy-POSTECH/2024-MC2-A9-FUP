@@ -35,7 +35,38 @@
 		DFBE0BCC2BF32CB600246814 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DFBE0BCB2BF32CB600246814 /* Preview Assets.xcassets */; };
 		DFBE0BDA2BF4DB4E00246814 /* Enums.swift in Sources */ = {isa = PBXBuildFile; fileRef = DFBE0BD92BF4DB4E00246814 /* Enums.swift */; };
 		DFBE0BEF2BF7289A00246814 /* CarouselView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DFBE0BEE2BF7289A00246814 /* CarouselView.swift */; };
+		DFC089902BFDDE330090E577 /* WidgetKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DFC0898F2BFDDE330090E577 /* WidgetKit.framework */; };
+		DFC089922BFDDE330090E577 /* SwiftUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DFC089912BFDDE330090E577 /* SwiftUI.framework */; };
+		DFC089952BFDDE330090E577 /* ExpressionStreakWidgetBundle.swift in Sources */ = {isa = PBXBuildFile; fileRef = DFC089942BFDDE330090E577 /* ExpressionStreakWidgetBundle.swift */; };
+		DFC089972BFDDE330090E577 /* ExpressionStreakWidget.swift in Sources */ = {isa = PBXBuildFile; fileRef = DFC089962BFDDE330090E577 /* ExpressionStreakWidget.swift */; };
+		DFC089992BFDDE340090E577 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DFC089982BFDDE340090E577 /* Assets.xcassets */; };
+		DFC0899D2BFDDE340090E577 /* ExpressionStreakWidgetExtension.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = DFC0898D2BFDDE330090E577 /* ExpressionStreakWidgetExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		DFC089A22BFDDE750090E577 /* Theme.swift in Sources */ = {isa = PBXBuildFile; fileRef = 173B49DB2BF72C5600FC4FEC /* Theme.swift */; };
 /* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		DFC0899B2BFDDE340090E577 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = DFBE0BB72BF32CB400246814 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = DFC0898C2BFDDE330090E577;
+			remoteInfo = ExpressionStreakWidgetExtension;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		DFC0899E2BFDDE340090E577 /* Embed Foundation Extensions */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 13;
+			files = (
+				DFC0899D2BFDDE340090E577 /* ExpressionStreakWidgetExtension.appex in Embed Foundation Extensions */,
+			);
+			name = "Embed Foundation Extensions";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		172BA22A2BFD0954007AC28A /* AudioPlayingComponent.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AudioPlayingComponent.swift; sourceTree = "<group>"; };
@@ -67,6 +98,13 @@
 		DFBE0BCB2BF32CB600246814 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		DFBE0BD92BF4DB4E00246814 /* Enums.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Enums.swift; sourceTree = "<group>"; };
 		DFBE0BEE2BF7289A00246814 /* CarouselView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CarouselView.swift; sourceTree = "<group>"; };
+		DFC0898D2BFDDE330090E577 /* ExpressionStreakWidgetExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = ExpressionStreakWidgetExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
+		DFC0898F2BFDDE330090E577 /* WidgetKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WidgetKit.framework; path = System/Library/Frameworks/WidgetKit.framework; sourceTree = SDKROOT; };
+		DFC089912BFDDE330090E577 /* SwiftUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftUI.framework; path = System/Library/Frameworks/SwiftUI.framework; sourceTree = SDKROOT; };
+		DFC089942BFDDE330090E577 /* ExpressionStreakWidgetBundle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpressionStreakWidgetBundle.swift; sourceTree = "<group>"; };
+		DFC089962BFDDE330090E577 /* ExpressionStreakWidget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpressionStreakWidget.swift; sourceTree = "<group>"; };
+		DFC089982BFDDE340090E577 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		DFC0899A2BFDDE340090E577 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -74,6 +112,15 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		DFC0898A2BFDDE330090E577 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				DFC089922BFDDE330090E577 /* SwiftUI.framework in Frameworks */,
+				DFC089902BFDDE330090E577 /* WidgetKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -191,6 +238,8 @@
 			isa = PBXGroup;
 			children = (
 				DFBE0BC12BF32CB400246814 /* F-UP */,
+				DFC089932BFDDE330090E577 /* ExpressionStreakWidget */,
+				DFC0898E2BFDDE330090E577 /* Frameworks */,
 				DFBE0BC02BF32CB400246814 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -199,6 +248,7 @@
 			isa = PBXGroup;
 			children = (
 				DFBE0BBF2BF32CB400246814 /* F-UP.app */,
+				DFC0898D2BFDDE330090E577 /* ExpressionStreakWidgetExtension.appex */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -227,6 +277,26 @@
 			path = "Preview Content";
 			sourceTree = "<group>";
 		};
+		DFC0898E2BFDDE330090E577 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				DFC0898F2BFDDE330090E577 /* WidgetKit.framework */,
+				DFC089912BFDDE330090E577 /* SwiftUI.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		DFC089932BFDDE330090E577 /* ExpressionStreakWidget */ = {
+			isa = PBXGroup;
+			children = (
+				DFC089942BFDDE330090E577 /* ExpressionStreakWidgetBundle.swift */,
+				DFC089962BFDDE330090E577 /* ExpressionStreakWidget.swift */,
+				DFC089982BFDDE340090E577 /* Assets.xcassets */,
+				DFC0899A2BFDDE340090E577 /* Info.plist */,
+			);
+			path = ExpressionStreakWidget;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -237,15 +307,34 @@
 				DFBE0BBB2BF32CB400246814 /* Sources */,
 				DFBE0BBC2BF32CB400246814 /* Frameworks */,
 				DFBE0BBD2BF32CB400246814 /* Resources */,
+				DFC0899E2BFDDE340090E577 /* Embed Foundation Extensions */,
 			);
 			buildRules = (
 			);
 			dependencies = (
+				DFC0899C2BFDDE340090E577 /* PBXTargetDependency */,
 			);
 			name = "F-UP";
 			productName = "F-UP";
 			productReference = DFBE0BBF2BF32CB400246814 /* F-UP.app */;
 			productType = "com.apple.product-type.application";
+		};
+		DFC0898C2BFDDE330090E577 /* ExpressionStreakWidgetExtension */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = DFC089A12BFDDE340090E577 /* Build configuration list for PBXNativeTarget "ExpressionStreakWidgetExtension" */;
+			buildPhases = (
+				DFC089892BFDDE330090E577 /* Sources */,
+				DFC0898A2BFDDE330090E577 /* Frameworks */,
+				DFC0898B2BFDDE330090E577 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = ExpressionStreakWidgetExtension;
+			productName = ExpressionStreakWidgetExtension;
+			productReference = DFC0898D2BFDDE330090E577 /* ExpressionStreakWidgetExtension.appex */;
+			productType = "com.apple.product-type.app-extension";
 		};
 /* End PBXNativeTarget section */
 
@@ -254,11 +343,14 @@
 			isa = PBXProject;
 			attributes = {
 				BuildIndependentTargetsInParallel = 1;
-				LastSwiftUpdateCheck = 1520;
+				LastSwiftUpdateCheck = 1540;
 				LastUpgradeCheck = 1520;
 				TargetAttributes = {
 					DFBE0BBE2BF32CB400246814 = {
 						CreatedOnToolsVersion = 15.2;
+					};
+					DFC0898C2BFDDE330090E577 = {
+						CreatedOnToolsVersion = 15.4;
 					};
 				};
 			};
@@ -276,6 +368,7 @@
 			projectRoot = "";
 			targets = (
 				DFBE0BBE2BF32CB400246814 /* F-UP */,
+				DFC0898C2BFDDE330090E577 /* ExpressionStreakWidgetExtension */,
 			);
 		};
 /* End PBXProject section */
@@ -287,6 +380,14 @@
 			files = (
 				DFBE0BCC2BF32CB600246814 /* Preview Assets.xcassets in Resources */,
 				DFBE0BC92BF32CB600246814 /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		DFC0898B2BFDDE330090E577 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				DFC089992BFDDE340090E577 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -326,7 +427,25 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		DFC089892BFDDE330090E577 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				DFC089A22BFDDE750090E577 /* Theme.swift in Sources */,
+				DFC089952BFDDE330090E577 /* ExpressionStreakWidgetBundle.swift in Sources */,
+				DFC089972BFDDE330090E577 /* ExpressionStreakWidget.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		DFC0899C2BFDDE340090E577 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = DFC0898C2BFDDE330090E577 /* ExpressionStreakWidgetExtension */;
+			targetProxy = DFC0899B2BFDDE340090E577 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
 		DFBE0BCD2BF32CB600246814 /* Debug */ = {
@@ -451,6 +570,7 @@
 		DFBE0BD02BF32CB600246814 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
@@ -482,6 +602,7 @@
 		DFBE0BD12BF32CB600246814 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
@@ -510,6 +631,62 @@
 			};
 			name = Release;
 		};
+		DFC0899F2BFDDE340090E577 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = GKWM8Q6TMS;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = ExpressionStreakWidget/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = ExpressionStreakWidget;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				IPHONEOS_DEPLOYMENT_TARGET = 17.2;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.f-up.F-UP.ExpressionStreakWidget";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		DFC089A02BFDDE340090E577 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = GKWM8Q6TMS;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = ExpressionStreakWidget/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = ExpressionStreakWidget;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				IPHONEOS_DEPLOYMENT_TARGET = 17.2;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.f-up.F-UP.ExpressionStreakWidget";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -527,6 +704,15 @@
 			buildConfigurations = (
 				DFBE0BD02BF32CB600246814 /* Debug */,
 				DFBE0BD12BF32CB600246814 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		DFC089A12BFDDE340090E577 /* Build configuration list for PBXNativeTarget "ExpressionStreakWidgetExtension" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				DFC0899F2BFDDE340090E577 /* Debug */,
+				DFC089A02BFDDE340090E577 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
