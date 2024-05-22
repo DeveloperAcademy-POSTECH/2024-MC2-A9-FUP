@@ -44,24 +44,12 @@ struct ChallengeView: View {
             
             //Title
             VStack(spacing: 0) {
-                if currentChallengeStep == .recordingCompleted {
-                    Button("start") {
-                        avFoundationManager.playRecorded(audioFilename: todayHistories[0].audioURL)
-                    }
-                    Button("stop") {
-                        avFoundationManager.stopPlaying()
-                    }
-                }
-                Button("ss") {
-                    swiftDataManager.deleteHistory(modelContext: modelContext, history: todayHistories[0])
-                }
                 HStack {
                     Text("챌린지")
                         .font(.title)
                         .foregroundStyle(Theme.black)
                         .fontWeight(.bold)
                         .padding(.leading, 20)
-                    
                     //streak
                     HStack(alignment: .center, spacing: 10) {
                         HStack(spacing: 2) {
@@ -80,11 +68,26 @@ struct ChallengeView: View {
                         RoundedRectangle(cornerRadius: 12.5)
                     )
                     .overlay(
-                      RoundedRectangle(cornerRadius: 12.5)
-                        .inset(by: 0.65)
-                        .stroke(Theme.point, lineWidth: 1.3)
+                        RoundedRectangle(cornerRadius: 12.5)
+                            .inset(by: 0.65)
+                            .stroke(Theme.point, lineWidth: 1.3)
                     )
+                    
                     Spacer()
+                    #if DEBUG
+                    if currentChallengeStep == .recordingCompleted || currentChallengeStep == .challengeCompleted {
+                        Button(avFoundationManager.isPlaying ? "정지" : "재생") {
+                            if avFoundationManager.isPlaying {
+                                avFoundationManager.stopPlaying()
+                            } else {
+                                avFoundationManager.playRecorded(audioFilename: todayHistories[0].audioURL)
+                            }
+                        }.buttonStyle(.borderedProminent)
+                    }
+                    Button("초기화") {
+                        swiftDataManager.deleteHistory(modelContext: modelContext, history: todayHistories[0])
+                    }.buttonStyle(.borderedProminent).padding(.trailing, Theme.padding)
+                    #endif
                 }
                 .padding(.bottom, 20)
                 .padding(.top, 11)
