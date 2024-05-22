@@ -44,17 +44,17 @@ struct ChallengeView: View {
             
             //Title
             VStack(spacing: 0) {
-//                if currentChallengeStep == .recordingCompleted {
-//                    Button("start") {
-//                        avFoundationManager.playRecorded(audioFilename: todayHistories[0].audioURL)
-//                    }
-//                    Button("stop") {
-//                        avFoundationManager.stopPlaying()
-//                    }
-//                }
-//                Button("ss") {
-//                    swiftDataManager.deleteHistory(modelContext: modelContext, history: todayHistories[0])
-//                }
+                if currentChallengeStep == .recordingCompleted {
+                    Button("start") {
+                        avFoundationManager.playRecorded(audioFilename: todayHistories[0].audioURL)
+                    }
+                    Button("stop") {
+                        avFoundationManager.stopPlaying()
+                    }
+                }
+                Button("ss") {
+                    swiftDataManager.deleteHistory(modelContext: modelContext, history: todayHistories[0])
+                }
                 HStack {
                     Text("챌린지")
                         .font(.title)
@@ -309,5 +309,7 @@ extension ChallengeView {
 #Preview {
     ChallengeView()
         .modelContainer(for: History.self, inMemory: true)
+        .environment(AVFoundationManager())
         .environment(SwiftDataManager())
+        .environment(RefreshTrigger())
 }

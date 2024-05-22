@@ -127,4 +127,6 @@ struct ReviewRecordingView: View {
 #Preview {
     ReviewRecordingView(showModal: .constant(true), history: History(date: Date(), challengeStep: .challengeCompleted, expression: "ds", audioURL: URL(string: "https://www.example.com")!, target: .acquaintance, feelingValue: .neutral, reactionValue: .neutral))
         .environment(AVFoundationManager())
+        .environment(SwiftDataManager())
+        .environment(RefreshTrigger())
 }
