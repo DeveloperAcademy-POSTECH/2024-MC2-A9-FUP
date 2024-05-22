@@ -122,13 +122,16 @@ private func RecoderPlay(history: History, formattedDate: String, manager: AVFou
                         .foregroundStyle(Theme.black)
                         .padding(.bottom, 21)
                     HStack(spacing: 0) {
-                        AudioPlayingComponent(audioLevels: history.audioLevels, audioLength: history.audioLength)
+                        AudioPlayingComponent(audioLevels: history.audioLevels, audioLength: history.audioLength, maxHeight: 50)
                         Button {
                             // 녹음 실행 event
-                            print(history.audioURL)
-                            manager.playRecorded(audioFilename: history.audioURL)
+                            if manager.isPlaying {
+                                manager.stopPlaying()
+                            } else {
+                                manager.playRecorded(audioFilename: history.audioURL)
+                            }
                         }label: {
-                            Image(systemName: "play.circle.fill")
+                            Image(systemName: manager.isPlaying ? "square.circle.fill" : "play.circle.fill")
                                 .resizable()
                                 .frame(width: 28, height: 28)
                                 .foregroundStyle(Theme.point)

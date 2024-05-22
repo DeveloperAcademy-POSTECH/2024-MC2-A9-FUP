@@ -131,10 +131,16 @@ final class AVFoundationManager: NSObject {
             
             audioPlayer?.delegate = self
             audioPlayer?.play()
-            audioPlayer?.volume = 70
             
-            recordLength = CMTimeGetSeconds(asset.duration)
+            audioPlayer?.volume = 70
             isPlaying = true
+            
+            Timer.scheduledTimer(withTimeInterval: 0.1, repeats: true) { [weak self] _ in
+                guard let self = self else { return }
+                withAnimation(.bouncy) {
+                    self.playingTime = self.audioPlayer?.currentTime ?? 0
+                }
+            }
         } catch {
             print("Could not play audio: \(error.localizedDescription)")
         }
