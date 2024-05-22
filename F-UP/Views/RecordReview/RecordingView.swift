@@ -15,8 +15,6 @@ struct RecordingView: View {
     //    @State private var isMicSelected: Bool = true
     @State private var navigationToNextView: Bool = false
     
-    var dummyAudioUrl: String = "dummy"
-    
     var body: some View {
         NavigationStack {
             ZStack {
@@ -28,7 +26,7 @@ struct RecordingView: View {
                         .foregroundColor(Theme.semiblack)
                         .padding(.top, 34)
                         .padding(.bottom, 3)
-                    Text("“오늘 하루도 정말 수고 많았어.”")
+                    Text("“\(history.expression)”")
                         .font(.title3 .weight(.bold))
                         .foregroundColor(Theme.black)
                         .padding(.bottom, 115)
@@ -78,7 +76,7 @@ struct RecordingView: View {
                                 
                             } else {
                                 avfoundationManager.isRecording = true
-                                avfoundationManager.startRecording(fileName: dummyAudioUrl)
+                                avfoundationManager.startRecording(fileName: history.date.dateToString())
                             }
                         }
                         
