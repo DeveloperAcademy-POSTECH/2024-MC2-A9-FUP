@@ -41,16 +41,19 @@ extension CarouselView {
                     .fontWeight(.bold)
                     .foregroundStyle(Theme.white)
                 
-                Text("오늘의 표현을 따라 말해보세요!")
-                    .padding(.top, 8)
+                Text(currentChallengeStep == .notStarted ? "오늘의 표현을 따라 말해보세요!" : "따라 말하기")
+                    .padding(.top, currentChallengeStep == .notStarted ? 8 : 4)
+                    .padding(.bottom, currentChallengeStep == .notStarted ? 7 : 8)
                     .font(.callout)
                     .fontWeight(.bold)
                     .foregroundStyle(Theme.white)
                 
-                Text(currentChallengeStep == .notStarted ? "🎤" : "🎉")
-                    .font(.system(size: 130))
-                    .padding(.top, 41)
-                    .padding(.bottom, 50)
+                Image(currentChallengeStep == .notStarted ? "characterChallenge1" : "characterCelebrate1")
+                    .frame( 
+                        width: currentChallengeStep == .notStarted ? 200 : 250,
+                        height: currentChallengeStep == .notStarted ? 200 : 236
+                    )
+                    .padding(.bottom, currentChallengeStep == .notStarted ? 15 : 2)
                 if (currentChallengeStep == .notStarted) {
                     challengeButton(history: history, currentChallengeStep: $currentChallengeStep, index: index)
                 }
@@ -59,7 +62,7 @@ extension CarouselView {
                         .font(.title3)
                         .fontWeight(.bold)
                         .foregroundStyle(Theme.white)
-                        .padding(.bottom, 44)
+                        .padding(.bottom, 24)
                 }
             }
             .containerRelativeFrame(.horizontal)
@@ -80,8 +83,8 @@ extension CarouselView {
                     .fontWeight(.bold)
                     .foregroundStyle(Theme.white)
                 
-                Text("오늘의 문장을 주변 사람들에게\n실제로 사용하고 반응을 기록해보세요!")
-                    .padding(.top, 8)
+                Text(currentChallengeStep == .challengeCompleted ? "사용하고 기록하기" : "오늘의 문장을 주변 사람들에게\n실제로 사용하고 반응을 기록해보세요!")
+                    .padding(.top, currentChallengeStep == .challengeCompleted ? 4 : 8)
                     .multilineTextAlignment(.center)
                     .font(.callout)
                     .fontWeight(.bold)
@@ -89,20 +92,20 @@ extension CarouselView {
                 
                 switch currentChallengeStep {
                 case .notStarted:
-                    Text("🔒")
-                        .font(.system(size: 130))
-                        .padding(.top, 23)
-                        .padding(.bottom, 47)
+                    Image("lock")
+                        .frame(width: 200, height: 174)
+                        .padding(.top, 12)
+                        .padding(.bottom, 15)
                 case .recordingCompleted:
-                    Text("🥰")
-                        .font(.system(size: 130))
-                        .padding(.top, 23)
-                        .padding(.bottom, 47)
+                    Image("characterChallenge2")
+                        .frame(width: 200, height: 179)
+                        .padding(.top, 7)
+                        .padding(.bottom, 15)
                 case .challengeCompleted:
-                    Text("🥳")
-                        .font(.system(size: 130))
-                        .padding(.top, 23)
-                        .padding(.bottom, 47)
+                    Image("characterCelebrate2")
+                        .frame(width: 250, height: 236)
+                        .padding(.top, 8)
+                        .padding(.bottom, 2)
                 }
                 
                 if !(currentChallengeStep == .challengeCompleted) {
@@ -113,7 +116,7 @@ extension CarouselView {
                         .font(.title3)
                         .fontWeight(.bold)
                         .foregroundStyle(Theme.white)
-                        .padding(.bottom, 44)
+                        .padding(.bottom, 24)
                 }
                 
             }
@@ -154,8 +157,8 @@ fileprivate struct challengeButton: View {
                         RoundedRectangle(cornerRadius: Theme.round)
                     )
             }
-            .padding(.horizontal, 20)
-            .padding(.bottom, 20)
+            .padding(.horizontal, 19)
+            .padding(.bottom, 19)
             .sheet(isPresented: $showModal) {
                 RecordingView(showModal: $showModal, history: history).interactiveDismissDisabled()
             }
@@ -175,8 +178,8 @@ fileprivate struct challengeButton: View {
                     )
             }
             .disabled(currentChallengeStep == .notStarted)
-            .padding(.horizontal, 20)
-            .padding(.bottom, 20)
+            .padding(.horizontal, 19)
+            .padding(.bottom, 19)
             .sheet(isPresented: $showModal) {
                 TargetSelectView(showModal: $showModal, history: history).interactiveDismissDisabled()
             }
@@ -195,8 +198,9 @@ fileprivate struct challengeButton: View {
                         RoundedRectangle(cornerRadius: Theme.round)
                     )
             }
-            .padding(.horizontal, 20)
-            .padding(.bottom, 20)
+            .frame(width: 281, height: 50)
+            .padding(.horizontal, 19)
+            .padding(.bottom, 19)
         }
     }
 }
