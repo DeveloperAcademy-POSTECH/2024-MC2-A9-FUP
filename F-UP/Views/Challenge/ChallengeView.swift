@@ -133,7 +133,6 @@ struct ChallengeView: View {
         .onChange(of: currentDateString) {
             updateExpressionIndex()
             checkAndAddHistory()
-            setUpStreak()
             print(histories)
             print(todayHistories)
             print(yesterdayHistories)
@@ -205,13 +204,9 @@ extension ChallengeView {
     }
     
     func setUpStreak() {
-        if !yesterdayHistories.isEmpty {
-            if yesterdayHistories[0].isPerformed {
-                streak += 1
-            }
-            else {
-                streak = 0
-            }
+        if !yesterdayHistories.isEmpty && yesterdayHistories[0].isPerformed {
+            todayHistories[0].streak = yesterdayHistories[0].streak + 1
+            streak = todayHistories[0].streak
         }
         else {
             streak = 0
@@ -224,6 +219,7 @@ extension ChallengeView {
             swiftDataManager.addHistory(modelContext: modelContext, expression: dummyExpression[expressionIndex])
         }
         updateHistories()
+        setUpStreak()
     }
 }
 

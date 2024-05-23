@@ -15,9 +15,9 @@ enum ChallengeStep: Int, Codable {
 
 enum Target: String, Codable, CaseIterable {
     case family = "가족"
+    case lover = "연인"
     case friend = "친구"
     case acquaintance = "지인"
-    case lover = "연인"
 }
 
 enum FeelingValue: Int, Codable {
