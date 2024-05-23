@@ -67,12 +67,14 @@ struct RecordingView: View {
                     .frame(width: 204, height: 204)
                     .padding(.bottom, 115)
                     .onTapGesture {
-                        withAnimation(.easeInOut(duration: 0.5)) {
+                        withAnimation(.easeInOut(duration: 0.3)) {
                             if avfoundationManager.isRecording {
                                 navigationToNextView = true
                                 avfoundationManager.isRecording = false
                                 avfoundationManager.stopRecording()
+                                HapticManager.sharedInstance.generateHaptic(.success)
                             } else {
+                                HapticManager.sharedInstance.generateHaptic(.medium(times: 1))
                                 avfoundationManager.isRecording = true
                                 avfoundationManager.startRecording(fileName: history.date.dateToString())
                             }
@@ -80,6 +82,9 @@ struct RecordingView: View {
                     }
                     .navigationDestination(isPresented: $navigationToNextView) {
                         ReviewRecordingView(showModal: $showModal, history: history)
+                    }
+                    .onChange(of: avfoundationManager.audioLevel) { oldValue, newValue in
+                        HapticManager.sharedInstance.generateHaptic(.light(times: 1))
                     }
                     
                     Text(avfoundationManager.isRecording ? "듣고 있어요" : "오늘의 표현을 실제로 따라해보세요")
@@ -100,6 +105,7 @@ struct RecordingView: View {
                     .tint(Theme.point)
                 }
                 .onAppear {
+                    HapticManager.sharedInstance.prepareHapticEngine()
                     avfoundationManager.requestPermission { success in
                         if !success {
                             showModal = false

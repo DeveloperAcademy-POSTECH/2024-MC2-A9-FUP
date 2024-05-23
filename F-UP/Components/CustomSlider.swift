@@ -11,6 +11,8 @@ struct CustomSlider<V>: View where V : BinaryFloatingPoint, V.Stride : BinaryFlo
     // MARK: - 프로퍼티
     // MARK: Private
     @Binding private var value: V
+    
+    
     private let bounds: ClosedRange<V>
     private let step: V.Stride
     
@@ -19,6 +21,7 @@ struct CustomSlider<V>: View where V : BinaryFloatingPoint, V.Stride : BinaryFlo
     
     @State private var ratio: CGFloat   = 0
     @State private var startX: CGFloat? = nil
+    @State private var previousValue: V?
     
     // MARK: - 생성자
     init(value: Binding<V>, in bounds: ClosedRange<V>, step: V.Stride = 1) {
@@ -54,14 +57,18 @@ struct CustomSlider<V>: View where V : BinaryFloatingPoint, V.Stride : BinaryFlo
                     .dropShadow(opacity: 0.15)
                     .offset(x: (proxy.size.width - length) * ratio + 4.5)
                     .gesture(DragGesture(minimumDistance: 0)
-                        .onChanged({ updateStatus(value: $0, proxy: proxy) })
+                        .onChanged({ updateStatus(value: $0, proxy: proxy);  })
                         .onEnded { _ in startX = nil })
+                    
             }
             .frame(height: 38)
             .simultaneousGesture(DragGesture(minimumDistance: 0)
                 .onChanged({ update(value: $0, proxy: proxy) }))
             .onAppear {
                 ratio = min(1, max(0,CGFloat(value / bounds.upperBound)))
+            }
+            .onChange(of: Int(value)/25) {
+                HapticManager.sharedInstance.generateHaptic(.medium(times: 1))
             }
         }
     }
@@ -88,6 +95,7 @@ struct CustomSlider<V>: View where V : BinaryFloatingPoint, V.Stride : BinaryFlo
     // MARK: - 메소드
     // MARK: Private
     private func updateStatus(value: DragGesture.Value, proxy: GeometryProxy) {
+        
         guard startX == nil else { return }
         
         let delta = value.startLocation.x - (proxy.size.width - length) * ratio

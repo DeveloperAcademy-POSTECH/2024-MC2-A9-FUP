@@ -11,6 +11,7 @@ struct CarouselView: View {
     @Binding var currentChallengeStep: ChallengeStep
     @State var history: History
     @State private var showModal: Bool = false
+    @State private var scrollOffset: CGFloat = 0
     
     var body: some View {
         GeometryReader { geometry in
@@ -163,6 +164,10 @@ fileprivate struct challengeButton: View {
             .sheet(isPresented: $showModal) {
                 RecordingView(showModal: $showModal, history: history).interactiveDismissDisabled()
             }
+            .onChange(of: showModal) { _, _ in
+                HapticManager.sharedInstance.generateHaptic(.light(times: 1))
+            }
+            
         case 2:
             Button {
                 showModal = true
@@ -184,6 +189,10 @@ fileprivate struct challengeButton: View {
             .sheet(isPresented: $showModal) {
                 TargetSelectView(showModal: $showModal, history: history).interactiveDismissDisabled()
             }
+            .onChange(of: showModal) { _, _ in
+                HapticManager.sharedInstance.generateHaptic(.light(times: 1))
+            }
+            
         default:
             Button {
                 showModal = true
@@ -202,6 +211,9 @@ fileprivate struct challengeButton: View {
             .frame(width: 281, height: 50)
             .padding(.horizontal, 19)
             .padding(.bottom, 19)
+            .onChange(of: showModal) { _, _ in
+                HapticManager.sharedInstance.generateHaptic(.light(times: 1))
+            }
         }
     }
 }

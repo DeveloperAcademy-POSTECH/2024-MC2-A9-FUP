@@ -88,6 +88,7 @@ struct ReactionView: View {
                     }
                     refreshTrigger.trigger.toggle()
                     showModal = false
+                    HapticManager.sharedInstance.generateHaptic(.success)
                 } label : {
                     RoundedRectangle(cornerRadius: Theme.round)
                         .fill(Theme.point)
@@ -108,6 +109,7 @@ struct ReactionView: View {
                 ToolbarItem(placement: .topBarLeading) {
                     Button {
                         dismiss()
+                        HapticManager.sharedInstance.generateHaptic(.light(times: 1))
                     } label: {
                         HStack {
                             Image(systemName: "chevron.left")

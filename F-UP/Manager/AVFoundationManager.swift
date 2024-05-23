@@ -89,7 +89,6 @@ final class AVFoundationManager: NSObject {
             // audioLevel을 Update하기 위해 필요
             audioRecorder?.isMeteringEnabled = true
             audioRecorder?.record()
-            
             self.audioFilename = audioFilename
             isRecording = true
         } catch {
@@ -195,7 +194,6 @@ final class AVFoundationManager: NSObject {
     
     /// tempAudioLevels에 있는 모든 오디오 레벨을 재생 막대의 개수인 30개의 구간으로 나눠서 audioLevels에 저장하는 메소드
     func calculateAudioLevels() {
-        
         let intervalLength = recordLength / 30
         for i in 0..<30 {
             let startTime = TimeInterval(i) * intervalLength
