@@ -35,12 +35,12 @@ struct MyMoodView: View {
                         .multilineTextAlignment(.center)
                     emojis[Int(sliderValue / 25)]
                         .frame(width: 250, height: 250)
-                        .animation(.spring, value: sliderValue)
+//                        .animation(.spring, value: sliderValue)
                     Text(strings[Int(sliderValue / 25)])
                         .font(.title2 .weight(.bold))
                         .padding(.top, 29)
                         .padding(.bottom, 38)
-                        .animation(.spring, value: sliderValue)
+//                        .animation(.spring, value: sliderValue)
                 }
                 .frame(width: 353)
                 .background(Theme.white)
