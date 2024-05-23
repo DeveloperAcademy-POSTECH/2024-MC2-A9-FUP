@@ -21,6 +21,7 @@ final class SwiftDataManager {
             
             let newHistory = History(
                 date: Date(),
+                streak: 0,
                 isPerformed: false,
                 challengeStep: .notStarted,
                 expression: expression,
@@ -89,14 +90,3 @@ final class SwiftDataManager {
     }
     
 }
-
-//let uuid = UUID()
-//var date: Date
-//var isPerformed = false
-//var challengeStep: ChallengeStep
-//var expression: String
-//var audioURL : URL
-//var target: Target
-//var specificTarget: String?
-//var feelingValue: FeelingValue
-//var reactionValue: ReactionValue

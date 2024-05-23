@@ -209,7 +209,7 @@ extension HistoryDetailView {
 
 #Preview {
     NavigationStack {
-        HistoryDetailView(history: History(date: Date(), challengeStep: .challengeCompleted, expression: "오늘의 표현", audioURL: URL(string: "https://www.example.com")!, audioLevels: Array(repeating: CGFloat(0.1), count: 30), audioLength: 0, target: .acquaintance, feelingValue: .neutral, reactionValue: .neutral))
+        HistoryDetailView(history: History(date: Date(), streak: 0, challengeStep: .challengeCompleted, expression: "ds", audioURL: URL(string: "https://www.example.com")!, audioLevels: Array(repeating: CGFloat(0.1), count: 30), audioLength: 0, target: .acquaintance, feelingValue: .neutral, reactionValue: .neutral))
             .environment(AVFoundationManager())
             .environment(SwiftDataManager())
             .environment(RefreshTrigger())

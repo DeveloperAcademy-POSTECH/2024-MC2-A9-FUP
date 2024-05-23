@@ -12,6 +12,7 @@ import SwiftData
 final class History {
     let uuid = UUID()
     var date: Date
+    var streak: Int
     var isPerformed = false
     var challengeStep: ChallengeStep
     var expression: String
@@ -23,8 +24,9 @@ final class History {
     var feelingValue: FeelingValue
     var reactionValue: ReactionValue
     
-    init(date: Date, isPerformed: Bool = false, challengeStep: ChallengeStep, expression: String, audioURL: URL, audioLevels: [CGFloat], audioLength: TimeInterval, target: Target, specificTarget: String? = nil, feelingValue: FeelingValue, reactionValue: ReactionValue) {
+    init(date: Date, streak: Int, isPerformed: Bool = false, challengeStep: ChallengeStep, expression: String, audioURL: URL, audioLevels: [CGFloat], audioLength: TimeInterval, target: Target, specificTarget: String? = nil, feelingValue: FeelingValue, reactionValue: ReactionValue) {
         self.date = date
+        self.streak = streak
         self.isPerformed = isPerformed
         self.challengeStep = challengeStep
         self.expression = expression

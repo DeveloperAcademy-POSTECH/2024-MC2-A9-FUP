@@ -126,7 +126,7 @@ struct MyMoodView: View {
 
 
 #Preview {
-    MyMoodView(showModal: .constant(true), history: History(date: Date(), challengeStep: .challengeCompleted, expression: "ds", audioURL: URL(string: "https://www.example.com")!, audioLevels: Array(repeating: CGFloat(0.1), count: 30), audioLength: 0, target: .acquaintance, feelingValue: .neutral, reactionValue: .neutral), target: .lover, specificTarget: "")
+    MyMoodView(showModal: .constant(true), history: History(date: Date(), streak: 0, challengeStep: .challengeCompleted, expression: "ds", audioURL: URL(string: "https://www.example.com")!, audioLevels: Array(repeating: CGFloat(0.1), count: 30), audioLength: 0, target: .acquaintance, feelingValue: .neutral, reactionValue: .neutral), target: .lover, specificTarget: "")
         .environment(AVFoundationManager())
         .environment(SwiftDataManager())
         .environment(RefreshTrigger())
