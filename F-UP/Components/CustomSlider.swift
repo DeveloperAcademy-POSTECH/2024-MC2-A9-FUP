@@ -31,6 +31,8 @@ struct CustomSlider<V>: View where V : BinaryFloatingPoint, V.Stride : BinaryFlo
     // MARK: - 뷰
     // MARK: Public
     var body: some View {
+        let emojis: [Image] = [Image("expression1"), Image("expression2"), Image("expression3"), Image("expression4"), Image("expression5"), ]
+        
         GeometryReader { proxy in
             ZStack(alignment: .leading) {
                 // Track
@@ -45,6 +47,9 @@ struct CustomSlider<V>: View where V : BinaryFloatingPoint, V.Stride : BinaryFlo
                 // Thumb
                 Circle()
                     .foregroundColor(.white)
+                    .overlay {
+                        emojis[Int(value)/25]
+                    }
                     .frame(width: length * 0.8, height: length)
                     .dropShadow(opacity: 0.15)
                     .offset(x: (proxy.size.width - length) * ratio + 4.5)
