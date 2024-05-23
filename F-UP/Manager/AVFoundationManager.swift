@@ -51,6 +51,20 @@ final class AVFoundationManager: NSObject {
         }
     }
     
+    // MARK: - 권한 체크
+    func requestPermission(completion: @escaping (Bool) -> Void) {
+        switch AVAudioApplication.shared.recordPermission {
+        case .denied:
+            completion(false)
+        case .granted:
+            completion(true)
+        case .undetermined:
+            AVAudioApplication.requestRecordPermission(completionHandler: completion)
+        @unknown default:
+            break
+        }
+    }
+    
     // MARK: - 녹음
     func startRecording(fileName: String) {
         tempAudioLevels.removeAll()

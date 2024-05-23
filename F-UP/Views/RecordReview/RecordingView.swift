@@ -68,19 +68,15 @@ struct RecordingView: View {
                     .padding(.bottom, 115)
                     .onTapGesture {
                         withAnimation(.easeInOut(duration: 0.5)) {
-                            // Recording..
                             if avfoundationManager.isRecording {
                                 navigationToNextView = true
                                 avfoundationManager.isRecording = false
                                 avfoundationManager.stopRecording()
-                                
                             } else {
                                 avfoundationManager.isRecording = true
                                 avfoundationManager.startRecording(fileName: history.date.dateToString())
                             }
                         }
-                        
-                        
                     }
                     .navigationDestination(isPresented: $navigationToNextView) {
                         ReviewRecordingView(showModal: $showModal, history: history)
@@ -102,6 +98,14 @@ struct RecordingView: View {
                         showModal = false
                     }
                     .tint(Theme.point)
+                }
+                .onAppear {
+                    avfoundationManager.requestPermission { success in
+                        if !success {
+                            showModal = false
+                            print("마이크 권한이 없습니다.")
+                        }
+                    }
                 }
             }
         }
