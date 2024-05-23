@@ -173,7 +173,7 @@ private func FeelingProgressTitle(headLine: String, minValueTitle: String, maxVa
 
 private struct CustomProgressViewStyle: ProgressViewStyle {
     func makeBody(configuration: Configuration) -> some View {
-        let emojis = ["😂", "😅", "😊", "😁", "🥰"]
+        let emojis: [Image] = [Image("expression1"), Image("expression2"), Image("expression3"), Image("expression4"), Image("expression5"), ]
         
         let progress = CGFloat(configuration.fractionCompleted ?? 0)
         
@@ -190,9 +190,9 @@ private struct CustomProgressViewStyle: ProgressViewStyle {
                     alignment: .leading
                 )
                 .overlay(
-                    Text(emojis[Int(progress * 4)])
-                        .font(Font.system(size: 34))
-                        .offset(x: progress == 0 ? 0 : progress * 353 - 40),
+                    emojis[Int(progress * 4)]
+                        .frame(width: 30, height: 30)
+                        .offset(x: progress == 0 ? 10 : progress * 353 - 40),
                     alignment: .leading
                 )
         }
