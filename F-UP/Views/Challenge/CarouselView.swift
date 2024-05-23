@@ -18,6 +18,7 @@ struct CarouselView: View {
                 HStack(spacing: -20){
                     ForEach(1..<3, id: \.self) { index in
                         CarouselCell(index: index, cellWidth: geometry.size.width)
+                            .safeAreaPadding(.vertical, 20)
                     }.scrollTransition(.animated, axis: .horizontal) { content, phase in
                         content
                             .opacity(phase.isIdentity ? 1.0 : 0.5)
