@@ -151,7 +151,7 @@ extension ReactionView {
             self.streak = ydStreak + 1
         }
         else {
-            self.streak = 0
+            self.streak = 1
         }
     }
     
