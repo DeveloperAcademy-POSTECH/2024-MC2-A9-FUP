@@ -190,7 +190,7 @@ struct ExpressionStreakWidgetEntryView : View {
                 Text("오늘의 표현")
                     .font(.system(size: 13))
                     .foregroundStyle(Theme.subblack)
-                Text("“\(entry.expression)“")
+                Text(entry.expression)
                     .font(.system(size: 20, weight: .bold))
                     .foregroundStyle(colorScheme == .light ? Theme.black : Theme.white)
             }.containerBackground(for: .widget) {
@@ -207,8 +207,9 @@ struct ExpressionStreakWidgetEntryView : View {
 }
 
 struct ExpressionStreakWidget: Widget {
+    
     let kind: String = "ExpressionStreakWidget"
-
+    
     var body: some WidgetConfiguration {
         StaticConfiguration(kind: kind, provider: Provider()) { entry in
             if #available(iOS 17.0, *) {
@@ -219,8 +220,8 @@ struct ExpressionStreakWidget: Widget {
                     .background()
             }
         }
-        .configurationDisplayName("My Widget")
-        .description("This is an example widget.")
+        .configurationDisplayName("스트릭·표현 위젯")
+        .description("스트릭과 오늘의 표현을 더 자주 만나보세요!")
         .supportedFamilies([.systemSmall, .systemMedium])
     }
 }
