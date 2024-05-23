@@ -80,6 +80,7 @@ struct TargetSelectView: View {
                                                 }
                                             }
                                             .onTapGesture {
+                                                HapticManager.sharedInstance.generateHaptic(.light(times: 1))
                                                 withAnimation(.easeIn(duration: 0.1)) {
                                                     let isSelected = selectedTarget == target.rawValue
                                                     isSelected ? (selectedTarget = "") : (selectedTarget = target.rawValue)
@@ -121,11 +122,7 @@ struct TargetSelectView: View {
                     }
                     
                     Button {
-//                        if navigationToNextView {
-//                            navigationToNextView = false
-//                        } else {
-//                            navigationToNextView = true
-//                        }
+                        HapticManager.sharedInstance.generateHaptic(.light(times: 1))
                         navigationToNextView = true
                     } label: {
                         Rectangle()

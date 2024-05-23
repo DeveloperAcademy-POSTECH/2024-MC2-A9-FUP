@@ -8,25 +8,31 @@
 import SwiftUI
 
 struct ContentTabView: View {
+    @State var selectedTab: Int = 1
     
     init() {
         UITabBar.appearance().backgroundColor = UIColor.white
     }
     
     var body: some View {
-        TabView {
+        TabView(selection: $selectedTab) {
             ChallengeView()
                 .tabItem {
                     Image(systemName: "flame")
                     Text("챌린지")
                 }
+                .tag(1)
             HistoryView()
                 .tabItem {
                     Image(systemName: "scroll")
                     Text("히스토리")
                 }
+                .tag(2)
         }
         .tint(Theme.point)
+        .onChange(of: selectedTab) { _, _ in
+            HapticManager.sharedInstance.generateHaptic(.medium(times: 1))
+        }
     }
 }
 

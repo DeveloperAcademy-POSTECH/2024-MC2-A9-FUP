@@ -72,6 +72,7 @@ struct HistoryDetailView: View {
         .toolbar {
             ToolbarItem(placement: .topBarLeading) {
                 Button {
+                    HapticManager.sharedInstance.generateHaptic(.light(times: 1))
                     avFoundationManager.stopPlaying()
                     dismiss.callAsFunction()
                 } label: {
@@ -125,6 +126,7 @@ private func RecoderPlay(history: History, formattedDate: String, manager: AVFou
                     HStack(spacing: 0) {
                         AudioPlayingComponent(audioLevels: history.audioLevels, audioLength: history.audioLength, maxHeight: 50)
                         Button {
+                            HapticManager.sharedInstance.generateHaptic(.light(times: 1))
                             // 녹음 실행 event
                             if manager.isPlaying {
                                 manager.stopPlaying()
