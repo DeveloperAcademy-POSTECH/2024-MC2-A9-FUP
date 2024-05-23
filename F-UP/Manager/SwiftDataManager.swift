@@ -72,7 +72,7 @@ final class SwiftDataManager {
             }
     }
     
-    func updateHistoryAfterChallenge(modelContext: ModelContext, history: History, target: Target, specificTarget: String?, feelingValue: FeelingValue, reactionValue: ReactionValue) {
+    func updateHistoryAfterChallenge(modelContext: ModelContext, history: History, streak: Int, target: Target, specificTarget: String?, feelingValue: FeelingValue, reactionValue: ReactionValue) {
             withAnimation {
                 history.isPerformed = true
                 history.challengeStep = .challengeCompleted
