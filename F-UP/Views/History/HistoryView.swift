@@ -97,6 +97,7 @@ private func HasDateHistoryView(isShowingModal: Binding<Bool>, filterData: [Hist
                             .padding(.horizontal, Theme.padding)
                     }
                 }
+                .padding(.top, 15)
             }
         }
         .background(Theme.background)
