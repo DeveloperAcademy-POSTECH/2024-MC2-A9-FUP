@@ -70,6 +70,7 @@ private func HasDateHistoryView(isShowingModal: Binding<Bool>, filterData: [Hist
                 .padding(.trailing, 8)
                 
                 Button {
+                    HapticManager.sharedInstance.generateHaptic(.light(times: 1))
                     isShowingModal.wrappedValue.toggle()
                 } label: {
                     Image(systemName: "line.3.horizontal.decrease")
@@ -82,7 +83,7 @@ private func HasDateHistoryView(isShowingModal: Binding<Bool>, filterData: [Hist
             
             ScrollView {
                 ForEach(filterData, id: \.id) { history in
-                    NavigationLink(destination: HistoryDetailView(history: history)) {
+                    NavigationLink(destination: HistoryDetailView(history: history).onAppear { HapticManager.sharedInstance.generateHaptic(.light(times: 1)) }) {
                         RoundedRectangle(cornerRadius: Theme.round)
                             .fill(Theme.white)
                             .frame(width: 353, height: 92)

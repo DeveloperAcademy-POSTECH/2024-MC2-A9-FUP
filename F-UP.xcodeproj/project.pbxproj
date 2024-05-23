@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		171834FD2BFF84700088F348 /* Launch Screen.storyboard.backup in Resources */ = {isa = PBXBuildFile; fileRef = 171834FC2BFF84700088F348 /* Launch Screen.storyboard.backup */; };
 		171834FF2BFF9F270088F348 /* UINavigation+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 171834FE2BFF9F270088F348 /* UINavigation+Extension.swift */; };
+		171835012BFFB89E0088F348 /* HapticManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 171835002BFFB89E0088F348 /* HapticManager.swift */; };
 		172BA22B2BFD0954007AC28A /* AudioPlayingComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 172BA22A2BFD0954007AC28A /* AudioPlayingComponent.swift */; };
 		1731C51D2BF74969002B59FE /* TargetSelectView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1731C51C2BF74969002B59FE /* TargetSelectView.swift */; };
 		173B49DC2BF72C5600FC4FEC /* Theme.swift in Sources */ = {isa = PBXBuildFile; fileRef = 173B49DB2BF72C5600FC4FEC /* Theme.swift */; };
@@ -71,6 +72,7 @@
 /* Begin PBXFileReference section */
 		171834FC2BFF84700088F348 /* Launch Screen.storyboard.backup */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = "Launch Screen.storyboard.backup"; sourceTree = "<group>"; };
 		171834FE2BFF9F270088F348 /* UINavigation+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UINavigation+Extension.swift"; sourceTree = "<group>"; };
+		171835002BFFB89E0088F348 /* HapticManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HapticManager.swift; sourceTree = "<group>"; };
 		172BA22A2BFD0954007AC28A /* AudioPlayingComponent.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AudioPlayingComponent.swift; sourceTree = "<group>"; };
 		1731C51C2BF74969002B59FE /* TargetSelectView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TargetSelectView.swift; sourceTree = "<group>"; };
 		173B49DB2BF72C5600FC4FEC /* Theme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Theme.swift; sourceTree = "<group>"; };
@@ -215,6 +217,7 @@
 				DF32E1812BFA40780084B28C /* SwiftDataManager.swift */,
 				DF32E1832BFA48660084B28C /* AVFoundationManager.swift */,
 				CCC0A14A2BFCFD4B00C14B8C /* NotificationManger.swift */,
+				171835002BFFB89E0088F348 /* HapticManager.swift */,
 			);
 			path = Manager;
 			sourceTree = "<group>";
@@ -399,6 +402,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				172BA22B2BFD0954007AC28A /* AudioPlayingComponent.swift in Sources */,
+				171835012BFFB89E0088F348 /* HapticManager.swift in Sources */,
 				CCC074272BFB1F2E00401B25 /* HistoryDetailView.swift in Sources */,
 				DF32E17F2BFA1B730084B28C /* DottedDivider.swift in Sources */,
 				DF0ABEC42BFCE6A1000F2C03 /* RefreshTrigger.swift in Sources */,
@@ -573,7 +577,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = "F-UP/F-UP.entitlements";
 				CODE_SIGN_IDENTITY = "Apple Development";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Manual;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"F-UP/Preview Content\"";
@@ -599,7 +603,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "com.f-up.F-UP";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
-				"PROVISIONING_PROFILE_SPECIFIER[sdk=iphoneos*]" = "hearF-Distribution";
+				"PROVISIONING_PROFILE_SPECIFIER[sdk=iphoneos*]" = "hearF-Development";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
 				SUPPORTS_MACCATALYST = NO;
 				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
@@ -618,7 +622,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = "F-UP/F-UP.entitlements";
 				CODE_SIGN_IDENTITY = "Apple Development";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Manual;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"F-UP/Preview Content\"";
@@ -644,7 +648,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "com.f-up.F-UP";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
-				"PROVISIONING_PROFILE_SPECIFIER[sdk=iphoneos*]" = "hearF-Distribution";
+				"PROVISIONING_PROFILE_SPECIFIER[sdk=iphoneos*]" = "hearF-Development";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
 				SUPPORTS_MACCATALYST = NO;
 				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
@@ -661,7 +665,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
 				CODE_SIGN_ENTITLEMENTS = ExpressionStreakWidgetExtension.entitlements;
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Manual;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = "";
@@ -680,7 +684,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "com.f-up.F-UP.ExpressionStreakWidget";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
-				"PROVISIONING_PROFILE_SPECIFIER[sdk=iphoneos*]" = "hearF-Widget-Distribution";
+				"PROVISIONING_PROFILE_SPECIFIER[sdk=iphoneos*]" = "hearF-Widget-Development";
 				SKIP_INSTALL = YES;
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
 				SUPPORTS_MACCATALYST = NO;
@@ -698,7 +702,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
 				CODE_SIGN_ENTITLEMENTS = ExpressionStreakWidgetExtension.entitlements;
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Manual;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = "";
@@ -717,7 +721,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "com.f-up.F-UP.ExpressionStreakWidget";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
-				"PROVISIONING_PROFILE_SPECIFIER[sdk=iphoneos*]" = "hearF-Widget-Distribution";
+				"PROVISIONING_PROFILE_SPECIFIER[sdk=iphoneos*]" = "hearF-Widget-Development";
 				SKIP_INSTALL = YES;
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
 				SUPPORTS_MACCATALYST = NO;

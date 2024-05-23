@@ -43,13 +43,13 @@ struct ReviewRecordingView: View {
                             AudioPlayingComponent(audioLevels: avFoundationManager.audioLevels, audioLength: avFoundationManager.recordLength)
                             Spacer()
                             Button {
+                                HapticManager.sharedInstance.generateHaptic(.light(times: 1))
                                 // 녹음 재생 기능 구현
                                 if avFoundationManager.isPlaying {
                                     avFoundationManager.stopPlaying()
                                 } else {
                                     avFoundationManager.playRecording()
                                 }
-                                
                             } label: {
                                 Label(
                                     title: { Text(avFoundationManager.isPlaying ? "Stop" : "Play") },
@@ -69,6 +69,7 @@ struct ReviewRecordingView: View {
                     .padding(.bottom, 38)
                 
                 Button {
+                    HapticManager.sharedInstance.generateHaptic(.light(times: 1))
                     // 녹음 삭제하고 다시 녹음
                     avFoundationManager.stopPlaying()
                     avFoundationManager.deleteRecording()
@@ -91,7 +92,7 @@ struct ReviewRecordingView: View {
                     swiftDataManager.updateHistoryAfterRecording(modelContext: modelContext, history: history, audioURL: avFoundationManager.getCurrentRecordingPath()!, audioLevels: avFoundationManager.audioLevels, audioLength: avFoundationManager.recordLength)
                     refreshTrigger.trigger.toggle()
                     showModal = false
-                    
+                    HapticManager.sharedInstance.generateHaptic(.success)
                 } label : {
                     RoundedRectangle(cornerRadius: Theme.round)
                         .fill(Theme.point)

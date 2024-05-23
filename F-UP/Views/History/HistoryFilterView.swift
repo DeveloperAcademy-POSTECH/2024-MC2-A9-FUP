@@ -29,6 +29,7 @@ struct HistoryFilterView: View {
                         target: target,
                         isSelected: selectedTarget == target
                     ) {
+                        HapticManager.sharedInstance.generateHaptic(.light(times: 1))
                         if selectedTarget == target {
                             selectedTarget = nil
                         } else {
@@ -51,6 +52,7 @@ struct HistoryFilterView: View {
             Menu {
                 ForEach(months, id: \.self) { month in
                     Button {
+                        HapticManager.sharedInstance.generateHaptic(.light(times: 1))
                         selectedMonth = month
                     } label: {
                         Text(month)
@@ -77,6 +79,7 @@ struct HistoryFilterView: View {
             }
             
             Button {
+                HapticManager.sharedInstance.generateHaptic(.success)
                 isShowingModal.toggle()
             } label: {
                 RoundedRectangle(cornerRadius: Theme.round)

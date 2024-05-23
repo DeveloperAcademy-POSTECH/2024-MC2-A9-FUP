@@ -61,11 +61,8 @@ struct MyMoodView: View {
                 Spacer()
                 
                 Button {
-                    if navigationToNextView {
-                        navigationToNextView = false
-                    } else {
-                        navigationToNextView = true
-                    }
+                    HapticManager.sharedInstance.generateHaptic(.light(times: 1))
+                    navigationToNextView = true
                 } label : {
                     RoundedRectangle(cornerRadius: Theme.round)
                         .fill(Theme.point)
@@ -105,6 +102,7 @@ struct MyMoodView: View {
                 ToolbarItem(placement: .topBarLeading) {
                     Button {
                         dismiss.callAsFunction()
+                        HapticManager.sharedInstance.generateHaptic(.light(times: 1))
                     } label: {
                         HStack {
                             Image(systemName: "chevron.left")
