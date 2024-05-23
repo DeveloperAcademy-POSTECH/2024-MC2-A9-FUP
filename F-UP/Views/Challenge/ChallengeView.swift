@@ -115,6 +115,7 @@ struct ChallengeView: View {
                         currentChallengeStep: $currentChallengeStep,
                         history: todayHistories[0]
                     )
+                    .padding(.top, -20)
                 }
                 
                 Spacer()
@@ -201,7 +202,7 @@ extension ChallengeView {
     }
     
     func setUpStreak() {
-        if yesterdayHistories.isEmpty || !yesterdayHistories[0].isPerformed {
+        if (yesterdayHistories.isEmpty && !todayHistories[0].isPerformed) || (!yesterdayHistories.isEmpty && !yesterdayHistories[0].isPerformed) {
             streak = 0
         }
 //        if !yesterdayHistories.isEmpty && yesterdayHistories[0].isPerformed {
