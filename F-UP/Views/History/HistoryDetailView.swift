@@ -72,6 +72,7 @@ struct HistoryDetailView: View {
         .toolbar {
             ToolbarItem(placement: .topBarLeading) {
                 Button {
+                    avFoundationManager.stopPlaying()
                     dismiss.callAsFunction()
                 } label: {
                     HStack {
