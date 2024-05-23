@@ -22,8 +22,8 @@ struct ReactionView: View {
     let specificTarget: String?
     let feelingValue: FeelingValue
     
-    private let emojis = ["😂", "😅", "😊", "😁", "🥰"]
-    private let strings = ["많이 별로에요", "별로에요", "보통이에요", "좋아요", "너무 좋아요"]
+    private let emojis: [Image] = [Image("expressionF1"), Image("expressionF2"), Image("expressionF3"), Image("expressionF4"), Image("expressionF5") ]
+    private let strings = ["많이 별로에요", "조금 별로에요", "그저 그래요", "좋아요!", "정말 좋아요!"]
     
     var body: some View {
         ZStack {
@@ -31,15 +31,17 @@ struct ReactionView: View {
             
             VStack(spacing: 0) {
                 VStack(alignment: .center, spacing: 0) {
-                    Text("상대방의 반응은 어땠나요?")
+                    Text("이 따듯함을 건낸\n 나의 기분은 어떠한가요?")
                         .font(.title2 .weight(.bold))
                         .padding(.top, 38)
-                    Text(emojis[Int(sliderValue / 25)]).font(.system(size: 220))
-                        .padding(.top, 43)
+                        .padding(.bottom, 31)
+                        .multilineTextAlignment(.center)
+                    emojis[Int(sliderValue / 25)]
+                        .frame(width: 250, height: 250)
                         .animation(.spring, value: sliderValue)
                     Text(strings[Int(sliderValue / 25)])
                         .font(.title2 .weight(.bold))
-                        .padding(.top, 47)
+                        .padding(.top, 29)
                         .padding(.bottom, 38)
                         .animation(.spring, value: sliderValue)
                 }

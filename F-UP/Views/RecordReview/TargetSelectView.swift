@@ -22,6 +22,12 @@ struct TargetSelectView: View {
         GridItem(.flexible(), spacing: 9, alignment: .leading),
         GridItem(.flexible(), alignment: .leading)
     ]
+    private let emojis: [String: Image] = [
+        "가족": Image("characterFamily"),
+        "연인": Image("characterCouple"),
+        "친구": Image("characterFriend"),
+        "지인": Image("characterNeighbor")
+    ]
     var isComplete: Bool {
         selectedTarget != ""
     }
@@ -58,11 +64,18 @@ struct TargetSelectView: View {
                                             .dropShadow(opacity: 0.15)
                                             .overlay {
                                                 VStack {
-                                                    Spacer()
+                                                    
+                                                    if let emoji = emojis[target.rawValue] {
+                                                        emoji
+                                                            .frame(width: 140, height: 126)
+                                                            .padding(.top, 9)
+                                                            .padding(.horizontal, 16)
+                                                    }
                                                     Text("\(target.rawValue)")
                                                         .font(.body .weight(.bold))
                                                         .multilineTextAlignment(.center)
                                                         .foregroundColor(selectedTarget == target.rawValue ? Theme.white : Theme.black)
+                                                        .padding(.top, 4)
                                                         .padding(.bottom, 11)
                                                 }
                                             }
