@@ -13,12 +13,14 @@ struct HistoryView: View {
     @State private var selectedMonth: String = "전체"
     @State private var selectedTarget: Target?
     @State private var filterData: [History] = []
+    @State var count: Int = 0
     @Query private var items: [History]
     
     var body: some View {
-        HistoryViewHandler(count: items.count, isShowingModal: $isShowingModal, filterData: filterData, selectedMonth: $selectedMonth, selectedTarget: $selectedTarget)                
+        HistoryViewHandler(count: $count, isShowingModal: $isShowingModal, filterData: filterData, selectedMonth: $selectedMonth, selectedTarget: $selectedTarget)
             .onAppear {
-                    filterData = items
+                filterData = items.filter({ $0.isPerformed == true })
+                count = filterData.count
                 }
             .sheet(isPresented: $isShowingModal, content: {
                 HistoryFilterView(selectedMonth: $selectedMonth, selectedTarget: $selectedTarget, isShowingModal: $isShowingModal)
@@ -33,9 +35,9 @@ struct HistoryView: View {
 }
 
 @ViewBuilder
-private func HistoryViewHandler(count: Int, isShowingModal: Binding<Bool>, filterData: [History], selectedMonth: Binding<String>, selectedTarget: Binding<Target?>) -> some View {
-    if count == 0 {
-        EmptyHistoryView()
+private func HistoryViewHandler(count: Binding<Int>, isShowingModal: Binding<Bool>, filterData: [History], selectedMonth: Binding<String>, selectedTarget: Binding<Target?>) -> some View {
+    if count.wrappedValue == 0 {
+        EmptyHistoryView(isShowingModal: isShowingModal)
     } else {
         HasDateHistoryView(isShowingModal: isShowingModal, filterData: filterData, selectedTarget: selectedTarget, selectedMonth: selectedMonth)
     }
@@ -101,7 +103,7 @@ private func HasDateHistoryView(isShowingModal: Binding<Bool>, filterData: [Hist
     }
 }
 
-private func EmptyHistoryView() -> some View {
+private func EmptyHistoryView(isShowingModal: Binding<Bool>) -> some View {
     return NavigationStack {
         VStack(spacing: 0) {
             HStack(spacing: 0) {
@@ -113,8 +115,12 @@ private func EmptyHistoryView() -> some View {
                     .foregroundStyle(Theme.point)
                     .padding(.leading, 8)
                 Spacer()
-                Image(systemName: "line.3.horizontal.decrease")
-                    .foregroundStyle(Theme.point)
+                Button {
+                    isShowingModal.wrappedValue.toggle()
+                } label: {
+                    Image(systemName: "line.3.horizontal.decrease")
+                        .foregroundStyle(Theme.point)
+                }
             }
             .padding([.leading, .top, .trailing], Theme.padding)
             .padding(.bottom, 28)
