@@ -19,8 +19,8 @@ struct MyMoodView: View {
     let target: Target
     let specificTarget: String?
     
-    private let emojis = ["😂", "😅", "😊", "😁", "🥰"]
-    private let strings = ["많이 어색해요", "어색해요", "보통이에요", "익숙해요", "많이 익숙해요"]
+    private let emojis: [Image] = [Image("expressionT1"), Image("expressionT2"), Image("expressionT3"), Image("expressionT4"), Image("expressionT5") ]
+    private let strings = ["많이 어색해요", "조금 어색해요", "그저 그래요", "익숙해요!", "정말 익숙해요!"]
     
     var body: some View {
         ZStack {
@@ -28,15 +28,17 @@ struct MyMoodView: View {
             
             VStack(spacing: 0) {
                 VStack(alignment: .center, spacing: 0) {
-                    Text("기분이 어땠나요?")
+                    Text("이 따듯함을 건낸\n 나의 기분은 어떠한가요?")
                         .font(.title2 .weight(.bold))
                         .padding(.top, 38)
-                    Text(emojis[Int(sliderValue / 25)]).font(.system(size: 220))
-                        .padding(.top, 43)
+                        .padding(.bottom, 31)
+                        .multilineTextAlignment(.center)
+                    emojis[Int(sliderValue / 25)]
+                        .frame(width: 250, height: 250)
                         .animation(.spring, value: sliderValue)
                     Text(strings[Int(sliderValue / 25)])
                         .font(.title2 .weight(.bold))
-                        .padding(.top, 47)
+                        .padding(.top, 29)
                         .padding(.bottom, 38)
                         .animation(.spring, value: sliderValue)
                 }
