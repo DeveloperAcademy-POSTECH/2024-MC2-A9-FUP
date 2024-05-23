@@ -27,9 +27,7 @@
 		DF32E17F2BFA1B730084B28C /* DottedDivider.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF32E17E2BFA1B730084B28C /* DottedDivider.swift */; };
 		DF32E1822BFA40780084B28C /* SwiftDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF32E1812BFA40780084B28C /* SwiftDataManager.swift */; };
 		DF32E1842BFA48660084B28C /* AVFoundationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF32E1832BFA48660084B28C /* AVFoundationManager.swift */; };
-		DF32E1862BFA4B3A0084B28C /* AVFoundationTestView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF32E1852BFA4B3A0084B28C /* AVFoundationTestView.swift */; };
 		DFBE0BC32BF32CB400246814 /* F_UPApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = DFBE0BC22BF32CB400246814 /* F_UPApp.swift */; };
-		DFBE0BC52BF32CB400246814 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DFBE0BC42BF32CB400246814 /* ContentView.swift */; };
 		DFBE0BC72BF32CB400246814 /* History.swift in Sources */ = {isa = PBXBuildFile; fileRef = DFBE0BC62BF32CB400246814 /* History.swift */; };
 		DFBE0BC92BF32CB600246814 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DFBE0BC82BF32CB600246814 /* Assets.xcassets */; };
 		DFBE0BCC2BF32CB600246814 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DFBE0BCB2BF32CB600246814 /* Preview Assets.xcassets */; };
@@ -89,10 +87,8 @@
 		DF32E17E2BFA1B730084B28C /* DottedDivider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DottedDivider.swift; sourceTree = "<group>"; };
 		DF32E1812BFA40780084B28C /* SwiftDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftDataManager.swift; sourceTree = "<group>"; };
 		DF32E1832BFA48660084B28C /* AVFoundationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AVFoundationManager.swift; sourceTree = "<group>"; };
-		DF32E1852BFA4B3A0084B28C /* AVFoundationTestView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AVFoundationTestView.swift; sourceTree = "<group>"; };
 		DFBE0BBF2BF32CB400246814 /* F-UP.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "F-UP.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		DFBE0BC22BF32CB400246814 /* F_UPApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = F_UPApp.swift; sourceTree = "<group>"; };
-		DFBE0BC42BF32CB400246814 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		DFBE0BC62BF32CB400246814 /* History.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = History.swift; sourceTree = "<group>"; };
 		DFBE0BC82BF32CB600246814 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		DFBE0BCB2BF32CB600246814 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
@@ -171,7 +167,6 @@
 		17756DAE2BF5FE320067E10D /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				DF32E1872BFA642D0084B28C /* Temp */,
 				DF81E1612BFB5B2900A562B2 /* Challenge */,
 				CCC074232BFB1E9F00401B25 /* History */,
 				1731C51E2BF749B0002B59FE /* RecordReview */,
@@ -216,15 +211,6 @@
 				CCC0A14A2BFCFD4B00C14B8C /* NotificationManger.swift */,
 			);
 			path = Manager;
-			sourceTree = "<group>";
-		};
-		DF32E1872BFA642D0084B28C /* Temp */ = {
-			isa = PBXGroup;
-			children = (
-				DFBE0BC42BF32CB400246814 /* ContentView.swift */,
-				DF32E1852BFA4B3A0084B28C /* AVFoundationTestView.swift */,
-			);
-			path = Temp;
 			sourceTree = "<group>";
 		};
 		DF81E1612BFB5B2900A562B2 /* Challenge */ = {
@@ -421,11 +407,9 @@
 				1731C51D2BF74969002B59FE /* TargetSelectView.swift in Sources */,
 				17756DB32BF5FE320067E10D /* ChallengeView.swift in Sources */,
 				CCC0A14B2BFCFD4B00C14B8C /* NotificationManger.swift in Sources */,
-				DFBE0BC52BF32CB400246814 /* ContentView.swift in Sources */,
 				DF32E1842BFA48660084B28C /* AVFoundationManager.swift in Sources */,
 				DFBE0BC72BF32CB400246814 /* History.swift in Sources */,
 				DFBE0BEF2BF7289A00246814 /* CarouselView.swift in Sources */,
-				DF32E1862BFA4B3A0084B28C /* AVFoundationTestView.swift in Sources */,
 				DFBE0BC32BF32CB400246814 /* F_UPApp.swift in Sources */,
 				17AB3C172BFA3E9600A725B7 /* RecordingView.swift in Sources */,
 			);
