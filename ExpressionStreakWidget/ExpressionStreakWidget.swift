@@ -9,11 +9,7 @@ import WidgetKit
 import SwiftUI
 
 struct Provider: TimelineProvider {
-    @AppStorage("streak") var streak: Int = 0
-    
     func placeholder(in context: Context) -> SimpleEntry {
-//        SimpleEntry(date: Date(), streak: 1, expression: "오늘의 표현")
-        //        SimpleEntry(date: Date(), emoji: "😀")
         let dummyExpression = [
             "생각나서 연락했어.",
             "보람찬 하루 보내",
@@ -36,18 +32,18 @@ struct Provider: TimelineProvider {
         dateComponents.day = 1
         
         guard let specificDate = calendar.date(from: dateComponents) else {
-            return SimpleEntry(date: Date(), streak: streak, expression: "너는 최고야")
+            return SimpleEntry(date: Date(), streak: loadStreak(), expression: "너는 최고야")
         }
         
         let components = calendar.dateComponents([.day], from: specificDate, to: currentDate)
         
         guard let daysElapsed = components.day else {
-            return SimpleEntry(date: Date(), streak: streak, expression: "너는 최고야")
+            return SimpleEntry(date: Date(), streak: loadStreak(), expression: "너는 최고야")
         }
         
         let expressionIndex = daysElapsed % dummyExpression.count
         
-        return SimpleEntry(date: Date(), streak: streak, expression: dummyExpression[expressionIndex])
+        return SimpleEntry(date: Date(), streak: loadStreak(), expression: dummyExpression[expressionIndex])
         
     }
     
@@ -74,18 +70,19 @@ struct Provider: TimelineProvider {
         dateComponents.day = 1
         
         guard let specificDate = calendar.date(from: dateComponents) else {
+            completion(SimpleEntry(date: Date(), streak: 1, expression: "오늘의 표현"))
             return
         }
         
         let components = calendar.dateComponents([.day], from: specificDate, to: currentDate)
         
         guard let daysElapsed = components.day else {
+            completion(SimpleEntry(date: Date(), streak: 1, expression: "오늘의 표현"))
             return
         }
-        
         let expressionIndex = daysElapsed % dummyExpression.count
         
-        let entry = SimpleEntry(date: Date(), streak: streak, expression: dummyExpression[expressionIndex])
+        let entry = SimpleEntry(date: Date(), streak: loadStreak(), expression: dummyExpression[expressionIndex])
         completion(entry)
     }
     
@@ -127,14 +124,17 @@ struct Provider: TimelineProvider {
             }
             
             let expressionIndex = daysElapsed % dummyExpression.count
-            
-            let entryDate = calendar.date(byAdding: .minute, value: minuteOffset * 5, to: currentDate)!
-            let entry = SimpleEntry(date: entryDate, streak: streak, expression: dummyExpression[expressionIndex])
+            let entryDate = calendar.date(byAdding: .minute, value: minuteOffset * 3, to: currentDate)!
+            let entry = SimpleEntry(date: entryDate, streak: loadStreak(), expression: dummyExpression[expressionIndex])
             entries.append(entry)
         }
         
         let timeline = Timeline(entries: entries, policy: .atEnd)
         completion(timeline)
+    }
+    
+    func loadStreak() -> Int {
+        return UserDefaults(suiteName: "group.f_up.group.com")?.integer(forKey: "streak") ?? 0
     }
 }
 

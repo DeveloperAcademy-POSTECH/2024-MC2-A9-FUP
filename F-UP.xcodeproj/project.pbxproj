@@ -105,6 +105,8 @@
 		DFC089962BFDDE330090E577 /* ExpressionStreakWidget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpressionStreakWidget.swift; sourceTree = "<group>"; };
 		DFC089982BFDDE340090E577 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		DFC0899A2BFDDE340090E577 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		DFC089A32BFED9CD0090E577 /* F-UP.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "F-UP.entitlements"; sourceTree = "<group>"; };
+		DFC089A42BFEDA000090E577 /* ExpressionStreakWidgetExtension.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = ExpressionStreakWidgetExtension.entitlements; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -237,6 +239,7 @@
 		DFBE0BB62BF32CB400246814 = {
 			isa = PBXGroup;
 			children = (
+				DFC089A42BFEDA000090E577 /* ExpressionStreakWidgetExtension.entitlements */,
 				DFBE0BC12BF32CB400246814 /* F-UP */,
 				DFC089932BFDDE330090E577 /* ExpressionStreakWidget */,
 				DFC0898E2BFDDE330090E577 /* Frameworks */,
@@ -257,6 +260,7 @@
 			isa = PBXGroup;
 			children = (
 				17DB9E142BFDE8EA00897937 /* Extensions */,
+				DFC089A32BFED9CD0090E577 /* F-UP.entitlements */,
 				DF32E1802BFA406C0084B28C /* Manager */,
 				DF32E17D2BFA1B580084B28C /* Components */,
 				173B49D72BF7241200FC4FEC /* App */,
@@ -573,6 +577,7 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = "F-UP/F-UP.entitlements";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"F-UP/Preview Content\"";
@@ -605,6 +610,7 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = "F-UP/F-UP.entitlements";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"F-UP/Preview Content\"";
@@ -636,9 +642,10 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
+				CODE_SIGN_ENTITLEMENTS = ExpressionStreakWidgetExtension.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = GKWM8Q6TMS;
+				DEVELOPMENT_TEAM = 6RUVHQW43D;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = ExpressionStreakWidget/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = ExpressionStreakWidget;
@@ -664,9 +671,10 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
+				CODE_SIGN_ENTITLEMENTS = ExpressionStreakWidgetExtension.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = GKWM8Q6TMS;
+				DEVELOPMENT_TEAM = 6RUVHQW43D;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = ExpressionStreakWidget/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = ExpressionStreakWidget;

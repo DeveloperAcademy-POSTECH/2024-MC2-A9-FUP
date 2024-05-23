@@ -35,7 +35,7 @@ struct ChallengeView: View {
     @State private var expressionIndex: Int = 0
     @State var currentChallengeStep: ChallengeStep = .notStarted
     
-    @AppStorage("streak") var streak: Int = 0
+    @AppStorage("streak", store: UserDefaults(suiteName: "group.f_up.group.com")) var streak: Int = 0
     
     var body: some View {
         ZStack(alignment: .top){
@@ -133,6 +133,7 @@ struct ChallengeView: View {
         .onChange(of: currentDateString) {
             updateExpressionIndex()
             checkAndAddHistory()
+            setUpStreak()
             print(histories)
             print(todayHistories)
             print(yesterdayHistories)
@@ -223,7 +224,6 @@ extension ChallengeView {
             swiftDataManager.addHistory(modelContext: modelContext, expression: dummyExpression[expressionIndex])
         }
         updateHistories()
-        setUpStreak()
     }
 }
 
