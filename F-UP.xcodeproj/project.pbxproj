@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		171834FD2BFF84700088F348 /* Launch Screen.storyboard.backup in Resources */ = {isa = PBXBuildFile; fileRef = 171834FC2BFF84700088F348 /* Launch Screen.storyboard.backup */; };
 		172BA22B2BFD0954007AC28A /* AudioPlayingComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 172BA22A2BFD0954007AC28A /* AudioPlayingComponent.swift */; };
 		1731C51D2BF74969002B59FE /* TargetSelectView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1731C51C2BF74969002B59FE /* TargetSelectView.swift */; };
 		173B49DC2BF72C5600FC4FEC /* Theme.swift in Sources */ = {isa = PBXBuildFile; fileRef = 173B49DB2BF72C5600FC4FEC /* Theme.swift */; };
@@ -67,6 +68,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		171834FC2BFF84700088F348 /* Launch Screen.storyboard.backup */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = "Launch Screen.storyboard.backup"; sourceTree = "<group>"; };
 		172BA22A2BFD0954007AC28A /* AudioPlayingComponent.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AudioPlayingComponent.swift; sourceTree = "<group>"; };
 		1731C51C2BF74969002B59FE /* TargetSelectView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TargetSelectView.swift; sourceTree = "<group>"; };
 		173B49DB2BF72C5600FC4FEC /* Theme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Theme.swift; sourceTree = "<group>"; };
@@ -255,6 +257,7 @@
 				173B49D82BF7241900FC4FEC /* Resources */,
 				DFBE0BCA2BF32CB600246814 /* Preview Content */,
 				CCC0A14C2BFF197900C14B8C /* Launch Screen.storyboard */,
+				171834FC2BFF84700088F348 /* Launch Screen.storyboard.backup */,
 			);
 			path = "F-UP";
 			sourceTree = "<group>";
@@ -368,6 +371,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				171834FD2BFF84700088F348 /* Launch Screen.storyboard.backup in Resources */,
 				CCC0A14D2BFF197900C14B8C /* Launch Screen.storyboard in Resources */,
 				DFBE0BCC2BF32CB600246814 /* Preview Assets.xcassets in Resources */,
 				DFBE0BC92BF32CB600246814 /* Assets.xcassets in Resources */,
