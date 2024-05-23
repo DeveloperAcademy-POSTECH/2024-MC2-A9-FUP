@@ -133,9 +133,6 @@ struct ChallengeView: View {
         .onChange(of: currentDateString) {
             updateExpressionIndex()
             checkAndAddHistory()
-            print(histories)
-            print(todayHistories)
-            print(yesterdayHistories)
         }
         .onReceive(Timer.publish(every: 30, on: .main, in: .common).autoconnect()) { _ in
             let newDateString = Date().formatted(date: .abbreviated, time: .omitted)
@@ -204,13 +201,16 @@ extension ChallengeView {
     }
     
     func setUpStreak() {
-        if !yesterdayHistories.isEmpty && yesterdayHistories[0].isPerformed {
-            todayHistories[0].streak = yesterdayHistories[0].streak + 1
-            streak = todayHistories[0].streak
-        }
-        else {
+        if yesterdayHistories.isEmpty || !yesterdayHistories[0].isPerformed {
             streak = 0
         }
+//        if !yesterdayHistories.isEmpty && yesterdayHistories[0].isPerformed {
+//            todayHistories[0].streak = yesterdayHistories[0].streak + 1
+//            streak = todayHistories[0].streak
+//        }
+//        else {
+//            streak = 0
+//        }
     }
     
     func checkAndAddHistory() {

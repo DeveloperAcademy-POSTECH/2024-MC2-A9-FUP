@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import SwiftData
 
 struct ReactionView: View {
     @Environment(\.dismiss) private var dismiss
@@ -17,6 +18,11 @@ struct ReactionView: View {
     @State private var sliderValue: Double = 0
     
     @State var history: History
+    
+    @Query var histories: [History]
+    @AppStorage("streak", store: UserDefaults(suiteName: "group.f_up.group.com")) var streak: Int = 0
+    
+    @State var yesterdayStreak: Int? = nil
     
     let target: Target
     let specificTarget: String?
@@ -64,19 +70,21 @@ struct ReactionView: View {
                 Spacer()
                 
                 Button {
+                    initializeYesterdayStreak()
+                    setUserdefaultStreak(yesterdayStreak: yesterdayStreak)
                     switch Int(sliderValue / 25) {
                     case 0:
-                        swiftDataManager.updateHistoryAfterChallenge(modelContext: modelContext, history: history, target: target, specificTarget: specificTarget, feelingValue: feelingValue, reactionValue: .veryBad)
+                        swiftDataManager.updateHistoryAfterChallenge(modelContext: modelContext, history: history, streak: streak, target: target, specificTarget: specificTarget, feelingValue: feelingValue, reactionValue: .veryBad)
                     case 1:
-                        swiftDataManager.updateHistoryAfterChallenge(modelContext: modelContext, history: history, target: target, specificTarget: specificTarget, feelingValue: feelingValue, reactionValue: .bad)
+                        swiftDataManager.updateHistoryAfterChallenge(modelContext: modelContext, history: history, streak: streak, target: target, specificTarget: specificTarget, feelingValue: feelingValue, reactionValue: .bad)
                     case 2:
-                        swiftDataManager.updateHistoryAfterChallenge(modelContext: modelContext, history: history, target: target, specificTarget: specificTarget, feelingValue: feelingValue, reactionValue: .neutral)
+                        swiftDataManager.updateHistoryAfterChallenge(modelContext: modelContext, history: history, streak: streak, target: target, specificTarget: specificTarget, feelingValue: feelingValue, reactionValue: .neutral)
                     case 3:
-                        swiftDataManager.updateHistoryAfterChallenge(modelContext: modelContext, history: history, target: target, specificTarget: specificTarget, feelingValue: feelingValue, reactionValue: .good)
+                        swiftDataManager.updateHistoryAfterChallenge(modelContext: modelContext, history: history, streak: streak, target: target, specificTarget: specificTarget, feelingValue: feelingValue, reactionValue: .good)
                     case 4:
-                        swiftDataManager.updateHistoryAfterChallenge(modelContext: modelContext, history: history, target: target, specificTarget: specificTarget, feelingValue: feelingValue, reactionValue: .veryGood)
+                        swiftDataManager.updateHistoryAfterChallenge(modelContext: modelContext, history: history, streak: streak, target: target, specificTarget: specificTarget, feelingValue: feelingValue, reactionValue: .veryGood)
                     default:
-                        swiftDataManager.updateHistoryAfterChallenge(modelContext: modelContext, history: history, target: target, specificTarget: specificTarget, feelingValue: feelingValue, reactionValue: .veryBad)
+                        swiftDataManager.updateHistoryAfterChallenge(modelContext: modelContext, history: history, streak: streak, target: target, specificTarget: specificTarget, feelingValue: feelingValue, reactionValue: .veryBad)
                     }
                     refreshTrigger.trigger.toggle()
                     showModal = false
@@ -91,8 +99,6 @@ struct ReactionView: View {
                                 .foregroundStyle(Theme.white)
                         }
                 }
-                
-                
             }
             .padding(.horizontal, Theme.padding)
             .navigationTitle("기록하기")
@@ -121,6 +127,34 @@ struct ReactionView: View {
         }
         
     }
+}
+
+
+extension ReactionView {
+    
+    private func initializeYesterdayStreak() {
+        let calendar = Calendar.current
+        let yesterday = calendar.date(byAdding: .day, value: -1, to: Date())!
+        let yesterdayHistories = histories.filter {
+            $0.date.formatted(date: .abbreviated, time: .omitted)
+            ==
+            yesterday.formatted(date: .abbreviated, time: .omitted)
+        }
+        
+        if !yesterdayHistories.isEmpty {
+            self.yesterdayStreak = yesterdayHistories[0].streak
+        }
+    }
+    
+    private func setUserdefaultStreak(yesterdayStreak: Int?) {
+        if let ydStreak = yesterdayStreak {
+            self.streak = ydStreak + 1
+        }
+        else {
+            self.streak = 0
+        }
+    }
+    
 }
 
 
