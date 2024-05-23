@@ -28,7 +28,7 @@ struct MyMoodView: View {
             
             VStack(spacing: 0) {
                 VStack(alignment: .center, spacing: 0) {
-                    Text("이 따듯함을 건낸\n 나의 기분은 어떠한가요?")
+                    Text("이 따뜻함을 건낸\n 나의 기분은 어떠한가요?")
                         .font(.title2 .weight(.bold))
                         .padding(.top, 38)
                         .padding(.bottom, 31)
