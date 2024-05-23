@@ -76,6 +76,7 @@ final class SwiftDataManager {
             withAnimation {
                 history.isPerformed = true
                 history.challengeStep = .challengeCompleted
+                history.streak = streak
                 history.target = target
                 history.specificTarget = specificTarget
                 history.feelingValue = feelingValue
