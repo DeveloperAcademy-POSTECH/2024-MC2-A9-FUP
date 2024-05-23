@@ -87,6 +87,7 @@
 		DF32E17E2BFA1B730084B28C /* DottedDivider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DottedDivider.swift; sourceTree = "<group>"; };
 		DF32E1812BFA40780084B28C /* SwiftDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftDataManager.swift; sourceTree = "<group>"; };
 		DF32E1832BFA48660084B28C /* AVFoundationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AVFoundationManager.swift; sourceTree = "<group>"; };
+		DF499ACC2BFF54490037B9E9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		DFBE0BBF2BF32CB400246814 /* F-UP.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "F-UP.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		DFBE0BC22BF32CB400246814 /* F_UPApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = F_UPApp.swift; sourceTree = "<group>"; };
 		DFBE0BC62BF32CB400246814 /* History.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = History.swift; sourceTree = "<group>"; };
@@ -245,6 +246,7 @@
 		DFBE0BC12BF32CB400246814 /* F-UP */ = {
 			isa = PBXGroup;
 			children = (
+				DF499ACC2BFF54490037B9E9 /* Info.plist */,
 				17DB9E142BFDE8EA00897937 /* Extensions */,
 				DFC089A32BFED9CD0090E577 /* F-UP.entitlements */,
 				DF32E1802BFA406C0084B28C /* Manager */,
@@ -571,6 +573,7 @@
 				"DEVELOPMENT_TEAM[sdk=iphoneos*]" = 6RUVHQW43D;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "F-UP/Info.plist";
 				INFOPLIST_KEY_NSMicrophoneUsageDescription = "말하기 기능을 활성화하기 위해 마이크 권한이 필요합니다.";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
@@ -614,6 +617,7 @@
 				"DEVELOPMENT_TEAM[sdk=iphoneos*]" = 6RUVHQW43D;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "F-UP/Info.plist";
 				INFOPLIST_KEY_NSMicrophoneUsageDescription = "말하기 기능을 활성화하기 위해 마이크 권한이 필요합니다.";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
