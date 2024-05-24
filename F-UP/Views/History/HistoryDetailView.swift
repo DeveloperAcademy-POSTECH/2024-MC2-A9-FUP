@@ -33,7 +33,7 @@ struct HistoryDetailView: View {
                     .padding(.vertical, Theme.padding)
                     
                     if history.specificTarget != nil {
-                        Text("* 친구인 ")
+                        Text("* \(history.target.rawValue)인 ")
                             .font(.caption)
                             .foregroundStyle(Theme.semiblack)
                         +
