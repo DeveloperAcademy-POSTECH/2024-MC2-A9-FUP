@@ -19,7 +19,7 @@ struct SplashView: View {
                 }
             }
             .onAppear {
-                DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+                DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) {
                     withAnimation {
                         isSplashScreen = false
                     }
@@ -36,5 +36,6 @@ struct SplashScreen: View {
                 .ignoresSafeArea()
             LottieView(fileName: "Lunch")
         }
+        .frame(width:179, height:146)
     }
 }

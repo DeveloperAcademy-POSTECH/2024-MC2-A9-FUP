@@ -34,7 +34,7 @@ struct LottieView : UIViewRepresentable {
         
         NSLayoutConstraint.activate([
             animationView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            animationView.centerYAnchor.constraint(equalTo: view.centerYAnchor)
+            animationView.centerYAnchor.constraint(equalTo: view.centerYAnchor),
         ])
         
         return view
