@@ -133,10 +133,34 @@ private func EmptyHistoryView(isShowingModal: Binding<Bool>) -> some View {
                     .font(.title)
                     .foregroundStyle(Theme.black)
                     .bold()
-                Text("0")
-                    .foregroundStyle(Theme.point)
-                    .padding(.leading, 8)
+//                Text("0")
+//                    .foregroundStyle(Theme.point)
+//                    .padding(.leading, 8)
+                HStack(alignment: .center, spacing: 10) {
+                    HStack(spacing: 2) {
+                        Image(systemName: "scroll.fill")
+                            .font(.footnote .weight(.semibold))
+                            .foregroundColor(Theme.point)
+                        Text("0") //streak 변수
+                            .font(.footnote .weight(.semibold))
+                            .foregroundColor(Theme.point)
+                    }
+                }
+                .padding(.horizontal, 9)
+                .padding(.vertical, 4)
+                .background(Theme.background)
+                .clipShape(
+                    RoundedRectangle(cornerRadius: 12.5)
+                )
+                .overlay(
+                    RoundedRectangle(cornerRadius: 12.5)
+                        .inset(by: 0.65)
+                        .stroke(Theme.point, lineWidth: 1.3)
+                )
+                .padding(.leading, 10)
+                
                 Spacer()
+                
                 Button {
                     isShowingModal.wrappedValue.toggle()
                 } label: {
@@ -144,7 +168,8 @@ private func EmptyHistoryView(isShowingModal: Binding<Bool>) -> some View {
                         .foregroundStyle(Theme.point)
                 }
             }
-            .padding([.leading, .top, .trailing], Theme.padding)
+            .padding(.horizontal, Theme.padding)
+            .padding(.top, 11)
             .padding(.bottom, 28)
             Spacer()
             VStack(spacing: 0) {
