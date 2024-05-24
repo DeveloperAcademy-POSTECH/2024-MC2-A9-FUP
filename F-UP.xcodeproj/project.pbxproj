@@ -101,7 +101,6 @@
 		DF32E17E2BFA1B730084B28C /* DottedDivider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DottedDivider.swift; sourceTree = "<group>"; };
 		DF32E1812BFA40780084B28C /* SwiftDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftDataManager.swift; sourceTree = "<group>"; };
 		DF32E1832BFA48660084B28C /* AVFoundationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AVFoundationManager.swift; sourceTree = "<group>"; };
-		DF499ACC2BFF54490037B9E9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		DFBE0BBF2BF32CB400246814 /* F-UP.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "F-UP.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		DFBE0BC22BF32CB400246814 /* F_UPApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = F_UPApp.swift; sourceTree = "<group>"; };
 		DFBE0BC62BF32CB400246814 /* History.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = History.swift; sourceTree = "<group>"; };
@@ -285,7 +284,6 @@
 				17756DAE2BF5FE320067E10D /* Views */,
 				173B49D82BF7241900FC4FEC /* Resources */,
 				DFBE0BCA2BF32CB600246814 /* Preview Content */,
-				CCC0A14C2BFF197900C14B8C /* Launch Screen.storyboard */,
 				171834FC2BFF84700088F348 /* Launch Screen.storyboard.backup */,
 			);
 			path = "F-UP";
@@ -407,7 +405,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				171834FD2BFF84700088F348 /* Launch Screen.storyboard.backup in Resources */,
-				CCC0A14D2BFF197900C14B8C /* Launch Screen.storyboard in Resources */,
 				DFBE0BCC2BF32CB600246814 /* Preview Assets.xcassets in Resources */,
 				DFBE0BC92BF32CB600246814 /* Assets.xcassets in Resources */,
 				CC3B1F842C004622002818F2 /* Launch Screen.storyboard in Resources */,
@@ -630,7 +627,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0.1;
+				MARKETING_VERSION = 1.0.2;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.f-up.F-UP";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -675,7 +672,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0.1;
+				MARKETING_VERSION = 1.0.2;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.f-up.F-UP";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -712,7 +709,7 @@
 					"@executable_path/Frameworks",
 					"@executable_path/../../Frameworks",
 				);
-				MARKETING_VERSION = 1.0.1;
+				MARKETING_VERSION = 1.0.2;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.f-up.F-UP.ExpressionStreakWidget";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -750,7 +747,7 @@
 					"@executable_path/Frameworks",
 					"@executable_path/../../Frameworks",
 				);
-				MARKETING_VERSION = 1.0.1;
+				MARKETING_VERSION = 1.0.2;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.f-up.F-UP.ExpressionStreakWidget";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
