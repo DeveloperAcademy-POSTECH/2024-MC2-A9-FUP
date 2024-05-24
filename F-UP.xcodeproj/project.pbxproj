@@ -21,11 +21,14 @@
 		17B7627D2BFB348300BE8599 /* ReactionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17B7627C2BFB348300BE8599 /* ReactionView.swift */; };
 		17B7627F2BFB4C1100BE8599 /* CustomSlider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17B7627E2BFB4C1100BE8599 /* CustomSlider.swift */; };
 		17DB9E162BFDE8FD00897937 /* Date+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17DB9E152BFDE8FD00897937 /* Date+Extension.swift */; };
+		CC3B1F782C000FCE002818F2 /* Lottie in Frameworks */ = {isa = PBXBuildFile; productRef = CC3B1F772C000FCE002818F2 /* Lottie */; };
+		CC3B1F7A2C00108B002818F2 /* LottieView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC3B1F792C00108B002818F2 /* LottieView.swift */; };
+		CC3B1F7E2C00199C002818F2 /* SplashView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC3B1F7D2C00199C002818F2 /* SplashView.swift */; };
+		CC3B1F802C001C22002818F2 /* Lunch.json in Resources */ = {isa = PBXBuildFile; fileRef = CC3B1F7F2C001C22002818F2 /* Lunch.json */; };
 		CCC074252BFB1EC000401B25 /* HistoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCC074242BFB1EC000401B25 /* HistoryView.swift */; };
 		CCC074272BFB1F2E00401B25 /* HistoryDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCC074262BFB1F2E00401B25 /* HistoryDetailView.swift */; };
 		CCC074292BFB1F5000401B25 /* HistoryFilterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCC074282BFB1F5000401B25 /* HistoryFilterView.swift */; };
 		CCC0A14B2BFCFD4B00C14B8C /* NotificationManger.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCC0A14A2BFCFD4B00C14B8C /* NotificationManger.swift */; };
-		CCC0A14D2BFF197900C14B8C /* Launch Screen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CCC0A14C2BFF197900C14B8C /* Launch Screen.storyboard */; };
 		DF0ABEC42BFCE6A1000F2C03 /* RefreshTrigger.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF0ABEC32BFCE6A1000F2C03 /* RefreshTrigger.swift */; };
 		DF32E17F2BFA1B730084B28C /* DottedDivider.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF32E17E2BFA1B730084B28C /* DottedDivider.swift */; };
 		DF32E1822BFA40780084B28C /* SwiftDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF32E1812BFA40780084B28C /* SwiftDataManager.swift */; };
@@ -84,11 +87,14 @@
 		17B7627C2BFB348300BE8599 /* ReactionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReactionView.swift; sourceTree = "<group>"; };
 		17B7627E2BFB4C1100BE8599 /* CustomSlider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomSlider.swift; sourceTree = "<group>"; };
 		17DB9E152BFDE8FD00897937 /* Date+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+Extension.swift"; sourceTree = "<group>"; };
+		CC3B1F792C00108B002818F2 /* LottieView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LottieView.swift; sourceTree = "<group>"; };
+		CC3B1F7D2C00199C002818F2 /* SplashView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashView.swift; sourceTree = "<group>"; };
+		CC3B1F7F2C001C22002818F2 /* Lunch.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = Lunch.json; sourceTree = "<group>"; };
+		CC3B1F812C001EEA002818F2 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		CCC074242BFB1EC000401B25 /* HistoryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryView.swift; sourceTree = "<group>"; };
 		CCC074262BFB1F2E00401B25 /* HistoryDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryDetailView.swift; sourceTree = "<group>"; };
 		CCC074282BFB1F5000401B25 /* HistoryFilterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryFilterView.swift; sourceTree = "<group>"; };
 		CCC0A14A2BFCFD4B00C14B8C /* NotificationManger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationManger.swift; sourceTree = "<group>"; };
-		CCC0A14C2BFF197900C14B8C /* Launch Screen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = "Launch Screen.storyboard"; sourceTree = "<group>"; };
 		DF0ABEC32BFCE6A1000F2C03 /* RefreshTrigger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RefreshTrigger.swift; sourceTree = "<group>"; };
 		DF32E17E2BFA1B730084B28C /* DottedDivider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DottedDivider.swift; sourceTree = "<group>"; };
 		DF32E1812BFA40780084B28C /* SwiftDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftDataManager.swift; sourceTree = "<group>"; };
@@ -117,6 +123,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CC3B1F782C000FCE002818F2 /* Lottie in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -166,6 +173,7 @@
 		173B49D82BF7241900FC4FEC /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				CC3B1F7F2C001C22002818F2 /* Lunch.json */,
 				DFBE0BC82BF32CB600246814 /* Assets.xcassets */,
 			);
 			path = Resources;
@@ -174,6 +182,7 @@
 		17756DAE2BF5FE320067E10D /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				CC3B1F822C001F73002818F2 /* Launch */,
 				DF81E1612BFB5B2900A562B2 /* Challenge */,
 				CCC074232BFB1E9F00401B25 /* History */,
 				1731C51E2BF749B0002B59FE /* RecordReview */,
@@ -189,6 +198,15 @@
 				171834FE2BFF9F270088F348 /* UINavigation+Extension.swift */,
 			);
 			path = Extensions;
+			sourceTree = "<group>";
+		};
+		CC3B1F822C001F73002818F2 /* Launch */ = {
+			isa = PBXGroup;
+			children = (
+				CC3B1F792C00108B002818F2 /* LottieView.swift */,
+				CC3B1F7D2C00199C002818F2 /* SplashView.swift */,
+			);
+			path = Launch;
 			sourceTree = "<group>";
 		};
 		CCC074232BFB1E9F00401B25 /* History */ = {
@@ -254,7 +272,7 @@
 		DFBE0BC12BF32CB400246814 /* F-UP */ = {
 			isa = PBXGroup;
 			children = (
-				DF499ACC2BFF54490037B9E9 /* Info.plist */,
+				CC3B1F812C001EEA002818F2 /* Info.plist */,
 				17DB9E142BFDE8EA00897937 /* Extensions */,
 				DFC089A32BFED9CD0090E577 /* F-UP.entitlements */,
 				DF32E1802BFA406C0084B28C /* Manager */,
@@ -316,6 +334,9 @@
 				DFC0899C2BFDDE340090E577 /* PBXTargetDependency */,
 			);
 			name = "F-UP";
+			packageProductDependencies = (
+				CC3B1F772C000FCE002818F2 /* Lottie */,
+			);
 			productName = "F-UP";
 			productReference = DFBE0BBF2BF32CB400246814 /* F-UP.app */;
 			productType = "com.apple.product-type.application";
@@ -364,6 +385,9 @@
 				Base,
 			);
 			mainGroup = DFBE0BB62BF32CB400246814;
+			packageReferences = (
+				CC3B1F762C000FCE002818F2 /* XCRemoteSwiftPackageReference "lottie-ios" */,
+			);
 			productRefGroup = DFBE0BC02BF32CB400246814 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -383,6 +407,7 @@
 				CCC0A14D2BFF197900C14B8C /* Launch Screen.storyboard in Resources */,
 				DFBE0BCC2BF32CB600246814 /* Preview Assets.xcassets in Resources */,
 				DFBE0BC92BF32CB600246814 /* Assets.xcassets in Resources */,
+				CC3B1F802C001C22002818F2 /* Lunch.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -404,6 +429,7 @@
 				172BA22B2BFD0954007AC28A /* AudioPlayingComponent.swift in Sources */,
 				171835012BFFB89E0088F348 /* HapticManager.swift in Sources */,
 				CCC074272BFB1F2E00401B25 /* HistoryDetailView.swift in Sources */,
+				CC3B1F7E2C00199C002818F2 /* SplashView.swift in Sources */,
 				DF32E17F2BFA1B730084B28C /* DottedDivider.swift in Sources */,
 				DF0ABEC42BFCE6A1000F2C03 /* RefreshTrigger.swift in Sources */,
 				17B7627B2BFB347100BE8599 /* MyMoodView.swift in Sources */,
@@ -426,6 +452,7 @@
 				DFBE0BEF2BF7289A00246814 /* CarouselView.swift in Sources */,
 				DFBE0BC32BF32CB400246814 /* F_UPApp.swift in Sources */,
 				17AB3C172BFA3E9600A725B7 /* RecordingView.swift in Sources */,
+				CC3B1F7A2C00108B002818F2 /* LottieView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -591,7 +618,6 @@
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
-				INFOPLIST_KEY_UILaunchStoryboardName = "Launch Screen.storyboard";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UIUserInterfaceStyle = Light;
@@ -636,7 +662,6 @@
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
-				INFOPLIST_KEY_UILaunchStoryboardName = "Launch Screen.storyboard";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UIUserInterfaceStyle = Light;
@@ -665,6 +690,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
 				CODE_SIGN_ENTITLEMENTS = ExpressionStreakWidgetExtension.entitlements;
+				CODE_SIGN_IDENTITY = "Apple Development";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Manual;
 				CURRENT_PROJECT_VERSION = 1;
@@ -702,6 +728,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
 				CODE_SIGN_ENTITLEMENTS = ExpressionStreakWidgetExtension.entitlements;
+				CODE_SIGN_IDENTITY = "Apple Development";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Manual;
 				CURRENT_PROJECT_VERSION = 1;
@@ -764,6 +791,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		CC3B1F762C000FCE002818F2 /* XCRemoteSwiftPackageReference "lottie-ios" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/airbnb/lottie-ios";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 4.4.3;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		CC3B1F772C000FCE002818F2 /* Lottie */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = CC3B1F762C000FCE002818F2 /* XCRemoteSwiftPackageReference "lottie-ios" */;
+			productName = Lottie;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = DFBE0BB72BF32CB400246814 /* Project object */;
 }
