@@ -197,6 +197,22 @@ struct ExpressionStreakWidgetEntryView : View {
             }.containerBackground(for: .widget) {
                 colorScheme == .light ? Theme.white : Theme.black
             }
+        case .accessoryRectangular:
+            VStack {
+                Text("“\(entry.expression.forceCharWrapping)“")
+                    .font(.subheadline .weight(.bold))
+                    .foregroundStyle(colorScheme == .light ? Theme.black : Theme.white)
+                    .padding(.horizontal, 5)
+            }.containerBackground(for: .widget) {
+                colorScheme == .light ? Theme.white : Theme.black
+            }
+        case .accessoryInline:
+            HStack {
+                Text("“\(entry.expression.forceCharWrapping)“")
+                    .font(.subheadline .weight(.bold))
+                    .foregroundStyle(colorScheme == .light ? Theme.black : Theme.white)
+                    .padding(.horizontal, 5)
+            }
         default:
             Text("Hi").containerBackground(for: .widget) {
                 colorScheme == .light ? Theme.white : Theme.black
@@ -223,11 +239,11 @@ struct ExpressionStreakWidget: Widget {
         }
         .configurationDisplayName("스트릭·표현 위젯")
         .description("스트릭과 오늘의 표현을 더 자주 만나보세요!")
-        .supportedFamilies([.systemSmall, .systemMedium])
+        .supportedFamilies([.systemSmall, .systemMedium, .accessoryRectangular, .accessoryInline])
     }
 }
 
-#Preview(as: .systemSmall) {
+#Preview(as: .accessoryRectangular) {
     ExpressionStreakWidget()
 } timeline: {
     SimpleEntry(date: Date(), streak: 1, expression: "오늘의 표현")
