@@ -54,10 +54,10 @@ struct ChallengeView: View {
                         HStack(spacing: 2) {
                             Image(systemName: "flame.fill")
                                 .font(.footnote .weight(.semibold))
-                                .foregroundColor(Theme.point)
+                                .foregroundColor(streak == 0 ? Theme.subblack : Theme.point)
                             Text("\(streak)") //streak 변수
                                 .font(.footnote .weight(.semibold))
-                                .foregroundColor(Theme.point)
+                                .foregroundColor(streak == 0 ? Theme.subblack : Theme.point)
                         }
                     }
                     .padding(.horizontal, 9)
@@ -69,7 +69,7 @@ struct ChallengeView: View {
                     .overlay(
                         RoundedRectangle(cornerRadius: 12.5)
                             .inset(by: 0.65)
-                            .stroke(Theme.point, lineWidth: 1.3)
+                            .stroke(streak == 0 ? Theme.subblack : Theme.point, lineWidth: 1.3)
                     )
                     
                     Spacer()
