@@ -37,13 +37,13 @@ struct HistoryView: View {
 @ViewBuilder
 private func HistoryViewHandler(count: Binding<Int>, isShowingModal: Binding<Bool>, filterData: [History], selectedMonth: Binding<String>, selectedTarget: Binding<Target?>) -> some View {
     if count.wrappedValue == 0 {
-        EmptyHistoryView(isShowingModal: isShowingModal)
+        EmptyHistoryView(count: count, isShowingModal: isShowingModal)
     } else {
-        HasDateHistoryView(isShowingModal: isShowingModal, filterData: filterData, selectedTarget: selectedTarget, selectedMonth: selectedMonth)
+        HasDateHistoryView(count: count, isShowingModal: isShowingModal, filterData: filterData, selectedTarget: selectedTarget, selectedMonth: selectedMonth)
     }
 }
 
-private func HasDateHistoryView(isShowingModal: Binding<Bool>, filterData: [History], selectedTarget: Binding<Target?>, selectedMonth: Binding<String> ) -> some View {
+private func HasDateHistoryView(count: Binding<Int>, isShowingModal: Binding<Bool>, filterData: [History], selectedTarget: Binding<Target?>, selectedMonth: Binding<String> ) -> some View {
     return NavigationStack {
         VStack(spacing: 0) {
             HStack(spacing: 0) {
@@ -61,9 +61,9 @@ private func HasDateHistoryView(isShowingModal: Binding<Bool>, filterData: [Hist
                         Image(systemName: "scroll.fill")
                             .font(.footnote .weight(.semibold))
                             .foregroundColor(Theme.point)
-                        Text("\(filterData.count)") //streak 변수
+                        Text("\(count.wrappedValue)")
                             .font(.footnote .weight(.semibold))
-                            .foregroundColor(Theme.point)
+                            .foregroundStyle(Theme.point)
                     }
                 }
                 .padding(.horizontal, 9)
@@ -125,7 +125,7 @@ private func HasDateHistoryView(isShowingModal: Binding<Bool>, filterData: [Hist
     }
 }
 
-private func EmptyHistoryView(isShowingModal: Binding<Bool>) -> some View {
+private func EmptyHistoryView(count: Binding<Int>, isShowingModal: Binding<Bool>) -> some View {
     return NavigationStack {
         VStack(spacing: 0) {
             HStack(spacing: 0) {
@@ -140,10 +140,10 @@ private func EmptyHistoryView(isShowingModal: Binding<Bool>) -> some View {
                     HStack(spacing: 2) {
                         Image(systemName: "scroll.fill")
                             .font(.footnote .weight(.semibold))
-                            .foregroundColor(Theme.point)
-                        Text("0") //streak 변수
+                            .foregroundStyle(count.wrappedValue == 0 ? Theme.subblack : Theme.point)
+                        Text("\(count.wrappedValue)") //streak 변수
                             .font(.footnote .weight(.semibold))
-                            .foregroundColor(Theme.point)
+                            .foregroundStyle(count.wrappedValue == 0 ? Theme.subblack : Theme.point)
                     }
                 }
                 .padding(.horizontal, 9)
@@ -155,7 +155,7 @@ private func EmptyHistoryView(isShowingModal: Binding<Bool>) -> some View {
                 .overlay(
                     RoundedRectangle(cornerRadius: 12.5)
                         .inset(by: 0.65)
-                        .stroke(Theme.point, lineWidth: 1.3)
+                        .stroke(count.wrappedValue == 0 ? Theme.subblack : Theme.point, lineWidth: 1.3)
                 )
                 .padding(.leading, 10)
                 
