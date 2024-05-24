@@ -9,13 +9,13 @@ import SwiftUI
 
 struct ReviewRecordingView: View {
     @Environment(\.dismiss) private var dismiss
+    @Environment(\.modelContext) var modelContext
     @Environment(AVFoundationManager.self) var avFoundationManager
     @Environment(SwiftDataManager.self) var swiftDataManager
     @Environment(RefreshTrigger.self) var refreshTrigger
-    @Environment(\.modelContext) var modelContext
     
     @Binding var showModal: Bool
-    @State var history: History
+    var history: History
     
     var body: some View {
         ZStack {
@@ -43,7 +43,7 @@ struct ReviewRecordingView: View {
                             AudioPlayingComponent(audioLevels: avFoundationManager.audioLevels, audioLength: avFoundationManager.recordLength)
                             Spacer()
                             Button {
-                                HapticManager.sharedInstance.generateHaptic(.light(times: 1))
+                                HapticManager.shared.generateHaptic(.light(times: 1))
                                 // 녹음 재생 기능 구현
                                 if avFoundationManager.isPlaying {
                                     avFoundationManager.stopPlaying()
@@ -69,7 +69,7 @@ struct ReviewRecordingView: View {
                     .padding(.bottom, 38)
                 
                 Button {
-                    HapticManager.sharedInstance.generateHaptic(.light(times: 1))
+                    HapticManager.shared.generateHaptic(.light(times: 1))
                     // 녹음 삭제하고 다시 녹음
                     avFoundationManager.stopPlaying()
                     avFoundationManager.deleteRecording()
@@ -92,7 +92,7 @@ struct ReviewRecordingView: View {
                     swiftDataManager.updateHistoryAfterRecording(modelContext: modelContext, history: history, audioURL: avFoundationManager.getCurrentRecordingPath()!, audioLevels: avFoundationManager.audioLevels, audioLength: avFoundationManager.recordLength)
                     refreshTrigger.trigger.toggle()
                     showModal = false
-                    HapticManager.sharedInstance.generateHaptic(.success)
+                    HapticManager.shared.generateHaptic(.success)
                 } label : {
                     RoundedRectangle(cornerRadius: Theme.round)
                         .fill(Theme.point)

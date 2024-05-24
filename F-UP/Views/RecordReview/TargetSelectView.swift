@@ -14,8 +14,7 @@ struct TargetSelectView: View {
     @State private var selectedTarget: String = ""
     @State private var selectedTargetEnum: Target? = nil
     @State private var navigationToNextView: Bool = false
-    
-    @State var history: History
+    var history: History
     
     let target: [Target] = Target.allCases
     let columns = [
@@ -80,7 +79,7 @@ struct TargetSelectView: View {
                                                 }
                                             }
                                             .onTapGesture {
-                                                HapticManager.sharedInstance.generateHaptic(.light(times: 1))
+                                                HapticManager.shared.generateHaptic(.light(times: 1))
                                                 withAnimation(.easeIn(duration: 0.1)) {
                                                     let isSelected = selectedTarget == target.rawValue
                                                     isSelected ? (selectedTarget = "") : (selectedTarget = target.rawValue)
@@ -122,7 +121,7 @@ struct TargetSelectView: View {
                     }
                     
                     Button {
-                        HapticManager.sharedInstance.generateHaptic(.light(times: 1))
+                        HapticManager.shared.generateHaptic(.light(times: 1))
                         navigationToNextView = true
                     } label: {
                         Rectangle()

@@ -16,8 +16,7 @@ struct ReactionView: View {
     @Binding var showModal: Bool
     
     @State private var sliderValue: Double = 0
-    
-    @State var history: History
+    var history: History
     
     @Query var histories: [History]
     @AppStorage("streak", store: UserDefaults(suiteName: "group.f_up.group.com")) var streak: Int = 0
@@ -88,7 +87,7 @@ struct ReactionView: View {
                     }
                     refreshTrigger.trigger.toggle()
                     showModal = false
-                    HapticManager.sharedInstance.generateHaptic(.success)
+                    HapticManager.shared.generateHaptic(.success)
                 } label : {
                     RoundedRectangle(cornerRadius: Theme.round)
                         .fill(Theme.point)
@@ -109,7 +108,7 @@ struct ReactionView: View {
                 ToolbarItem(placement: .topBarLeading) {
                     Button {
                         dismiss()
-                        HapticManager.sharedInstance.generateHaptic(.light(times: 1))
+                        HapticManager.shared.generateHaptic(.light(times: 1))
                     } label: {
                         HStack {
                             Image(systemName: "chevron.left")

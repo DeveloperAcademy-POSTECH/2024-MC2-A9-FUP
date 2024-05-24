@@ -13,8 +13,7 @@ struct MyMoodView: View {
     
     @State private var sliderValue: Double = 0
     @State private var navigationToNextView: Bool = false
-    
-    @State var history: History
+    var history: History
     
     let target: Target
     let specificTarget: String?
@@ -35,12 +34,10 @@ struct MyMoodView: View {
                         .multilineTextAlignment(.center)
                     emojis[Int(sliderValue / 25)]
                         .frame(width: 250, height: 250)
-//                        .animation(.spring, value: sliderValue)
                     Text(strings[Int(sliderValue / 25)])
                         .font(.title2 .weight(.bold))
                         .padding(.top, 29)
                         .padding(.bottom, 38)
-//                        .animation(.spring, value: sliderValue)
                 }
                 .frame(width: 353)
                 .background(Theme.white)
@@ -51,6 +48,7 @@ struct MyMoodView: View {
                     .frame(height: 38)
                     .padding(.top, 22)
                     .animation(.spring, value: sliderValue)
+                
                 HStack(spacing: 0) {
                     Text("어색해요").font(.footnote .weight(.bold)).foregroundStyle(Theme.semiblack)
                     Spacer()
@@ -58,10 +56,11 @@ struct MyMoodView: View {
                 }
                 .padding(.top, 8)
                 .padding(.horizontal, 7)
+                
                 Spacer()
                 
                 Button {
-                    HapticManager.sharedInstance.generateHaptic(.light(times: 1))
+                    HapticManager.shared.generateHaptic(.light(times: 1))
                     navigationToNextView = true
                 } label : {
                     RoundedRectangle(cornerRadius: Theme.round)
@@ -89,10 +88,7 @@ struct MyMoodView: View {
                     default:
                         ReactionView(showModal: $showModal, history: history, target: target, specificTarget: specificTarget, feelingValue: .veryUncomfortable)
                     }
-                    
                 }
-                
-                
             }
             .padding(.horizontal, Theme.padding)
             .navigationTitle("기록하기")
@@ -102,7 +98,7 @@ struct MyMoodView: View {
                 ToolbarItem(placement: .topBarLeading) {
                     Button {
                         dismiss.callAsFunction()
-                        HapticManager.sharedInstance.generateHaptic(.light(times: 1))
+                        HapticManager.shared.generateHaptic(.light(times: 1))
                     } label: {
                         HStack {
                             Image(systemName: "chevron.left")

@@ -9,11 +9,10 @@ import SwiftUI
 
 struct RecordingView: View {
     @Environment(AVFoundationManager.self) var avfoundationManager
-    @Binding var showModal: Bool
-    @State var history: History
     
-    //    @State private var isMicSelected: Bool = true
+    @Binding var showModal: Bool
     @State private var navigationToNextView: Bool = false
+    var history: History
     
     var body: some View {
         NavigationStack {
@@ -72,9 +71,9 @@ struct RecordingView: View {
                                 navigationToNextView = true
                                 avfoundationManager.isRecording = false
                                 avfoundationManager.stopRecording()
-                                HapticManager.sharedInstance.generateHaptic(.success)
+                                HapticManager.shared.generateHaptic(.success)
                             } else {
-                                HapticManager.sharedInstance.generateHaptic(.medium(times: 1))
+                                HapticManager.shared.generateHaptic(.medium(times: 1))
                                 avfoundationManager.isRecording = true
                                 avfoundationManager.startRecording(fileName: history.date.dateToString())
                             }
@@ -84,7 +83,7 @@ struct RecordingView: View {
                         ReviewRecordingView(showModal: $showModal, history: history)
                     }
                     .onChange(of: avfoundationManager.audioLevel) { oldValue, newValue in
-                        HapticManager.sharedInstance.generateHaptic(.light(times: 1))
+                        HapticManager.shared.generateHaptic(.light(times: 1))
                     }
                     
                     Text(avfoundationManager.isRecording ? "듣고 있어요" : "오늘의 표현을 실제로 따라해보세요")

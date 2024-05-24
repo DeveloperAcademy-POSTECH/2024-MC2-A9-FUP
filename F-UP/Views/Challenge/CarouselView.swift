@@ -165,7 +165,7 @@ fileprivate struct challengeButton: View {
                 RecordingView(showModal: $showModal, history: history).interactiveDismissDisabled()
             }
             .onChange(of: showModal) { _, _ in
-                HapticManager.sharedInstance.generateHaptic(.light(times: 1))
+                HapticManager.shared.generateHaptic(.light(times: 1))
             }
             
         case 2:
@@ -190,7 +190,7 @@ fileprivate struct challengeButton: View {
                 TargetSelectView(showModal: $showModal, history: history).interactiveDismissDisabled()
             }
             .onChange(of: showModal) { _, _ in
-                HapticManager.sharedInstance.generateHaptic(.light(times: 1))
+                HapticManager.shared.generateHaptic(.light(times: 1))
             }
             
         default:
@@ -212,7 +212,7 @@ fileprivate struct challengeButton: View {
             .padding(.horizontal, 19)
             .padding(.bottom, 19)
             .onChange(of: showModal) { _, _ in
-                HapticManager.sharedInstance.generateHaptic(.light(times: 1))
+                HapticManager.shared.generateHaptic(.light(times: 1))
             }
         }
     }
