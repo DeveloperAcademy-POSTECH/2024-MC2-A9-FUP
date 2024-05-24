@@ -32,7 +32,7 @@ struct F_UPApp: App {
 
     var body: some Scene {
         WindowGroup {
-            ContentTabView()
+            SplashView()
 //            AVFoundationTestView()
 //            ContentView()
         }
