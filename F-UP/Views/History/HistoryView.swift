@@ -51,11 +51,34 @@ private func HasDateHistoryView(isShowingModal: Binding<Bool>, filterData: [Hist
                     .font(.title)
                     .foregroundStyle(Theme.black)
                     .bold()
-                Text("\(filterData.count)")
-                    .font(.footnote)
-                    .foregroundStyle(Theme.point)
-                    .padding(.leading, 8)
-                    .padding(.top, 10)
+//                Text("\(filterData.count)")
+//                    .font(.footnote)
+//                    .foregroundStyle(Theme.point)
+//                    .padding(.leading, 8)
+//                    .padding(.top, 10)
+                HStack(alignment: .center, spacing: 10) {
+                    HStack(spacing: 2) {
+                        Image(systemName: "scroll.fill")
+                            .font(.footnote .weight(.semibold))
+                            .foregroundColor(Theme.point)
+                        Text("\(filterData.count)") //streak 변수
+                            .font(.footnote .weight(.semibold))
+                            .foregroundColor(Theme.point)
+                    }
+                }
+                .padding(.horizontal, 9)
+                .padding(.vertical, 4)
+                .background(Theme.background)
+                .clipShape(
+                    RoundedRectangle(cornerRadius: 12.5)
+                )
+                .overlay(
+                    RoundedRectangle(cornerRadius: 12.5)
+                        .inset(by: 0.65)
+                        .stroke(Theme.point, lineWidth: 1.3)
+                )
+                .padding(.leading, 10)
+                
                 
                 Spacer()
                 
