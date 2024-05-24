@@ -97,9 +97,10 @@ struct ChallengeView: View {
                         .font(.footnote .weight(.regular))
                         .foregroundColor(Theme.semiblack)
                         .padding(.bottom, 3)
-                    Text("“\(dummyExpression[expressionIndex])”")
+                    Text("“\(dummyExpression[expressionIndex].forceCharWrapping)”")
                         .font(.title3 .weight(.bold))
                         .foregroundColor(Theme.black)
+                        .padding(.horizontal, 16)
                 }
                 .frame(maxWidth: .infinity)
                 .padding(.vertical, 22)

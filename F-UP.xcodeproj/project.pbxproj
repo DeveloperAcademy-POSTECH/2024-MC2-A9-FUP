@@ -34,6 +34,8 @@
 		DF32E17F2BFA1B730084B28C /* DottedDivider.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF32E17E2BFA1B730084B28C /* DottedDivider.swift */; };
 		DF32E1822BFA40780084B28C /* SwiftDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF32E1812BFA40780084B28C /* SwiftDataManager.swift */; };
 		DF32E1842BFA48660084B28C /* AVFoundationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF32E1832BFA48660084B28C /* AVFoundationManager.swift */; };
+		DF499AD02C006FA50037B9E9 /* String+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF499ACF2C006FA50037B9E9 /* String+Extension.swift */; };
+		DF499AD12C0070790037B9E9 /* String+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF499ACF2C006FA50037B9E9 /* String+Extension.swift */; };
 		DFBE0BC32BF32CB400246814 /* F_UPApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = DFBE0BC22BF32CB400246814 /* F_UPApp.swift */; };
 		DFBE0BC72BF32CB400246814 /* History.swift in Sources */ = {isa = PBXBuildFile; fileRef = DFBE0BC62BF32CB400246814 /* History.swift */; };
 		DFBE0BC92BF32CB600246814 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DFBE0BC82BF32CB600246814 /* Assets.xcassets */; };
@@ -101,6 +103,7 @@
 		DF32E17E2BFA1B730084B28C /* DottedDivider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DottedDivider.swift; sourceTree = "<group>"; };
 		DF32E1812BFA40780084B28C /* SwiftDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftDataManager.swift; sourceTree = "<group>"; };
 		DF32E1832BFA48660084B28C /* AVFoundationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AVFoundationManager.swift; sourceTree = "<group>"; };
+		DF499ACF2C006FA50037B9E9 /* String+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Extension.swift"; sourceTree = "<group>"; };
 		DFBE0BBF2BF32CB400246814 /* F-UP.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "F-UP.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		DFBE0BC22BF32CB400246814 /* F_UPApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = F_UPApp.swift; sourceTree = "<group>"; };
 		DFBE0BC62BF32CB400246814 /* History.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = History.swift; sourceTree = "<group>"; };
@@ -197,6 +200,7 @@
 			children = (
 				17DB9E152BFDE8FD00897937 /* Date+Extension.swift */,
 				171834FE2BFF9F270088F348 /* UINavigation+Extension.swift */,
+				DF499ACF2C006FA50037B9E9 /* String+Extension.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -427,6 +431,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DF499AD02C006FA50037B9E9 /* String+Extension.swift in Sources */,
 				172BA22B2BFD0954007AC28A /* AudioPlayingComponent.swift in Sources */,
 				171835012BFFB89E0088F348 /* HapticManager.swift in Sources */,
 				CCC074272BFB1F2E00401B25 /* HistoryDetailView.swift in Sources */,
@@ -461,6 +466,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DF499AD12C0070790037B9E9 /* String+Extension.swift in Sources */,
 				DFC089A22BFDDE750090E577 /* Theme.swift in Sources */,
 				DFC089952BFDDE330090E577 /* ExpressionStreakWidgetBundle.swift in Sources */,
 				DFC089972BFDDE330090E577 /* ExpressionStreakWidget.swift in Sources */,

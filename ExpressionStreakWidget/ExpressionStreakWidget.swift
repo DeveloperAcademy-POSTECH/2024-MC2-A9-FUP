@@ -190,9 +190,10 @@ struct ExpressionStreakWidgetEntryView : View {
                 Text("오늘의 표현")
                     .font(.system(size: 13))
                     .foregroundStyle(Theme.subblack)
-                Text(entry.expression)
+                Text("“\(entry.expression.forceCharWrapping)“")
                     .font(.system(size: 20, weight: .bold))
                     .foregroundStyle(colorScheme == .light ? Theme.black : Theme.white)
+                    .padding(.horizontal, 5)
             }.containerBackground(for: .widget) {
                 colorScheme == .light ? Theme.white : Theme.black
             }
