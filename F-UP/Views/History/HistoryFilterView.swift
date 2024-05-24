@@ -88,7 +88,6 @@ struct HistoryFilterView: View {
                     .overlay {
                         Text("필터 적용하기")
                             .foregroundStyle(Theme.white)
-                            .bold()
                     }
                     .padding(.top, 38)
                     .dropShadow(opacity: 0.2)
@@ -113,6 +112,7 @@ private struct TargetButton: View {
                         .stroke(isSelected ? Theme.point : Theme.subblack, lineWidth: 1)
                         .frame(width: 80, height: 45)
                     Text(target.rawValue)
+                        .font(.callout .weight(.bold))
                         .foregroundColor(isSelected ? Theme.white : Theme.semiblack)
                 }
         }
