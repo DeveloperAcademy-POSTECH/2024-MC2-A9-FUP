@@ -44,7 +44,7 @@ struct TargetSelectView: View {
                                 .foregroundColor(Theme.semiblack)
                                 .padding(.top, 34)
                                 .padding(.bottom, 3)
-                            Text("“오늘 하루도 정말 수고 많았어.”")
+                            Text("“\(history.expression)”")
                                 .font(.title3 .weight(.bold))
                                 .foregroundColor(Theme.black)
                                 .padding(.bottom, 51)
