@@ -5,8 +5,8 @@
 //  Created by namdghyun on 5/24/24.
 //
 
-import CoreHaptics
 import SwiftUI
+import CoreHaptics
 
 class HapticManager {
     enum HapticStyle {
@@ -16,23 +16,28 @@ class HapticManager {
         case medium(times: Int)
     }
     
-    static let sharedInstance: HapticManager = HapticManager()
+    static let shared: HapticManager = HapticManager()
     private var _engine: CHHapticEngine?
-    var engine: CHHapticEngine? {
-        get {
-            if self._engine == nil {
-                self._engine = try? CHHapticEngine()
-            }
-            return self._engine
-        }
-    }
+    var engine: CHHapticEngine?
     
     private init() {
         prepareHapticEngine()
+        setUpEngine()
+    }
+    
+    private func setUpEngine() {
+        guard CHHapticEngine.capabilitiesForHardware().supportsHaptics else { return }
+
+            do {
+                engine = try CHHapticEngine()
+                try engine?.start()
+            } catch {
+                print("There was an error creating the engine: \(error.localizedDescription)")
+            }
     }
     
     /// hapticEngine을 준비하는 함수
-    func prepareHapticEngine() {
+    private func prepareHapticEngine() {
         guard CHHapticEngine.capabilitiesForHardware().supportsHaptics else { return }
         guard let hapticEngine = self.engine else { return }
         
@@ -192,28 +197,5 @@ class HapticManager {
         
         let player = try self.engine?.makePlayer(with: givenPattern)
         try player?.start(atTime: 0)
-    }
-}
-
-
-// TestView for haptic
-struct HapticTestView: View {
-    var body: some View {
-        VStack(spacing: 40) {
-            Button("rigid 2번") {
-                HapticManager.sharedInstance.generateHaptic(.rigidTwice)
-            }
-            
-            Button("success") {
-                HapticManager.sharedInstance.generateHaptic(.success)
-            }
-            
-            Button("light") {
-                HapticManager.sharedInstance.generateHaptic(.light(times: 10))
-            }
-        }
-        .onAppear {
-            HapticManager.sharedInstance.prepareHapticEngine()
-        }
     }
 }

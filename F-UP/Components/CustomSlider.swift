@@ -11,17 +11,15 @@ struct CustomSlider<V>: View where V : BinaryFloatingPoint, V.Stride : BinaryFlo
     // MARK: - 프로퍼티
     // MARK: Private
     @Binding private var value: V
-    
+    @State private var ratio: CGFloat   = 0
+    @State private var startX: CGFloat? = nil
+    @State private var previousValue: V?
     
     private let bounds: ClosedRange<V>
     private let step: V.Stride
     
-    private let length: CGFloat    = 38
+    private let length: CGFloat = 38
     private let lineWidth: CGFloat = 2
-    
-    @State private var ratio: CGFloat   = 0
-    @State private var startX: CGFloat? = nil
-    @State private var previousValue: V?
     
     // MARK: - 생성자
     init(value: Binding<V>, in bounds: ClosedRange<V>, step: V.Stride = 1) {
@@ -34,7 +32,9 @@ struct CustomSlider<V>: View where V : BinaryFloatingPoint, V.Stride : BinaryFlo
     // MARK: - 뷰
     // MARK: Public
     var body: some View {
-        let emojis: [Image] = [Image("expression1"), Image("expression2"), Image("expression3"), Image("expression4"), Image("expression5"), ]
+        let emojis: [Image] = [
+            Image("expression1"), Image("expression2"), Image("expression3"), Image("expression4"), Image("expression5")
+        ]
         
         GeometryReader { proxy in
             ZStack(alignment: .leading) {
@@ -73,7 +73,7 @@ struct CustomSlider<V>: View where V : BinaryFloatingPoint, V.Stride : BinaryFlo
                 ratio = min(1, max(0,CGFloat(value / bounds.upperBound)))
             }
             .onChange(of: Int(value)/25) {
-                HapticManager.sharedInstance.generateHaptic(.medium(times: 1))
+                HapticManager.shared.generateHaptic(.medium(times: 1))
             }
         }
     }

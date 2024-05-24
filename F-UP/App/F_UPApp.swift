@@ -46,7 +46,6 @@ struct F_UPApp: App {
 class AppDelegate: NSObject, UIApplicationDelegate {
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey : Any]? = nil) -> Bool {
         NotificationManger.shared.setNotiAuth()
-        HapticManager.sharedInstance.prepareHapticEngine()
         return true
     }
 }
