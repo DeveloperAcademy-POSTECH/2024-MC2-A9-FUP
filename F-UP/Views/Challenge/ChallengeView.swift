@@ -107,6 +107,7 @@ struct ChallengeView: View {
                 .clipShape(RoundedRectangle(cornerRadius: Theme.round))
                 .padding(.horizontal, 37)
                 .padding(.bottom, 50)
+                .padding(.top, 6)
                 
                 ProgressIndicatorView
                 
