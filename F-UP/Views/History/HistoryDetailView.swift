@@ -24,7 +24,7 @@ struct HistoryDetailView: View {
                 
                 VStack(alignment: .leading ,spacing: 0) {
                     Text("누구에게 이 따뜻함을 건냈나요?")
-                        .font(.body .weight(.bold))
+                        .font(.headline .weight(.bold))
                     HStack {
                         ForEach(Target.allCases, id: \.self) { target in
                             TargetButton(target: target, history: history)
@@ -50,15 +50,13 @@ struct HistoryDetailView: View {
                 
                 VStack(spacing: 0) {
                     FeelingProgressTitle(headLine: "내 기분", minValueTitle: "어색해요", maxValueTitle: "익숙해요")
-                    ProgressView(value: Double(history.feelingValue.rawValue), total: 4)
-                        .progressViewStyle(CustomProgressViewStyle())
-                        .dropShadow(opacity: 0.15)
+                    CustomProgressView(value: Double(history.feelingValue.rawValue), in: 0...4)
+                        .frame(width: 353, height: 38)
                 }
                 VStack(spacing: 0) {
                     FeelingProgressTitle(headLine: "타인의 반응", minValueTitle: "별로에요", maxValueTitle: "좋아요")
-                    ProgressView(value: Double(history.reactionValue.rawValue), total: 4)
-                        .progressViewStyle(CustomProgressViewStyle())
-                        .dropShadow(opacity: 0.15)
+                    CustomProgressView(value: Double(history.reactionValue.rawValue), in: 0...4)
+                        .frame(width: 353, height: 38)
                 }
                 Spacer()
             }
@@ -99,8 +97,7 @@ private struct TargetButton: View {
             .frame(width: 80, height: 45)
             .overlay {
                 Text("\(target.rawValue)")
-                    .font(.callout)
-                    .bold()
+                    .font(.callout .weight(.bold))
                     .foregroundColor(target == history.target ? Theme.white : Theme.black.opacity(0.3))
             }
             .dropShadow(opacity: 0.15)
@@ -120,7 +117,7 @@ private func RecoderPlay(history: History, formattedDate: String, manager: AVFou
                         .foregroundStyle(Theme.semiblack)
                         .padding(.bottom, 5)
                     Text("\"\(history.expression)\"")
-                        .font(.headline)
+                        .font(.headline .weight(.bold))
                         .foregroundStyle(Theme.black)
                         .padding(.bottom, 21)
                     HStack(spacing: 0) {
@@ -152,7 +149,7 @@ private func RecoderPlay(history: History, formattedDate: String, manager: AVFou
 private func FeelingProgressTitle(headLine: String, minValueTitle: String, maxValueTitle: String) -> some View {
     return VStack(alignment: .leading, spacing: 0) {
         Text(headLine)
-            .font(.headline)
+            .font(.headline .weight(.bold))
             .padding(.leading, Theme.padding)
         HStack(spacing: 0) {
             Text(minValueTitle)
@@ -174,34 +171,6 @@ private func FeelingProgressTitle(headLine: String, minValueTitle: String, maxVa
     .padding(.top, 40)
 }
 
-private struct CustomProgressViewStyle: ProgressViewStyle {
-    func makeBody(configuration: Configuration) -> some View {
-        let emojis: [Image] = [Image("expression1"), Image("expression2"), Image("expression3"), Image("expression4"), Image("expression5"), ]
-        
-        let progress = CGFloat(configuration.fractionCompleted ?? 0)
-        
-        return ZStack(alignment: .leading) {
-            RoundedRectangle(cornerRadius: 20.5)
-                .fill(LinearGradient(gradient: Gradient(colors: [Theme.subblack.opacity(0.5), Theme.subblack]), startPoint: .leading, endPoint: .trailing))
-                .opacity(0.6)
-                .frame(width: 353, height: 38)
-                .overlay(
-                    RoundedRectangle(cornerRadius: 20.5)
-                        .fill(LinearGradient(gradient: Gradient(colors: [Color(hex: 0x94D9D7), Color(hex: 0x58C8C2)]), startPoint: .leading, endPoint: .trailing))
-                        .opacity(0.8)
-                        .frame(width: progress * 353, height: 38),
-                    alignment: .leading
-                )
-                .overlay(
-                    emojis[Int(progress * 4)]
-                        .frame(width: 30, height: 30)
-                        .offset(x: progress == 0 ? 10 : progress * 353 - 40),
-                    alignment: .leading
-                )
-        }
-    }
-}
-
 extension HistoryDetailView {
     private func dateFormatted() {
         let dateFormatter = DateFormatter()
@@ -212,7 +181,7 @@ extension HistoryDetailView {
 
 #Preview {
     NavigationStack {
-        HistoryDetailView(history: History(date: Date(), streak: 0, challengeStep: .challengeCompleted, expression: "ds", audioURL: URL(string: "https://www.example.com")!, audioLevels: Array(repeating: CGFloat(0.1), count: 30), audioLength: 0, target: .acquaintance, feelingValue: .neutral, reactionValue: .neutral))
+        HistoryDetailView(history: History(date: Date(), streak: 0, challengeStep: .challengeCompleted, expression: "나무디 화이팅이에요!", audioURL: URL(string: "https://www.example.com")!, audioLevels: Array(repeating: CGFloat(0.1), count: 30), audioLength: 0, target: .acquaintance, feelingValue: .comfortable, reactionValue: .bad))
             .environment(AVFoundationManager())
             .environment(SwiftDataManager())
             .environment(RefreshTrigger())

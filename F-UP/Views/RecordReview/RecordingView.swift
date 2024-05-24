@@ -105,7 +105,6 @@ struct RecordingView: View {
                     .tint(Theme.point)
                 }
                 .onAppear {
-                    HapticManager.sharedInstance.prepareHapticEngine()
                     avfoundationManager.requestPermission { success in
                         if !success {
                             showModal = false

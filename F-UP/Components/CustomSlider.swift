@@ -46,6 +46,12 @@ struct CustomSlider<V>: View where V : BinaryFloatingPoint, V.Stride : BinaryFlo
                 GradientView(firstColor: Theme.point,
                              secondColor: Theme.point.opacity(0.6),
                              isPresentFirst: false)
+                .mask(
+                    GeometryReader { proxy in
+                        Capsule()
+                            .frame(width: ((proxy.size.width - length) * ratio + 2.5 + length))
+                    }
+                )
                 
                 // Thumb
                 Circle()
@@ -59,7 +65,6 @@ struct CustomSlider<V>: View where V : BinaryFloatingPoint, V.Stride : BinaryFlo
                     .gesture(DragGesture(minimumDistance: 0)
                         .onChanged({ updateStatus(value: $0, proxy: proxy);  })
                         .onEnded { _ in startX = nil })
-                    
             }
             .frame(height: 38)
             .simultaneousGesture(DragGesture(minimumDistance: 0)
