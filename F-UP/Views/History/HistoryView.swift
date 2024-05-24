@@ -78,7 +78,7 @@ private func HasDateHistoryView(isShowingModal: Binding<Bool>, filterData: [Hist
                 }
             }
             .padding(.horizontal, Theme.padding)
-            .padding(.bottom, 28)
+            .padding(.bottom, 13)
             .padding(.top, 11)
             
             ScrollView {
@@ -86,22 +86,19 @@ private func HasDateHistoryView(isShowingModal: Binding<Bool>, filterData: [Hist
                     NavigationLink(destination: HistoryDetailView(history: history).onAppear { HapticManager.sharedInstance.generateHaptic(.light(times: 1)) }) {
                         RoundedRectangle(cornerRadius: Theme.round)
                             .fill(Theme.white)
-                            .frame(width: 353, height: 92)
+                            .frame(height: 92)
+                            .frame(maxWidth: .infinity)
                             .dropShadow(opacity: 0.15)
                             .overlay {
                                 Text(history.expression)
                                     .font(.title3)
                                     .foregroundStyle(Theme.black)
                                     .fontWeight(.bold)
-                            }
-                            .padding(.bottom, 10)
-                            .padding(.horizontal, Theme.padding)
-                    }
+                            }.padding(.bottom, 10)
+                    }.padding(.horizontal, Theme.padding)
                 }
-                .padding(.top, 15)
-            }
-        }
-        .background(Theme.background)
+            }.safeAreaPadding(.top, 15)
+        }.background(Theme.background)
     }
 }
 
