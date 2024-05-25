@@ -7,13 +7,10 @@
 
 import SwiftUI
 
-struct CarouselView: View {
-    @Binding var currentChallengeStep: ChallengeStep
-    @State var history: History
-    @State private var showModal: Bool = false
-    @State private var scrollOffset: CGFloat = 0
+extension ChallengeView {
     
-    var body: some View {
+    @ViewBuilder
+    var CarouselView: some View {
         GeometryReader { geometry in
             ScrollView(.horizontal, showsIndicators: false) {
                 HStack(spacing: -20){
@@ -29,9 +26,7 @@ struct CarouselView: View {
             }.safeAreaPadding(.horizontal, 37)
         }
     }
-}
-
-extension CarouselView {
+    
     @ViewBuilder
     func CarouselCell(index: Int, cellWidth: Double) -> some View {
         switch index {
@@ -51,13 +46,13 @@ extension CarouselView {
                     .foregroundStyle(Theme.white)
                 
                 Image(currentChallengeStep == .notStarted ? "characterChallenge1" : "characterCelebrate1")
-                    .frame( 
+                    .frame(
                         width: currentChallengeStep == .notStarted ? 200 : 250,
                         height: currentChallengeStep == .notStarted ? 200 : 236
                     )
                     .padding(.bottom, currentChallengeStep == .notStarted ? 15 : 2)
-                if (currentChallengeStep == .notStarted) {
-                    challengeButton(history: history, currentChallengeStep: $currentChallengeStep, index: index)
+                if !todayHistories.isEmpty && (currentChallengeStep == .notStarted) {
+                    ChallengeButton(index: index)
                 }
                 else {
                     Text("챌린지 완료!")
@@ -110,8 +105,8 @@ extension CarouselView {
                         .padding(.bottom, 2)
                 }
                 
-                if !(currentChallengeStep == .challengeCompleted) {
-                    challengeButton(history: history, currentChallengeStep: $currentChallengeStep, index: index)
+                if !todayHistories.isEmpty && !(currentChallengeStep == .challengeCompleted) {
+                    ChallengeButton(index: index)
                 }
                 else {
                     Text("챌린지 완료!")
@@ -134,15 +129,9 @@ extension CarouselView {
             Text("Hi")
         }
     }
-}
-
-fileprivate struct challengeButton: View {
-    @State private var showModal: Bool = false
-    @State var history: History
-    @Binding var currentChallengeStep: ChallengeStep
-    var index: Int
     
-    var body: some View {
+    @ViewBuilder
+    func ChallengeButton(index: Int) -> some View {
         switch index {
         case 1:
             Button {
@@ -162,7 +151,9 @@ fileprivate struct challengeButton: View {
             .padding(.horizontal, 19)
             .padding(.bottom, 19)
             .sheet(isPresented: $showModal) {
-                RecordingView(showModal: $showModal, history: history).interactiveDismissDisabled()
+                if !todayHistories.isEmpty {
+                    RecordingView(showModal: $showModal, history: todayHistories[0]).interactiveDismissDisabled()
+                }
             }
             .onChange(of: showModal) { _, _ in
                 HapticManager.shared.generateHaptic(.light(times: 1))
@@ -187,7 +178,9 @@ fileprivate struct challengeButton: View {
             .padding(.horizontal, 19)
             .padding(.bottom, 19)
             .sheet(isPresented: $showModal) {
-                TargetSelectView(showModal: $showModal, history: history).interactiveDismissDisabled()
+                if !todayHistories.isEmpty {
+                    TargetSelectView(showModal: $showModal, history: todayHistories[0]).interactiveDismissDisabled()
+                }
             }
             .onChange(of: showModal) { _, _ in
                 HapticManager.shared.generateHaptic(.light(times: 1))
@@ -216,8 +209,4 @@ fileprivate struct challengeButton: View {
             }
         }
     }
-}
-
-#Preview {
-    CarouselView(currentChallengeStep: .constant(.notStarted), history: History(date: Date(), streak: 0, challengeStep: .challengeCompleted, expression: "ds", audioURL: URL(string: "https://www.example.com")!, audioLevels: Array(repeating: CGFloat(0.1), count: 30), audioLength: 0, target: .acquaintance, feelingValue: .neutral, reactionValue: .neutral))
 }

@@ -32,8 +32,10 @@ struct ChallengeView: View {
     @State var todayHistories: [History] = []
     @State var yesterdayHistories: [History] = []
     @State private var currentDateString: String = Date().formatted(date: .abbreviated, time: .omitted)
-    @State private var expressionIndex: Int = 0
+    @State var expressionIndex: Int = 0
     @State var currentChallengeStep: ChallengeStep = .notStarted
+    
+    @State var showModal: Bool = false
     
     @AppStorage("streak", store: UserDefaults(suiteName: "group.f_up.group.com")) var streak: Int = 0
     
@@ -113,11 +115,7 @@ struct ChallengeView: View {
                 ProgressIndicatorView
                 
                 if !todayHistories.isEmpty {
-                    CarouselView(
-                        currentChallengeStep: $currentChallengeStep,
-                        history: todayHistories[0]
-                    )
-                    .padding(.top, -20)
+                    CarouselView.padding(.top, -20)
                 }
                 
                 Spacer()
@@ -207,13 +205,6 @@ extension ChallengeView {
         if (yesterdayHistories.isEmpty && !todayHistories[0].isPerformed) || (!yesterdayHistories.isEmpty && !yesterdayHistories[0].isPerformed) {
             streak = 0
         }
-//        if !yesterdayHistories.isEmpty && yesterdayHistories[0].isPerformed {
-//            todayHistories[0].streak = yesterdayHistories[0].streak + 1
-//            streak = todayHistories[0].streak
-//        }
-//        else {
-//            streak = 0
-//        }
     }
     
     func checkAndAddHistory() {
