@@ -30,6 +30,9 @@ struct ContentTabView: View {
                 .tag(2)
         }
         .tint(Theme.point)
+        .onAppear {
+            HapticManager.shared.prepareHapticEngine()
+        }
         .onChange(of: selectedTab) { _, _ in
             HapticManager.shared.generateHaptic(.medium(times: 1))
         }

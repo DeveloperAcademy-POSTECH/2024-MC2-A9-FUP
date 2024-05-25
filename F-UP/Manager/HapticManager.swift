@@ -17,11 +17,9 @@ class HapticManager {
     }
     
     static let shared: HapticManager = HapticManager()
-    private var _engine: CHHapticEngine?
-    var engine: CHHapticEngine?
+    private var engine: CHHapticEngine?
     
     private init() {
-        prepareHapticEngine()
         setUpEngine()
     }
     
@@ -37,7 +35,7 @@ class HapticManager {
     }
     
     /// hapticEngine을 준비하는 함수
-    private func prepareHapticEngine() {
+    func prepareHapticEngine() {
         guard CHHapticEngine.capabilitiesForHardware().supportsHaptics else { return }
         guard let hapticEngine = self.engine else { return }
         
