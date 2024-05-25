@@ -28,7 +28,7 @@ struct ChallengeView: View {
     @Environment(RefreshTrigger.self) var refreshTrigger
     
     @Query private var histories: [History]
-
+    
     @State var todayHistories: [History] = []
     @State var yesterdayHistories: [History] = []
     @State private var currentDateString: String = Date().formatted(date: .abbreviated, time: .omitted)
@@ -75,7 +75,7 @@ struct ChallengeView: View {
                     )
                     
                     Spacer()
-                    #if DEBUG
+#if DEBUG
                     if currentChallengeStep == .recordingCompleted || currentChallengeStep == .challengeCompleted {
                         Button(avFoundationManager.isPlaying ? "정지" : "재생") {
                             if avFoundationManager.isPlaying {
@@ -88,12 +88,12 @@ struct ChallengeView: View {
                     Button("초기화") {
                         swiftDataManager.deleteHistory(modelContext: modelContext, history: todayHistories[0])
                     }.buttonStyle(.borderedProminent).padding(.trailing, Theme.padding)
-                    #endif
+#endif
                 }
                 .padding(.bottom, 20)
                 .padding(.top, 11)
                 
-
+                
                 VStack(spacing: 0) {
                     Text("오늘의 표현")
                         .font(.footnote .weight(.regular))
@@ -119,7 +119,7 @@ struct ChallengeView: View {
                 }
                 
                 Spacer()
-
+                
                 
             }
         }
@@ -140,7 +140,7 @@ struct ChallengeView: View {
             
             if newDateString != currentDateString {
                 print("날짜바뀜")
-
+                
                 if currentChallengeStep != .recordingCompleted {
                     currentDateString = newDateString
                 }
@@ -162,14 +162,14 @@ extension ChallengeView {
         dateComponents.year = 2024
         dateComponents.month = 1
         dateComponents.day = 1
-
+        
         guard let specificDate = calendar.date(from: dateComponents) else {
             print("날짜를 생성할 수 없습니다.")
             return
         }
-
+        
         let components = calendar.dateComponents([.day], from: specificDate, to: currentDate)
-
+        
         guard let daysElapsed = components.day else {
             print("일수를 계산할 수 없습니다.")
             return
@@ -183,7 +183,7 @@ extension ChallengeView {
     func updateHistories() {
         let calendar = Calendar.current
         let yesterday = calendar.date(byAdding: .day, value: -1, to: Date())!
-                
+        
         todayHistories = histories.filter {
             $0.date.formatted(date: .abbreviated, time: .omitted)
             ==
@@ -200,8 +200,13 @@ extension ChallengeView {
     }
     
     func setUpStreak() {
-        if (yesterdayHistories.isEmpty && !todayHistories[0].isPerformed) || (!yesterdayHistories.isEmpty && !yesterdayHistories[0].isPerformed) {
-            streak = 0
+        if !yesterdayHistories.isEmpty && yesterdayHistories[0].isPerformed {
+            streak = todayHistories[0].isPerformed ?
+            todayHistories[0].streak :
+            yesterdayHistories[0].streak
+        }
+        else {
+            streak = todayHistories[0].streak
         }
     }
     
@@ -234,7 +239,7 @@ extension ChallengeView {
                     .frame(height: 21, alignment: .center)
                     .background(Theme.point)
                     .clipShape(RoundedRectangle(cornerRadius: 10.5))
-
+                
                 DottedDivider(step: currentChallengeStep)
                 
                 Circle()
