@@ -19,8 +19,7 @@ struct HistoryView: View {
     var body: some View {
         HistoryViewHandler(count: $count, isShowingModal: $isShowingModal, filterData: filterData, selectedMonth: $selectedMonth, selectedTarget: $selectedTarget)
             .onAppear {
-                filterData = items.filter({ $0.isPerformed == true })
-                count = filterData.count
+                combinedFilter()
                 }
             .sheet(isPresented: $isShowingModal, content: {
                 HistoryFilterView(selectedMonth: $selectedMonth, selectedTarget: $selectedTarget, isShowingModal: $isShowingModal)
@@ -51,11 +50,6 @@ private func HasDateHistoryView(count: Binding<Int>, isShowingModal: Binding<Boo
                     .font(.title)
                     .foregroundStyle(Theme.black)
                     .bold()
-//                Text("\(filterData.count)")
-//                    .font(.footnote)
-//                    .foregroundStyle(Theme.point)
-//                    .padding(.leading, 8)
-//                    .padding(.top, 10)
                 HStack(alignment: .center, spacing: 10) {
                     HStack(spacing: 2) {
                         Image(systemName: "scroll.fill")
@@ -133,15 +127,12 @@ private func EmptyHistoryView(count: Binding<Int>, isShowingModal: Binding<Bool>
                     .font(.title)
                     .foregroundStyle(Theme.black)
                     .bold()
-//                Text("0")
-//                    .foregroundStyle(Theme.point)
-//                    .padding(.leading, 8)
                 HStack(alignment: .center, spacing: 10) {
                     HStack(spacing: 2) {
                         Image(systemName: "scroll.fill")
                             .font(.footnote .weight(.semibold))
                             .foregroundStyle(count.wrappedValue == 0 ? Theme.subblack : Theme.point)
-                        Text("\(count.wrappedValue)") //streak 변수
+                        Text("\(count.wrappedValue)")
                             .font(.footnote .weight(.semibold))
                             .foregroundStyle(count.wrappedValue == 0 ? Theme.subblack : Theme.point)
                     }
@@ -218,6 +209,7 @@ extension HistoryView {
                let dateCondition = selectedMonth == "전체" || dateFormatter.string(from: item.date).contains(selectedMonth)
                return targetCondition && dateCondition
            }
+        count = filterData.count
        }
 }
 
