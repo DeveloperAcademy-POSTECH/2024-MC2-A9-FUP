@@ -29,9 +29,10 @@ class HapticManager {
 
         do {
             engine = try CHHapticEngine()
-            engine?.playsHapticsOnly = true
-            engine?.isAutoShutdownEnabled = true
-            try engine?.start()
+            guard let engine = engine else { return }
+            engine.playsHapticsOnly = true
+            engine.isAutoShutdownEnabled = true
+            try engine.start()
         } catch {
             print("There was an error creating the engine: \(error.localizedDescription)")
         }
@@ -40,16 +41,16 @@ class HapticManager {
     /// hapticEngine을 다시 시작하는 함수
     func resetHapticEngine() {
         guard CHHapticEngine.capabilitiesForHardware().supportsHaptics else { return }
-        guard let hapticEngine = self.engine else { return }
+        guard let engine = self.engine else { return }
         
-        hapticEngine.stop()
-        hapticEngine.stoppedHandler = { reason in
+        engine.stop()
+        engine.stoppedHandler = { reason in
             print("\(reason)")
         }
-        hapticEngine.resetHandler = {
+        engine.resetHandler = {
             do {
                 print("reseting core haptic engine")
-                try hapticEngine.start()
+                try engine.start()
             } catch {
                 print("cannot reset core haptic engine")
             }
