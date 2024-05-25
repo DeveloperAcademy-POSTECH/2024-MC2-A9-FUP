@@ -20,28 +20,29 @@ class HapticManager {
     private var engine: CHHapticEngine?
     
     private init() {
-        setUpEngine()
+        startHapticEngine()
     }
     
-    private func setUpEngine() {
+    /// hapticEngine을 시작하는 함수
+    private func startHapticEngine() {
         guard CHHapticEngine.capabilitiesForHardware().supportsHaptics else { return }
 
-            do {
-                engine = try CHHapticEngine()
-                try engine?.start()
-            } catch {
-                print("There was an error creating the engine: \(error.localizedDescription)")
-            }
+        do {
+            engine = try CHHapticEngine()
+            engine?.playsHapticsOnly = true
+            engine?.isAutoShutdownEnabled = true
+            try engine?.start()
+        } catch {
+            print("There was an error creating the engine: \(error.localizedDescription)")
+        }
     }
-    
-    /// hapticEngine을 준비하는 함수
-    func prepareHapticEngine() {
+
+    /// hapticEngine을 다시 시작하는 함수
+    func resetHapticEngine() {
         guard CHHapticEngine.capabilitiesForHardware().supportsHaptics else { return }
         guard let hapticEngine = self.engine else { return }
         
         hapticEngine.stop()
-        hapticEngine.playsHapticsOnly = true
-        hapticEngine.isAutoShutdownEnabled = true
         hapticEngine.stoppedHandler = { reason in
             print("\(reason)")
         }
