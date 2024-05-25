@@ -150,9 +150,7 @@ struct ChallengeView: View {
 }
 
 
-
-
-// 데이터 관련 메소드
+//MARK: - 챌린지뷰 데이터/상태 관리 메소드
 extension ChallengeView {
     
     func updateExpressionIndex() {
@@ -219,7 +217,7 @@ extension ChallengeView {
 
 
 
-// 뷰빌더
+//MARK: - 챌린지뷰 뷰빌더 (캐러셀뷰 extension 별도 분리)
 extension ChallengeView {
     @ViewBuilder
     private var ProgressIndicatorView: some View {
