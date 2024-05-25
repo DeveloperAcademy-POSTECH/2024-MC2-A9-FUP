@@ -7,6 +7,7 @@
 
 import SwiftUI
 
+// MARK: - 캐러셀뷰 + 서브뷰 뷰빌더
 extension ChallengeView {
     
     @ViewBuilder
