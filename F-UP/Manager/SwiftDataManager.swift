@@ -11,6 +11,30 @@ import SwiftData
 @Observable
 final class SwiftDataManager {
     
+    static let shared = SwiftDataManager()
+    let container: ModelContainer
+    
+    init() {
+        let schema = Schema([
+            History.self,
+        ])
+        let modelConfiguration = ModelConfiguration(schema: schema, isStoredInMemoryOnly: false)
+
+        do {
+            self.container = try ModelContainer(for: schema, configurations: [modelConfiguration])
+        } catch {
+            fatalError("Could not create ModelContainer: \(error)")
+        }
+    }
+    
+    func fetchHistories(modelContext: ModelContext) throws -> [History] {
+        do {
+            return try modelContext.fetch(FetchDescriptor<History>())
+        } catch {
+            fatalError("Failed to fetch tasks: \(error)")
+        }
+    }
+    
     func addHistory(modelContext: ModelContext, expression: String) {
         withAnimation {
             guard let audioURL = URL(string: "https://www.example.com")

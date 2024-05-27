@@ -10,6 +10,18 @@ import UserNotifications
 
 class NotificationManger {
     static let shared = NotificationManger()
+    let dummyExpression = [
+        "생각나서 연락했어.",
+        "보람찬 하루 보내",
+        "항상 널 생각하고 있어",
+        "알찬 하루 보내",
+        "오늘 하루도 화이팅!",
+        "행복한 하루 보내!",
+        "즐거운 하루 보내",
+        "오늘 뭐 먹었어?",
+        "에구 많이 힘들었겠다",
+        "너는 최고야"
+    ]
     
     func setNotiAuth() {
         UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .sound]) { success, error in

@@ -8,36 +8,8 @@
 import SwiftUI
 import SwiftData
 
-let dummyExpression = [
-    "생각나서 연락했어.",
-    "보람찬 하루 보내",
-    "항상 널 생각하고 있어",
-    "알찬 하루 보내",
-    "오늘 하루도 화이팅!",
-    "행복한 하루 보내!",
-    "즐거운 하루 보내",
-    "오늘 뭐 먹었어?",
-    "에구 많이 힘들었겠다",
-    "너는 최고야"
-]
-
 struct ChallengeView: View {
-    @Environment(\.modelContext) private var modelContext
-    @Environment(SwiftDataManager.self) private var swiftDataManager
-    @Environment(AVFoundationManager.self) private var avFoundationManager
-    @Environment(RefreshTrigger.self) var refreshTrigger
-    
-    @Query private var histories: [History]
-    
-    @State var todayHistories: [History] = []
-    @State var yesterdayHistories: [History] = []
-    @State private var currentDateString: String = Date().formatted(date: .abbreviated, time: .omitted)
-    @State var expressionIndex: Int = 0
-    @State var currentChallengeStep: ChallengeStep = .notStarted
-    
-    @State var showModal: Bool = false
-    
-    @AppStorage("streak", store: UserDefaults(suiteName: "group.f_up.group.com")) var streak: Int = 0
+    @State var challengeViewModel = ChallengeViewModel()
     
     var body: some View {
         ZStack(alignment: .top){
@@ -56,10 +28,10 @@ struct ChallengeView: View {
                         HStack(spacing: 2) {
                             Image(systemName: "flame.fill")
                                 .font(.footnote .weight(.semibold))
-                                .foregroundColor(streak == 0 ? Theme.subblack : Theme.point)
-                            Text("\(streak)") //streak 변수
+                                .foregroundColor(challengeViewModel.streak == 0 ? Theme.subblack : Theme.point)
+                            Text("\(challengeViewModel.streak ?? 0)") //streak 변수
                                 .font(.footnote .weight(.semibold))
-                                .foregroundColor(streak == 0 ? Theme.subblack : Theme.point)
+                                .foregroundColor(challengeViewModel.streak == 0 ? Theme.subblack : Theme.point)
                         }
                     }
                     .padding(.horizontal, 9)
@@ -71,24 +43,9 @@ struct ChallengeView: View {
                     .overlay(
                         RoundedRectangle(cornerRadius: 12.5)
                             .inset(by: 0.65)
-                            .stroke(streak == 0 ? Theme.subblack : Theme.point, lineWidth: 1.3)
+                            .stroke(challengeViewModel.streak == 0 ? Theme.subblack : Theme.point, lineWidth: 1.3)
                     )
-                    
                     Spacer()
-#if DEBUG
-                    if currentChallengeStep == .recordingCompleted || currentChallengeStep == .challengeCompleted {
-                        Button(avFoundationManager.isPlaying ? "정지" : "재생") {
-                            if avFoundationManager.isPlaying {
-                                avFoundationManager.stopPlaying()
-                            } else {
-                                avFoundationManager.playRecorded(audioFilename: todayHistories[0].audioURL)
-                            }
-                        }.buttonStyle(.borderedProminent)
-                    }
-                    Button("초기화") {
-                        swiftDataManager.deleteHistory(modelContext: modelContext, history: todayHistories[0])
-                    }.buttonStyle(.borderedProminent).padding(.trailing, Theme.padding)
-#endif
                 }
                 .padding(.bottom, 20)
                 .padding(.top, 11)
@@ -99,7 +56,7 @@ struct ChallengeView: View {
                         .font(.footnote .weight(.regular))
                         .foregroundColor(Theme.semiblack)
                         .padding(.bottom, 3)
-                    Text("“\(dummyExpression[expressionIndex].forceCharWrapping)”")
+                    Text("“\(challengeViewModel.dummyExpression[challengeViewModel.expressionIndex].forceCharWrapping)”")
                         .font(.title3 .weight(.bold))
                         .foregroundColor(Theme.black)
                         .padding(.horizontal, 16)
@@ -113,8 +70,7 @@ struct ChallengeView: View {
                 .padding(.top, 6)
                 
                 ProgressIndicatorView
-                
-                if !todayHistories.isEmpty {
+                if challengeViewModel.todaysHistory != nil {
                     CarouselView.padding(.top, -20)
                 }
                 
@@ -123,111 +79,27 @@ struct ChallengeView: View {
                 
             }
         }
-        .onAppear() {
-            updateExpressionIndex()
-            checkAndAddHistory()
+        .onAppear() {            
+            challengeViewModel.updateExpressionIndex()
+            challengeViewModel.checkAndAddHistory()
+            challengeViewModel.setDailyNoti(expressionIndex: $challengeViewModel.expressionIndex, currentChallengeStep: $challengeViewModel.currentChallengeStep)
         }
-        .onChange(of: refreshTrigger.trigger) {
-            updateExpressionIndex()
-            checkAndAddHistory()
-        }
-        .onChange(of: currentDateString) {
-            updateExpressionIndex()
-            checkAndAddHistory()
+        .onChange(of: challengeViewModel.currentDateString) {
+            challengeViewModel.updateExpressionIndex()
+            challengeViewModel.checkAndAddHistory()
+            challengeViewModel.setDailyNoti(expressionIndex: $challengeViewModel.expressionIndex, currentChallengeStep: $challengeViewModel.currentChallengeStep)
         }
         .onReceive(Timer.publish(every: 30, on: .main, in: .common).autoconnect()) { _ in
-            let newDateString = Date().formatted(date: .abbreviated, time: .omitted)
-            
-            if newDateString != currentDateString {
-                print("날짜바뀜")
-                
-                if currentChallengeStep != .recordingCompleted {
-                    currentDateString = newDateString
-                }
-            }
+            challengeViewModel.getAndCompareDateString()
         }
     }
 }
-
-
-//MARK: - 챌린지뷰 데이터/상태 관리 메소드
-extension ChallengeView {
-    
-    func updateExpressionIndex() {
-        let calendar = Calendar.current
-        
-        let currentDate = Date()
-        
-        var dateComponents = DateComponents()
-        dateComponents.year = 2024
-        dateComponents.month = 1
-        dateComponents.day = 1
-        
-        guard let specificDate = calendar.date(from: dateComponents) else {
-            print("날짜를 생성할 수 없습니다.")
-            return
-        }
-        
-        let components = calendar.dateComponents([.day], from: specificDate, to: currentDate)
-        
-        guard let daysElapsed = components.day else {
-            print("일수를 계산할 수 없습니다.")
-            return
-        }
-        
-        expressionIndex = daysElapsed % dummyExpression.count
-        print("expressionIndex: \(expressionIndex)")
-//        NotificationManger.shared.setDailyNoti(expressionIndex: $expressionIndex, currentChallengeStep: $currentChallengeStep)
-    }
-    
-    func updateHistories() {
-        let calendar = Calendar.current
-        let yesterday = calendar.date(byAdding: .day, value: -1, to: Date())!
-        
-        todayHistories = histories.filter {
-            $0.date.formatted(date: .abbreviated, time: .omitted)
-            ==
-            Date().formatted(date: .abbreviated, time: .omitted)
-        }
-        yesterdayHistories = histories.filter {
-            $0.date.formatted(date: .abbreviated, time: .omitted)
-            ==
-            yesterday.formatted(date: .abbreviated, time: .omitted)
-        }
-        if !todayHistories.isEmpty {
-            currentChallengeStep = todayHistories[0].challengeStep
-        }
-    }
-    
-    func setUpStreak() {
-        if !yesterdayHistories.isEmpty && yesterdayHistories[0].isPerformed {
-            streak = todayHistories[0].isPerformed ?
-            todayHistories[0].streak :
-            yesterdayHistories[0].streak
-        }
-        else {
-            streak = todayHistories[0].streak
-        }
-    }
-    
-    func checkAndAddHistory() {
-        updateHistories()
-        if todayHistories.isEmpty {
-            swiftDataManager.addHistory(modelContext: modelContext, expression: dummyExpression[expressionIndex])
-        }
-        updateHistories()
-        setUpStreak()
-        NotificationManger.shared.setDailyNoti(expressionIndex: $expressionIndex, currentChallengeStep: $currentChallengeStep)
-    }
-}
-
-
 
 //MARK: - 챌린지뷰 뷰빌더 (캐러셀뷰 extension 별도 분리)
 extension ChallengeView {
     @ViewBuilder
     private var ProgressIndicatorView: some View {
-        switch currentChallengeStep {
+        switch challengeViewModel.currentChallengeStep {
             
         case .notStarted:
             HStack(spacing: 0){
@@ -241,7 +113,7 @@ extension ChallengeView {
                     .background(Theme.point)
                     .clipShape(RoundedRectangle(cornerRadius: 10.5))
                 
-                DottedDivider(step: currentChallengeStep)
+                DottedDivider(step: challengeViewModel.currentChallengeStep)
                 
                 Circle()
                     .fill(Theme.point)
@@ -272,7 +144,7 @@ extension ChallengeView {
                             .foregroundColor(Theme.white)
                     }
                 
-                DottedDivider(step: currentChallengeStep)
+                DottedDivider(step: challengeViewModel.currentChallengeStep)
                 
                 Text("2. 기록하기")
                     .font(.caption2 .weight(.bold))

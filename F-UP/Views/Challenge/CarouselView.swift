@@ -39,20 +39,20 @@ extension ChallengeView {
                     .fontWeight(.bold)
                     .foregroundStyle(Theme.white)
                 
-                Text(currentChallengeStep == .notStarted ? "오늘의 표현을 따라 말해보세요!" : "따라 말하기")
-                    .padding(.top, currentChallengeStep == .notStarted ? 8 : 4)
-                    .padding(.bottom, currentChallengeStep == .notStarted ? 7 : 8)
+                Text(challengeViewModel.currentChallengeStep == .notStarted ? "오늘의 표현을 따라 말해보세요!" : "따라 말하기")
+                    .padding(.top, challengeViewModel.currentChallengeStep == .notStarted ? 8 : 4)
+                    .padding(.bottom, challengeViewModel.currentChallengeStep == .notStarted ? 7 : 8)
                     .font(.callout)
                     .fontWeight(.bold)
                     .foregroundStyle(Theme.white)
                 
-                Image(currentChallengeStep == .notStarted ? "characterChallenge1" : "characterCelebrate1")
+                Image(challengeViewModel.currentChallengeStep == .notStarted ? "characterChallenge1" : "characterCelebrate1")
                     .frame(
-                        width: currentChallengeStep == .notStarted ? 200 : 250,
-                        height: currentChallengeStep == .notStarted ? 200 : 236
+                        width: challengeViewModel.currentChallengeStep == .notStarted ? 200 : 250,
+                        height: challengeViewModel.currentChallengeStep == .notStarted ? 200 : 236
                     )
-                    .padding(.bottom, currentChallengeStep == .notStarted ? 15 : 2)
-                if !todayHistories.isEmpty && (currentChallengeStep == .notStarted) {
+                    .padding(.bottom, challengeViewModel.currentChallengeStep == .notStarted ? 15 : 2)
+                if challengeViewModel.todaysHistory != nil && (challengeViewModel.currentChallengeStep == .notStarted) {
                     ChallengeButton(index: index)
                 }
                 else {
@@ -81,14 +81,14 @@ extension ChallengeView {
                     .fontWeight(.bold)
                     .foregroundStyle(Theme.white)
                 
-                Text(currentChallengeStep == .challengeCompleted ? "사용하고 기록하기" : "오늘의 문장을 주변 사람들에게\n실제로 사용하고 반응을 기록해보세요!")
-                    .padding(.top, currentChallengeStep == .challengeCompleted ? 4 : 8)
+                Text(challengeViewModel.currentChallengeStep == .challengeCompleted ? "사용하고 기록하기" : "오늘의 문장을 주변 사람들에게\n실제로 사용하고 반응을 기록해보세요!")
+                    .padding(.top, challengeViewModel.currentChallengeStep == .challengeCompleted ? 4 : 8)
                     .multilineTextAlignment(.center)
                     .font(.callout)
                     .fontWeight(.bold)
                     .foregroundStyle(Theme.white)
                 
-                switch currentChallengeStep {
+                switch challengeViewModel.currentChallengeStep {
                 case .notStarted:
                     Image("lock")
                         .frame(width: 200, height: 174)
@@ -106,7 +106,7 @@ extension ChallengeView {
                         .padding(.bottom, 2)
                 }
                 
-                if !todayHistories.isEmpty && !(currentChallengeStep == .challengeCompleted) {
+                if challengeViewModel.todaysHistory != nil && !(challengeViewModel.currentChallengeStep == .challengeCompleted) {
                     ChallengeButton(index: index)
                 }
                 else {
@@ -121,7 +121,7 @@ extension ChallengeView {
             .containerRelativeFrame(.horizontal)
             .scrollTargetBehavior(.viewAligned)
             .frame(width: cellWidth - 74)
-            .background(currentChallengeStep == .notStarted ? Theme.subblack : Theme.point)
+            .background(challengeViewModel.currentChallengeStep == .notStarted ? Theme.subblack : Theme.point)
             .clipShape(
                 RoundedRectangle(cornerRadius: Theme.round)
             )
@@ -136,7 +136,7 @@ extension ChallengeView {
         switch index {
         case 1:
             Button {
-                showModal = true
+                challengeViewModel.showModal = true
             } label: {
                 Text("따라 말하기")
                     .font(.headline)
@@ -151,45 +151,57 @@ extension ChallengeView {
             }
             .padding(.horizontal, 19)
             .padding(.bottom, 19)
-            .sheet(isPresented: $showModal) {
-                if !todayHistories.isEmpty {
-                    RecordingView(showModal: $showModal, history: todayHistories[0]).interactiveDismissDisabled()
+            .sheet(isPresented: $challengeViewModel.showModal, onDismiss: {
+                withAnimation {
+                    challengeViewModel.updateExpressionIndex()
+                    challengeViewModel.checkAndAddHistory()
+                    challengeViewModel.setDailyNoti(expressionIndex: $challengeViewModel.expressionIndex, currentChallengeStep: $challengeViewModel.currentChallengeStep)
+                }
+            }) {
+                if challengeViewModel.todaysHistory != nil {
+                    RecordingView(showModal: $challengeViewModel.showModal, history: challengeViewModel.todaysHistory!).interactiveDismissDisabled()
                 }
             }
-            .onChange(of: showModal) { _, _ in
+            .onChange(of: challengeViewModel.showModal) { _, _ in
                 HapticManager.shared.generateHaptic(.light(times: 1))
             }
             
         case 2:
             Button {
-                showModal = true
+                challengeViewModel.showModal = true
             } label: {
                 Text("리뷰하러 가기")
                     .font(.headline)
-                    .foregroundStyle(currentChallengeStep == .notStarted ? Theme.subblack : Theme.black)
+                    .foregroundStyle(challengeViewModel.currentChallengeStep == .notStarted ? Theme.subblack : Theme.black)
                     .fontWeight(.bold)
                     .padding(.vertical, 14)
                     .frame(maxWidth: .infinity)
-                    .background(currentChallengeStep == .notStarted ? Theme.whiteWithOpacity : Theme.white)
+                    .background(challengeViewModel.currentChallengeStep == .notStarted ? Theme.whiteWithOpacity : Theme.white)
                     .clipShape(
                         RoundedRectangle(cornerRadius: Theme.round)
                     )
             }
-            .disabled(currentChallengeStep == .notStarted)
+            .disabled(challengeViewModel.currentChallengeStep == .notStarted)
             .padding(.horizontal, 19)
             .padding(.bottom, 19)
-            .sheet(isPresented: $showModal) {
-                if !todayHistories.isEmpty {
-                    TargetSelectView(showModal: $showModal, history: todayHistories[0]).interactiveDismissDisabled()
+            .sheet(isPresented: $challengeViewModel.showModal, onDismiss: {
+                withAnimation {
+                    challengeViewModel.updateExpressionIndex()
+                    challengeViewModel.checkAndAddHistory()
+                    challengeViewModel.setDailyNoti(expressionIndex: $challengeViewModel.expressionIndex, currentChallengeStep: $challengeViewModel.currentChallengeStep)
+                }
+            }) {
+                if challengeViewModel.todaysHistory != nil {
+                    TargetSelectView(showModal: $challengeViewModel.showModal, history: challengeViewModel.todaysHistory!).interactiveDismissDisabled()
                 }
             }
-            .onChange(of: showModal) { _, _ in
+            .onChange(of: challengeViewModel.showModal) { _, _ in
                 HapticManager.shared.generateHaptic(.light(times: 1))
             }
             
         default:
             Button {
-                showModal = true
+                challengeViewModel.showModal = true
             } label: {
                 Text("리뷰하러 가기")
                     .font(.headline)
@@ -205,7 +217,7 @@ extension ChallengeView {
             .frame(width: 281, height: 50)
             .padding(.horizontal, 19)
             .padding(.bottom, 19)
-            .onChange(of: showModal) { _, _ in
+            .onChange(of: challengeViewModel.showModal) { _, _ in
                 HapticManager.shared.generateHaptic(.light(times: 1))
             }
         }
