@@ -177,7 +177,7 @@ extension ChallengeView {
         
         expressionIndex = daysElapsed % dummyExpression.count
         print("expressionIndex: \(expressionIndex)")
-        NotificationManger.shared.setDailyNoti(expressionIndex: $expressionIndex)
+//        NotificationManger.shared.setDailyNoti(expressionIndex: $expressionIndex, currentChallengeStep: $currentChallengeStep)
     }
     
     func updateHistories() {
@@ -217,6 +217,7 @@ extension ChallengeView {
         }
         updateHistories()
         setUpStreak()
+        NotificationManger.shared.setDailyNoti(expressionIndex: $expressionIndex, currentChallengeStep: $currentChallengeStep)
     }
 }
 
