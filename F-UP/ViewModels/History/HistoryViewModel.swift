@@ -22,7 +22,6 @@ class HistoryViewModel {
     
     init() {
         modelContext = ModelContext(SwiftDataManager.shared.container)
-        fetchHistories()
     }
     
     func fetchHistories() {
