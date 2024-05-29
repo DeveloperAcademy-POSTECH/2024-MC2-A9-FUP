@@ -34,8 +34,8 @@ struct SplashScreen: View {
         ZStack {
             Color.white
                 .ignoresSafeArea()
-            LottieView(fileName: "Lunch")
+            LottieView(fileName: "typoLogo")
         }
-        .frame(width:179, height:146)
+        .frame(width:320, height:393)
     }
 }
