@@ -10,17 +10,16 @@ import SwiftUI
 
 struct HistoryDetailView: View {
     @Environment(AVFoundationManager.self) var avFoundationManager
-    var history: History
-    @State private var formattedDate: String = ""
-    @State private var sliderValue = 0.0
     @Environment(\.dismiss) var dismiss
+    @State var formattedDate: String = ""
+    var history: History
     
     var body: some View {
         ZStack {
             Theme.background
             
             VStack(spacing: 0) {
-                RecoderPlay(history: history, formattedDate: formattedDate, manager: avFoundationManager)
+                RecoderPlay(manager: avFoundationManager)
                 
                 VStack(alignment: .leading ,spacing: 0) {
                     Text("누구에게 이 따뜻함을 건냈나요?")
@@ -86,98 +85,98 @@ struct HistoryDetailView: View {
     }
 }
 
-private struct TargetButton: View {
-    var target:Target
-    var history: History
-    @State private var borderColor = Theme.subblack
-    
-    var body: some View {
-        RoundedRectangle(cornerRadius: 26)
-            .fill(target == history.target ? Theme.point : Theme.subblack .opacity(0.3))
-            .frame(width: 80, height: 45)
-            .overlay {
-                Text("\(target.rawValue)")
-                    .font(.callout .weight(.bold))
-                    .foregroundColor(target == history.target ? Theme.white : Theme.black.opacity(0.3))
-            }
-            .dropShadow(opacity: 0.15)
-    }
-}
-
-private func RecoderPlay(history: History, formattedDate: String, manager: AVFoundationManager) -> some View {
-    return VStack(spacing: 0) {
-        RoundedRectangle(cornerRadius: Theme.round)
-            .fill(Theme.white)
-            .frame(width: 353, height: 140)
-            .dropShadow(opacity: 0.15)
-            .overlay {
-                VStack(alignment: .leading, spacing: 0) {
-                    Text("\(formattedDate)의 표현")
-                        .font(.footnote .weight(.bold))
-                        .foregroundStyle(Theme.semiblack)
-                        .padding(.bottom, 5)
-                    Text("\"\(history.expression)\"")
-                        .font(.headline .weight(.bold))
-                        .foregroundStyle(Theme.black)
-                        .padding(.bottom, 21)
-                    HStack(spacing: 0) {
-                        AudioPlayingComponent(audioLevels: history.audioLevels, audioLength: history.audioLength, maxHeight: 50)
-                        Button {
-                            HapticManager.shared.generateHaptic(.light(times: 1))
-                            // 녹음 실행 event
-                            if manager.isPlaying {
-                                manager.stopPlaying()
-                            } else {
-                                manager.playRecorded(audioFilename: history.audioURL)
-                            }
-                        }label: {
-                            Image(systemName: manager.isPlaying ? "square.circle.fill" : "play.circle.fill")
-                                .resizable()
-                                .frame(width: 28, height: 28)
-                                .foregroundStyle(Theme.point)
-                        }
-                        .padding(.leading, 39)
-                    }
+extension HistoryDetailView {
+    private struct TargetButton: View {
+        var target:Target
+        var history: History
+        @State private var borderColor = Theme.subblack
+        
+        var body: some View {
+            RoundedRectangle(cornerRadius: 26)
+                .fill(target == history.target ? Theme.point : Theme.subblack .opacity(0.3))
+                .frame(width: 80, height: 45)
+                .overlay {
+                    Text("\(target.rawValue)")
+                        .font(.callout .weight(.bold))
+                        .foregroundColor(target == history.target ? Theme.white : Theme.black.opacity(0.3))
                 }
-            }
-            .padding(.horizontal, Theme.padding)
-            .padding(.bottom, 40)
-            .padding(.top, 35)
-    }
-}
-
-private func FeelingProgressTitle(headLine: String, minValueTitle: String, maxValueTitle: String) -> some View {
-    return VStack(alignment: .leading, spacing: 0) {
-        Text(headLine)
-            .font(.headline .weight(.bold))
-            .padding(.leading, Theme.padding)
-        HStack(spacing: 0) {
-            Text(minValueTitle)
-                .font(.footnote)
-                .foregroundStyle(Theme.semiblack)
-                .padding(.leading, 27)
-                .padding(.top, 12)
-                .bold()
-            Spacer()
-            Text(maxValueTitle)
-                .font(.footnote)
-                .foregroundStyle(Theme.semiblack)
-                .padding(.trailing, 27)
-                .padding(.top, 12)
-                .bold()
+                .dropShadow(opacity: 0.15)
         }
     }
-    .padding(.bottom, 8)
-    .padding(.top, 40)
-}
-
-extension HistoryDetailView {
+    
+    private func RecoderPlay(manager: AVFoundationManager) -> some View {
+        return VStack(spacing: 0) {
+            RoundedRectangle(cornerRadius: Theme.round)
+                .fill(Theme.white)
+                .frame(width: 353, height: 140)
+                .dropShadow(opacity: 0.15)
+                .overlay {
+                    VStack(alignment: .leading, spacing: 0) {
+                        Text("\(formattedDate)의 표현")
+                            .font(.footnote .weight(.bold))
+                            .foregroundStyle(Theme.semiblack)
+                            .padding(.bottom, 5)
+                        Text("\"\(history.expression)\"")
+                            .font(.headline .weight(.bold))
+                            .foregroundStyle(Theme.black)
+                            .padding(.bottom, 21)
+                        HStack(spacing: 0) {
+                            AudioPlayingComponent(audioLevels: history.audioLevels, audioLength: history.audioLength, maxHeight: 50)
+                            Button {
+                                HapticManager.shared.generateHaptic(.light(times: 1))
+                                // 녹음 실행 event
+                                if manager.isPlaying {
+                                    manager.stopPlaying()
+                                } else {
+                                    manager.playRecorded(audioFilename: history.audioURL)
+                                }
+                            }label: {
+                                Image(systemName: manager.isPlaying ? "square.circle.fill" : "play.circle.fill")
+                                    .resizable()
+                                    .frame(width: 28, height: 28)
+                                    .foregroundStyle(Theme.point)
+                            }
+                            .padding(.leading, 39)
+                        }
+                    }
+                }
+                .padding(.horizontal, Theme.padding)
+                .padding(.bottom, 40)
+                .padding(.top, 35)
+        }
+    }
+    
+    private func FeelingProgressTitle(headLine: String, minValueTitle: String, maxValueTitle: String) -> some View {
+        return VStack(alignment: .leading, spacing: 0) {
+            Text(headLine)
+                .font(.headline .weight(.bold))
+                .padding(.leading, Theme.padding)
+            HStack(spacing: 0) {
+                Text(minValueTitle)
+                    .font(.footnote)
+                    .foregroundStyle(Theme.semiblack)
+                    .padding(.leading, 27)
+                    .padding(.top, 12)
+                    .bold()
+                Spacer()
+                Text(maxValueTitle)
+                    .font(.footnote)
+                    .foregroundStyle(Theme.semiblack)
+                    .padding(.trailing, 27)
+                    .padding(.top, 12)
+                    .bold()
+            }
+        }
+        .padding(.bottom, 8)
+        .padding(.top, 40)
+    }
+    
     private func dateFormatted() {
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "yy.MM.dd"
         formattedDate = dateFormatter.string(from: history.date)
-        }
     }
+}
 
 #Preview {
     NavigationStack {
