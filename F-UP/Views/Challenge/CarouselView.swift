@@ -81,7 +81,7 @@ extension ChallengeView {
                     .fontWeight(.bold)
                     .foregroundStyle(Theme.white)
                 
-                Text(challengeViewModel.currentChallengeStep == .challengeCompleted ? "사용하고 기록하기" : "오늘의 문장을 주변 사람들에게\n실제로 사용하고 반응을 기록해보세요!")
+                Text(challengeViewModel.currentChallengeStep == .challengeCompleted ? "사용하고 기록하기" : "오늘의 표현을 주변 사람들에게\n실제로 사용하고 반응을 기록해보세요!")
                     .padding(.top, challengeViewModel.currentChallengeStep == .challengeCompleted ? 4 : 8)
                     .multilineTextAlignment(.center)
                     .font(.callout)
