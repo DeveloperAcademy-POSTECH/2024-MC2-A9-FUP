@@ -8,11 +8,8 @@
 import SwiftUI
 
 struct HistoryFilterView: View {
-    @Binding var selectedMonth: String
-    @Binding var selectedTarget: Target?
-    @Binding var isShowingModal: Bool
-    var months = ["1월", "2월", "3월", "4월", "5월", "6월", "7월", "8월", "9월", "10월", "11월", "12월", "전체"].reversed()
-    
+    @Bindable var historyViewModel: HistoryViewModel
+  
     var body: some View {
         VStack(spacing: 0) {
             HStack {
@@ -27,13 +24,13 @@ struct HistoryFilterView: View {
                 ForEach(Target.allCases, id: \.self) { target in
                     TargetButton(
                         target: target,
-                        isSelected: selectedTarget == target
+                        isSelected: historyViewModel.selectedTarget == target
                     ) {
                         HapticManager.shared.generateHaptic(.light(times: 1))
-                        if selectedTarget == target {
-                            selectedTarget = nil
+                        if historyViewModel.selectedTarget == target {
+                            historyViewModel.selectedTarget = nil
                         } else {
-                            selectedTarget = target
+                            historyViewModel.selectedTarget = target
                         }
                     }
                 }
@@ -50,10 +47,10 @@ struct HistoryFilterView: View {
             }
             
             Menu {
-                ForEach(months, id: \.self) { month in
+                ForEach(historyViewModel.months, id: \.self) { month in
                     Button {
                         HapticManager.shared.generateHaptic(.light(times: 1))
-                        selectedMonth = month
+                        historyViewModel.selectedMonth = month
                     } label: {
                         Text(month)
                     }
@@ -67,7 +64,7 @@ struct HistoryFilterView: View {
                             .stroke( Theme.subblack ,lineWidth: 1)
                             .frame(width: 353, height: 50)
                         HStack(spacing: 0) {
-                            Text(selectedMonth)
+                            Text(historyViewModel.selectedMonth)
                                 .foregroundStyle(Theme.black)
                                 .padding(Theme.padding)
                             Spacer()
@@ -80,7 +77,7 @@ struct HistoryFilterView: View {
             
             Button {
                 HapticManager.shared.generateHaptic(.success)
-                isShowingModal.toggle()
+                historyViewModel.isShowingModal.toggle()
             } label: {
                 RoundedRectangle(cornerRadius: Theme.round)
                     .fill(Theme.point)
@@ -95,30 +92,31 @@ struct HistoryFilterView: View {
         }
     }
 }
-
-private struct TargetButton: View {
-    var target: Target
-    var isSelected: Bool
-    var action: () -> Void
-    @State private var borderColor = Theme.subblack
-    
-    var body: some View {
-        Button(action: action) {
-            RoundedRectangle(cornerRadius: 26)
-                .fill(isSelected ? Theme.point : Theme.white)
-                .frame(width: 80, height: 45)
-                .overlay {
-                    RoundedRectangle(cornerRadius: 26)
-                        .stroke(isSelected ? Theme.point : Theme.subblack, lineWidth: 1)
-                        .frame(width: 80, height: 45)
-                    Text(target.rawValue)
-                        .font(.callout .weight(.bold))
-                        .foregroundColor(isSelected ? Theme.white : Theme.semiblack)
-                }
+extension HistoryFilterView {
+    private struct TargetButton: View {
+        var target: Target
+        var isSelected: Bool
+        var action: () -> Void
+        @State private var borderColor = Theme.subblack
+        
+        var body: some View {
+            Button(action: action) {
+                RoundedRectangle(cornerRadius: 26)
+                    .fill(isSelected ? Theme.point : Theme.white)
+                    .frame(width: 80, height: 45)
+                    .overlay {
+                        RoundedRectangle(cornerRadius: 26)
+                            .stroke(isSelected ? Theme.point : Theme.subblack, lineWidth: 1)
+                            .frame(width: 80, height: 45)
+                        Text(target.rawValue)
+                            .font(.callout .weight(.bold))
+                            .foregroundColor(isSelected ? Theme.white : Theme.semiblack)
+                    }
+            }
         }
     }
 }
 
 #Preview {
-    HistoryFilterView(selectedMonth: .constant("1월"), selectedTarget: .constant(.family), isShowingModal: .constant(false))
+    HistoryFilterView(historyViewModel: HistoryViewModel())
 }

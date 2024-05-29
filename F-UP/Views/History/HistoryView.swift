@@ -9,208 +9,192 @@ import SwiftUI
 import SwiftData
 
 struct HistoryView: View {
-    @State private var isShowingModal = false
-    @State private var selectedMonth: String = "전체"
-    @State private var selectedTarget: Target?
-    @State private var filterData: [History] = []
-    @State var count: Int = 0
-    @Query private var items: [History]
+    @State var historyViewModel = HistoryViewModel()
     
     var body: some View {
-        HistoryViewHandler(count: $count, isShowingModal: $isShowingModal, filterData: filterData, selectedMonth: $selectedMonth, selectedTarget: $selectedTarget)
+        HistoryViewHandler()
             .onAppear {
-                combinedFilter()
+                historyViewModel.fetchHistories()
+                historyViewModel.combinedFilter()
                 }
-            .sheet(isPresented: $isShowingModal, content: {
-                HistoryFilterView(selectedMonth: $selectedMonth, selectedTarget: $selectedTarget, isShowingModal: $isShowingModal)
+            .sheet(isPresented: $historyViewModel.isShowingModal, content: {
+                HistoryFilterView(historyViewModel: historyViewModel)
                     .presentationDetents(
                         [.height(330)]
                     )
                     .onDisappear {
-                        combinedFilter()
+                        historyViewModel.combinedFilter()
                     }
             })
     }
 }
 
-@ViewBuilder
-private func HistoryViewHandler(count: Binding<Int>, isShowingModal: Binding<Bool>, filterData: [History], selectedMonth: Binding<String>, selectedTarget: Binding<Target?>) -> some View {
-    if count.wrappedValue == 0 {
-        EmptyHistoryView(count: count, isShowingModal: isShowingModal)
-    } else {
-        HasDateHistoryView(count: count, isShowingModal: isShowingModal, filterData: filterData, selectedTarget: selectedTarget, selectedMonth: selectedMonth)
+extension HistoryView {
+    @ViewBuilder
+    private func HistoryViewHandler() -> some View {
+        if historyViewModel.count == 0 {
+            EmptyHistoryView()
+        } else {
+            HasDateHistoryView()
+        }
     }
-}
-
-private func HasDateHistoryView(count: Binding<Int>, isShowingModal: Binding<Bool>, filterData: [History], selectedTarget: Binding<Target?>, selectedMonth: Binding<String> ) -> some View {
-    return NavigationStack {
-        VStack(spacing: 0) {
-            HStack(spacing: 0) {
-                Text("챌린지 표현")
-                    .font(.title)
-                    .foregroundStyle(Theme.black)
-                    .bold()
-                HStack(alignment: .center, spacing: 10) {
-                    HStack(spacing: 2) {
-                        Image(systemName: "scroll.fill")
-                            .font(.footnote .weight(.semibold))
-                            .foregroundColor(Theme.point)
-                        Text("\(count.wrappedValue)")
-                            .font(.footnote .weight(.semibold))
+    
+    private func HasDateHistoryView() -> some View {
+        return NavigationStack {
+            VStack(spacing: 0) {
+                HStack(spacing: 0) {
+                    Text("챌린지 표현")
+                        .font(.title)
+                        .foregroundStyle(Theme.black)
+                        .bold()
+                    HStack(alignment: .center, spacing: 10) {
+                        HStack(spacing: 2) {
+                            Image(systemName: "scroll.fill")
+                                .font(.footnote .weight(.semibold))
+                                .foregroundColor(Theme.point)
+                            Text("\(historyViewModel.count)")
+                                .font(.footnote .weight(.semibold))
+                                .foregroundStyle(Theme.point)
+                        }
+                    }
+                    .padding(.horizontal, 9)
+                    .padding(.vertical, 4)
+                    .background(Theme.background)
+                    .clipShape(
+                        RoundedRectangle(cornerRadius: 12.5)
+                    )
+                    .overlay(
+                        RoundedRectangle(cornerRadius: 12.5)
+                            .inset(by: 0.65)
+                            .stroke(Theme.point, lineWidth: 1.3)
+                    )
+                    .padding(.leading, 10)
+                    
+                    
+                    Spacer()
+                    
+                    HStack(spacing: 8) {
+                        if historyViewModel.selectedTarget != nil {
+                            CurrentTargetFilter()
+                        }
+                        if historyViewModel.selectedMonth !=  "전체" {
+                            CurrentMonthFilter()
+                        }
+                    }
+                    .padding(.trailing, 8)
+                    
+                    Button {
+                        HapticManager.shared.generateHaptic(.light(times: 1))
+                        historyViewModel.isShowingModal.toggle()
+                    } label: {
+                        Image(systemName: "line.3.horizontal.decrease")
                             .foregroundStyle(Theme.point)
                     }
                 }
-                .padding(.horizontal, 9)
-                .padding(.vertical, 4)
-                .background(Theme.background)
-                .clipShape(
-                    RoundedRectangle(cornerRadius: 12.5)
-                )
-                .overlay(
-                    RoundedRectangle(cornerRadius: 12.5)
-                        .inset(by: 0.65)
-                        .stroke(Theme.point, lineWidth: 1.3)
-                )
-                .padding(.leading, 10)
+                .padding(.horizontal, Theme.padding)
+                .padding(.bottom, 13)
+                .padding(.top, 11)
                 
-                
-                Spacer()
-                
-                HStack(spacing: 8) {
-                    if selectedTarget.wrappedValue != nil {
-                        CurrentTargetFilter(selectedTarget: selectedTarget)
+                ScrollView {
+                    ForEach(historyViewModel.filterData, id: \.id) { history in
+                        NavigationLink(destination: HistoryDetailView(history: history).onAppear { HapticManager.shared.generateHaptic(.light(times: 1)) }) {
+                            RoundedRectangle(cornerRadius: Theme.round)
+                                .fill(Theme.white)
+                                .frame(height: 92)
+                                .frame(maxWidth: .infinity)
+                                .dropShadow(opacity: 0.15)
+                                .overlay {
+                                    Text(history.expression)
+                                        .font(.title3)
+                                        .foregroundStyle(Theme.black)
+                                        .fontWeight(.bold)
+                                }.padding(.bottom, 10)
+                        }.padding(.horizontal, Theme.padding)
                     }
-                    if selectedMonth.wrappedValue !=  "전체" {
-                        CurrentMonthFilter(selectedMonth: selectedMonth)
-                    }
-                }
-                .padding(.trailing, 8)
-                
-                Button {
-                    HapticManager.shared.generateHaptic(.light(times: 1))
-                    isShowingModal.wrappedValue.toggle()
-                } label: {
-                    Image(systemName: "line.3.horizontal.decrease")
-                        .foregroundStyle(Theme.point)
-                }
-            }
-            .padding(.horizontal, Theme.padding)
-            .padding(.bottom, 13)
-            .padding(.top, 11)
-            
-            ScrollView {
-                ForEach(filterData, id: \.id) { history in
-                    NavigationLink(destination: HistoryDetailView(history: history).onAppear { HapticManager.shared.generateHaptic(.light(times: 1)) }) {
-                        RoundedRectangle(cornerRadius: Theme.round)
-                            .fill(Theme.white)
-                            .frame(height: 92)
-                            .frame(maxWidth: .infinity)
-                            .dropShadow(opacity: 0.15)
-                            .overlay {
-                                Text(history.expression)
-                                    .font(.title3)
-                                    .foregroundStyle(Theme.black)
-                                    .fontWeight(.bold)
-                            }.padding(.bottom, 10)
-                    }.padding(.horizontal, Theme.padding)
-                }
-            }.safeAreaPadding(.top, 15)
-        }.background(Theme.background)
-    }
-}
-
-private func EmptyHistoryView(count: Binding<Int>, isShowingModal: Binding<Bool>) -> some View {
-    return NavigationStack {
-        VStack(spacing: 0) {
-            HStack(spacing: 0) {
-                Text("챌린지 표현")
-                    .font(.title)
-                    .foregroundStyle(Theme.black)
-                    .bold()
-                HStack(alignment: .center, spacing: 10) {
-                    HStack(spacing: 2) {
-                        Image(systemName: "scroll.fill")
-                            .font(.footnote .weight(.semibold))
-                            .foregroundStyle(count.wrappedValue == 0 ? Theme.subblack : Theme.point)
-                        Text("\(count.wrappedValue)")
-                            .font(.footnote .weight(.semibold))
-                            .foregroundStyle(count.wrappedValue == 0 ? Theme.subblack : Theme.point)
-                    }
-                }
-                .padding(.horizontal, 9)
-                .padding(.vertical, 4)
-                .background(Theme.background)
-                .clipShape(
-                    RoundedRectangle(cornerRadius: 12.5)
-                )
-                .overlay(
-                    RoundedRectangle(cornerRadius: 12.5)
-                        .inset(by: 0.65)
-                        .stroke(count.wrappedValue == 0 ? Theme.subblack : Theme.point, lineWidth: 1.3)
-                )
-                .padding(.leading, 10)
-                
-                Spacer()
-                
-                Button {
-                    isShowingModal.wrappedValue.toggle()
-                } label: {
-                    Image(systemName: "line.3.horizontal.decrease")
-                        .foregroundStyle(Theme.point)
-                }
-            }
-            .padding(.horizontal, Theme.padding)
-            .padding(.top, 11)
-            .padding(.bottom, 28)
-            Spacer()
-            VStack(spacing: 0) {
-                Text("아직 기록이 없어요!")
-                    .foregroundStyle(Theme.subblack)
-            }
-            Spacer()
+                }.safeAreaPadding(.top, 15)
+            }.background(Theme.background)
         }
-        .background(Theme.background)
     }
-}
-
-private func CurrentTargetFilter(selectedTarget: Binding<Target?>) -> some View {
-    return VStack {
-        RoundedRectangle(cornerRadius: Theme.round)
-            .fill(Theme.point)
-            .frame(width: 37, height: 20)
-            .overlay {
-                Text("\(selectedTarget.wrappedValue?.rawValue ?? "")")
-                    .font(.caption2 .weight(.bold))
-                    .foregroundStyle(Theme.white)
+    
+    private func EmptyHistoryView() -> some View {
+        return NavigationStack {
+            VStack(spacing: 0) {
+                HStack(spacing: 0) {
+                    Text("챌린지 표현")
+                        .font(.title)
+                        .foregroundStyle(Theme.black)
+                        .bold()
+                    HStack(alignment: .center, spacing: 10) {
+                        HStack(spacing: 2) {
+                            Image(systemName: "scroll.fill")
+                                .font(.footnote .weight(.semibold))
+                                .foregroundStyle(historyViewModel.count == 0 ? Theme.subblack : Theme.point)
+                            Text("\(historyViewModel.count)")
+                                .font(.footnote .weight(.semibold))
+                                .foregroundStyle(historyViewModel.count == 0 ? Theme.subblack : Theme.point)
+                        }
+                    }
+                    .padding(.horizontal, 9)
+                    .padding(.vertical, 4)
+                    .background(Theme.background)
+                    .clipShape(
+                        RoundedRectangle(cornerRadius: 12.5)
+                    )
+                    .overlay(
+                        RoundedRectangle(cornerRadius: 12.5)
+                            .inset(by: 0.65)
+                            .stroke(historyViewModel.count == 0 ? Theme.subblack : Theme.point, lineWidth: 1.3)
+                    )
+                    .padding(.leading, 10)
+                    
+                    Spacer()
+                    
+                    Button {
+                        historyViewModel.isShowingModal.toggle()
+                    } label: {
+                        Image(systemName: "line.3.horizontal.decrease")
+                            .foregroundStyle(Theme.point)
+                    }
+                }
+                .padding(.horizontal, Theme.padding)
+                .padding(.top, 11)
+                .padding(.bottom, 28)
+                Spacer()
+                VStack(spacing: 0) {
+                    Text("아직 기록이 없어요!")
+                        .foregroundStyle(Theme.subblack)
+                }
+                Spacer()
             }
+            .background(Theme.background)
+        }
     }
-}
-
-private func CurrentMonthFilter(selectedMonth: Binding<String>) -> some View {
-    return VStack {
-        RoundedRectangle(cornerRadius: Theme.round)
-            .fill(Theme.point)
-            .frame(width: 37, height: 20)
-            .overlay {
-                Text("\(selectedMonth.wrappedValue)")
-                    .font(.caption2 .weight(.bold))
-                    .foregroundStyle(Theme.white)
-            }
+    
+    private func CurrentTargetFilter() -> some View {
+        return VStack {
+            RoundedRectangle(cornerRadius: Theme.round)
+                .fill(Theme.point)
+                .frame(width: 37, height: 20)
+                .overlay {
+                    Text("\(historyViewModel.selectedTarget?.rawValue ?? "")")
+                        .font(.caption2 .weight(.bold))
+                        .foregroundStyle(Theme.white)
+                }
+        }
     }
-}
-
-extension HistoryView {
-    private func combinedFilter() {
-           let dateFormatter = DateFormatter()
-           dateFormatter.dateFormat = "yy년M월"
-           
-           filterData = items.filter { item in
-               let targetCondition = (selectedTarget == nil || item.target == selectedTarget) && item.isPerformed
-               let dateCondition = selectedMonth == "전체" || dateFormatter.string(from: item.date).contains(selectedMonth)
-               return targetCondition && dateCondition
-           }
-        count = filterData.count
-       }
+    
+    private func CurrentMonthFilter() -> some View {
+        return VStack {
+            RoundedRectangle(cornerRadius: Theme.round)
+                .fill(Theme.point)
+                .frame(width: 37, height: 20)
+                .overlay {
+                    Text("\(historyViewModel.selectedMonth)")
+                        .font(.caption2 .weight(.bold))
+                        .foregroundStyle(Theme.white)
+                }
+        }
+    }
 }
 
 #Preview {
