@@ -155,7 +155,7 @@ extension ChallengeView {
                 withAnimation {
                     challengeViewModel.updateExpressionIndex()
                     challengeViewModel.checkAndAddHistory()
-                    challengeViewModel.setDailyNoti(expressionIndex: $challengeViewModel.expressionIndex, currentChallengeStep: $challengeViewModel.currentChallengeStep)
+                    challengeViewModel.setDailyNoti()
                 }
             }) {
                 if challengeViewModel.todaysHistory != nil {
@@ -188,7 +188,7 @@ extension ChallengeView {
                 withAnimation {
                     challengeViewModel.updateExpressionIndex()
                     challengeViewModel.checkAndAddHistory()
-                    challengeViewModel.setDailyNoti(expressionIndex: $challengeViewModel.expressionIndex, currentChallengeStep: $challengeViewModel.currentChallengeStep)
+                    challengeViewModel.setDailyNoti()
                 }
             }) {
                 if challengeViewModel.todaysHistory != nil {
