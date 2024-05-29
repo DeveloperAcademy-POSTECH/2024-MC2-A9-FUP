@@ -221,13 +221,20 @@
 			path = Launch;
 			sourceTree = "<group>";
 		};
+		CC76CF382C06CF8400C7CAFA /* History */ = {
+			isa = PBXGroup;
+			children = (
+				CC76CF362C0610D800C7CAFA /* HistoryViewModel.swift */,
+			);
+			path = History;
+			sourceTree = "<group>";
+		};
 		CCC074232BFB1E9F00401B25 /* History */ = {
 			isa = PBXGroup;
 			children = (
 				CCC074242BFB1EC000401B25 /* HistoryView.swift */,
 				CCC074262BFB1F2E00401B25 /* HistoryDetailView.swift */,
 				CCC074282BFB1F5000401B25 /* HistoryFilterView.swift */,
-				CC76CF362C0610D800C7CAFA /* HistoryViewModel.swift */,
 			);
 			path = History;
 			sourceTree = "<group>";
@@ -235,6 +242,7 @@
 		DF0B1C6C2C04C9560081CEA5 /* ViewModels */ = {
 			isa = PBXGroup;
 			children = (
+				CC76CF382C06CF8400C7CAFA /* History */,
 				DF0B1C6D2C04C9710081CEA5 /* Challenge */,
 			);
 			path = ViewModels;
