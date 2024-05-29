@@ -29,12 +29,12 @@ struct LottieView : UIViewRepresentable {
         }
         
         animationView.translatesAutoresizingMaskIntoConstraints = false
-        
         view.addSubview(animationView)
-        
         NSLayoutConstraint.activate([
             animationView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             animationView.centerYAnchor.constraint(equalTo: view.centerYAnchor),
+            animationView.heightAnchor.constraint(equalToConstant: 320),
+            animationView.widthAnchor.constraint(equalToConstant: 393)
         ])
         
         return view
