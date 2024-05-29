@@ -15,17 +15,19 @@
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="logo" translatesAutoresizingMaskIntoConstraints="NO" id="uzf-Ff-4vs">
-                                <rect key="frame" x="0.0" y="59" width="393" height="759"/>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="typoLogo" translatesAutoresizingMaskIntoConstraints="NO" id="uzf-Ff-4vs">
+                                <rect key="frame" x="0.0" y="278.66666666666669" width="393" height="320.00000000000006"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="320" id="9c1-Wh-oVg"/>
+                                    <constraint firstAttribute="width" constant="393" id="o4b-Ah-ViR"/>
+                                </constraints>
                             </imageView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="Bcu-3y-fUS"/>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
-                            <constraint firstItem="uzf-Ff-4vs" firstAttribute="leading" secondItem="Bcu-3y-fUS" secondAttribute="leading" id="EzD-ds-fQw"/>
-                            <constraint firstItem="Bcu-3y-fUS" firstAttribute="trailing" secondItem="uzf-Ff-4vs" secondAttribute="trailing" id="dpP-TM-yt1"/>
-                            <constraint firstItem="uzf-Ff-4vs" firstAttribute="top" secondItem="Bcu-3y-fUS" secondAttribute="top" id="kOq-CO-vRz"/>
-                            <constraint firstItem="Bcu-3y-fUS" firstAttribute="bottom" secondItem="uzf-Ff-4vs" secondAttribute="bottom" id="pee-6O-EAp"/>
+                            <constraint firstItem="uzf-Ff-4vs" firstAttribute="centerX" secondItem="Bcu-3y-fUS" secondAttribute="centerX" id="YIx-e7-IkJ"/>
+                            <constraint firstItem="uzf-Ff-4vs" firstAttribute="centerY" secondItem="Bcu-3y-fUS" secondAttribute="centerY" id="rhQ-Ji-e8w"/>
                         </constraints>
                     </view>
                 </viewController>
@@ -35,6 +37,6 @@
         </scene>
     </scenes>
     <resources>
-        <image name="logo" width="393" height="320"/>
+        <image name="typoLogo" width="1572" height="1280"/>
     </resources>
 </document>
