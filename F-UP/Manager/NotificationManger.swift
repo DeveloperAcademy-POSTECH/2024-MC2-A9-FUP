@@ -34,17 +34,17 @@ class NotificationManger {
         }
     }
     
-    func setDailyNoti(expressionIndex: Binding<Int>, currentChallengeStep: Binding<ChallengeStep>) {
+    func setDailyNoti(expressionIndex: Int, currentChallengeStep: ChallengeStep) {
         print("setDailyNoti")
         UNUserNotificationCenter.current().removePendingNotificationRequests(withIdentifiers: ["dailyNotification"])
         self.setNotiContent(expressionIndex: expressionIndex, currentChallengeStep: currentChallengeStep)
     }
     
-    func setNotiContent(expressionIndex: Binding<Int>, currentChallengeStep: Binding<ChallengeStep>) {
+    func setNotiContent(expressionIndex: Int, currentChallengeStep: ChallengeStep) {
         print("setNotiContent")
        
-        let index = expressionIndex.wrappedValue
-        let step = currentChallengeStep.wrappedValue.rawValue
+        let index = expressionIndex
+        let step = currentChallengeStep.rawValue
         print(step)
         let content = UNMutableNotificationContent()
         
@@ -66,8 +66,8 @@ class NotificationManger {
         }
         
         var dateComponents = DateComponents()
-        dateComponents.hour = 13
-        dateComponents.minute = 01
+        dateComponents.hour = 10
+        dateComponents.minute = 00
         
         let trigger = UNCalendarNotificationTrigger(dateMatching: dateComponents, repeats: true)
         let request = UNNotificationRequest(identifier: "dailyNotification", content: content, trigger: trigger)

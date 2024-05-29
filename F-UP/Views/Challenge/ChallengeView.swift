@@ -82,12 +82,12 @@ struct ChallengeView: View {
         .onAppear() {            
             challengeViewModel.updateExpressionIndex()
             challengeViewModel.checkAndAddHistory()
-            challengeViewModel.setDailyNoti(expressionIndex: $challengeViewModel.expressionIndex, currentChallengeStep: $challengeViewModel.currentChallengeStep)
+            challengeViewModel.setDailyNoti()
         }
         .onChange(of: challengeViewModel.currentDateString) {
             challengeViewModel.updateExpressionIndex()
             challengeViewModel.checkAndAddHistory()
-            challengeViewModel.setDailyNoti(expressionIndex: $challengeViewModel.expressionIndex, currentChallengeStep: $challengeViewModel.currentChallengeStep)
+            challengeViewModel.setDailyNoti()
         }
         .onReceive(Timer.publish(every: 30, on: .main, in: .common).autoconnect()) { _ in
             challengeViewModel.getAndCompareDateString()

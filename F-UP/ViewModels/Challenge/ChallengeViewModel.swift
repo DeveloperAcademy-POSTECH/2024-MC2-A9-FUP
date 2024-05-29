@@ -123,7 +123,7 @@ final class ChallengeViewModel {
         setUpStreak()
     }
     
-    func setDailyNoti(expressionIndex: Binding<Int>, currentChallengeStep: Binding<ChallengeStep>) {
+    func setDailyNoti() {
         NotificationManger.shared.setDailyNoti(expressionIndex: expressionIndex, currentChallengeStep: currentChallengeStep)
     }
     
