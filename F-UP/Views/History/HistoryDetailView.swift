@@ -50,12 +50,16 @@ struct HistoryDetailView: View {
                 VStack(spacing: 0) {
                     FeelingProgressTitle(headLine: "내 기분", minValueTitle: "어색해요", maxValueTitle: "익숙해요")
                     CustomProgressView(value: Double(history.feelingValue.rawValue), in: 0...4)
-                        .frame(width: 353, height: 38)
+                        .frame(maxWidth: .infinity)
+                        .frame( height: 38)
+                        .padding(.horizontal, Theme.padding)
                 }
                 VStack(spacing: 0) {
                     FeelingProgressTitle(headLine: "타인의 반응", minValueTitle: "별로에요", maxValueTitle: "좋아요")
                     CustomProgressView(value: Double(history.reactionValue.rawValue), in: 0...4)
-                        .frame(width: 353, height: 38)
+                        .frame(maxWidth: .infinity)
+                        .frame( height: 38)
+                        .padding(.horizontal, Theme.padding)
                 }
                 Spacer()
             }
@@ -108,7 +112,8 @@ extension HistoryDetailView {
         return VStack(spacing: 0) {
             RoundedRectangle(cornerRadius: Theme.round)
                 .fill(Theme.white)
-                .frame(width: 353, height: 140)
+                .frame(maxWidth: .infinity)
+                .frame(height: 140)
                 .dropShadow(opacity: 0.15)
                 .overlay {
                     VStack(alignment: .leading, spacing: 0) {
