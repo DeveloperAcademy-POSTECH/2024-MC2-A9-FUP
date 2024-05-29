@@ -58,11 +58,13 @@ struct HistoryFilterView: View {
             } label: {
                 RoundedRectangle(cornerRadius: Theme.round)
                     .fill(.white)
-                    .frame(width: 353, height: 50)
+                    .frame(maxWidth: .infinity)
+                    .frame( height: 50)
                     .overlay {
                         RoundedRectangle(cornerRadius: Theme.round)
                             .stroke( Theme.subblack ,lineWidth: 1)
-                            .frame(width: 353, height: 50)
+                            .frame(maxWidth: .infinity)
+                            .frame( height: 50)
                         HStack(spacing: 0) {
                             Text(historyViewModel.selectedMonth)
                                 .foregroundStyle(Theme.black)
@@ -74,6 +76,7 @@ struct HistoryFilterView: View {
                         }
                     }
             }
+            .padding(.horizontal, Theme.padding)
             
             Button {
                 HapticManager.shared.generateHaptic(.success)
@@ -81,7 +84,8 @@ struct HistoryFilterView: View {
             } label: {
                 RoundedRectangle(cornerRadius: Theme.round)
                     .fill(Theme.point)
-                    .frame(width: 353, height: 50)
+                    .frame(maxWidth: .infinity)
+                    .frame( height: 50)
                     .overlay {
                         Text("필터 적용하기")
                             .foregroundStyle(Theme.white)
@@ -89,6 +93,7 @@ struct HistoryFilterView: View {
                     .padding(.top, 38)
                     .dropShadow(opacity: 0.2)
             }
+            .padding(.horizontal, Theme.padding)
         }
     }
 }
