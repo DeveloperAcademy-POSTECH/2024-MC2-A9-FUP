@@ -112,6 +112,7 @@ final class ChallengeViewModel {
                 streak = todaysHistory.streak
             }
         }
+        UserDefaults(suiteName: "group.f_up.group.com")?.set(streak, forKey: "streak")
     }
     
     func checkAndAddHistory() {
