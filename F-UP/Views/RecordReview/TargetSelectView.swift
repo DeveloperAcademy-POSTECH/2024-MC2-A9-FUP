@@ -8,13 +8,12 @@
 import SwiftUI
 
 struct TargetSelectView: View {
-    @Binding var showModal: Bool
+    @State var cvm: ChallengeViewModel
     
     @State private var nameTextField = ""
     @State private var selectedTarget: String = ""
     @State private var selectedTargetEnum: Target? = nil
     @State private var navigationToNextView: Bool = false
-    var history: History
     
     let target: [Target] = Target.allCases
     let columns = [
@@ -44,7 +43,7 @@ struct TargetSelectView: View {
                                 .foregroundColor(Theme.semiblack)
                                 .padding(.top, 34)
                                 .padding(.bottom, 3)
-                            Text("“\(history.expression)”")
+                            Text("“\(cvm.dummyExpression[cvm.expressionIndex].forceCharWrapping))”")
                                 .font(.title3 .weight(.bold))
                                 .foregroundColor(Theme.black)
                                 .padding(.bottom, 51)
@@ -115,7 +114,7 @@ struct TargetSelectView: View {
                     .navigationBarTitleDisplayMode(.inline)
                     .toolbar {
                         Button("취소") {
-                            showModal = false
+                            cvm.showModal = false
                         }
                         .tint(Theme.point)
                     }
@@ -140,10 +139,10 @@ struct TargetSelectView: View {
                     .disabled(!isComplete)
                     .navigationDestination(isPresented: $navigationToNextView) {
                         if nameTextField.isEmpty {
-                            MyMoodView(showModal: $showModal, history: history, target: selectedTargetEnum ?? .family, specificTarget: nil)
+                            MyMoodView(cvm: cvm, target: selectedTargetEnum ?? .family, specificTarget: nil)
                         }
                         else {
-                            MyMoodView(showModal: $showModal, history: history, target: selectedTargetEnum ?? .family, specificTarget: nameTextField)
+                            MyMoodView(cvm: cvm, target: selectedTargetEnum ?? .family, specificTarget: nameTextField)
                         }
                         
                     }
@@ -152,10 +151,4 @@ struct TargetSelectView: View {
             }
         }
     }
-}
-
-#Preview {
-
-    TargetSelectView(showModal: .constant(true), history: History(date: Date(), streak: 0, challengeStep: .challengeCompleted, expression: "ds", audioURL: URL(string: "https://www.example.com")!, audioLevels: Array(repeating: CGFloat(0.1), count: 30), audioLength: 0, target: .acquaintance, feelingValue: .neutral, reactionValue: .neutral))
-        .environment(AVFoundationManager())
 }

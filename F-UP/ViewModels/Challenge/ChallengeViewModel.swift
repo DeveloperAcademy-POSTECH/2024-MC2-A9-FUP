@@ -137,4 +137,12 @@ final class ChallengeViewModel {
             }
         }
     }
+    
+    func updateStreak() {
+        if yesterdaysHistory != nil {
+            streak! += 1
+        } else {
+            streak = 1
+        }
+    }
 }
