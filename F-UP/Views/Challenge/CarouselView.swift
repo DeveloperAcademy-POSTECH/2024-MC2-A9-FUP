@@ -159,7 +159,7 @@ extension ChallengeView {
                 }
             }) {
                 if challengeViewModel.todaysHistory != nil {
-                    RecordingView(showModal: $challengeViewModel.showModal, history: challengeViewModel.todaysHistory!).interactiveDismissDisabled()
+                    RecordingView(cvm: challengeViewModel).interactiveDismissDisabled()
                 }
             }
             .onChange(of: challengeViewModel.showModal) { _, _ in
@@ -192,7 +192,7 @@ extension ChallengeView {
                 }
             }) {
                 if challengeViewModel.todaysHistory != nil {
-                    TargetSelectView(showModal: $challengeViewModel.showModal, history: challengeViewModel.todaysHistory!).interactiveDismissDisabled()
+                    TargetSelectView(cvm: challengeViewModel).interactiveDismissDisabled()
                 }
             }
             .onChange(of: challengeViewModel.showModal) { _, _ in

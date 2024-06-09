@@ -10,9 +10,8 @@ import SwiftUI
 struct RecordingView: View {
     @Environment(AVFoundationManager.self) var avfoundationManager
     
-    @Binding var showModal: Bool
+    @State var cvm: ChallengeViewModel
     @State private var navigationToNextView: Bool = false
-    var history: History
     
     var body: some View {
         NavigationStack {
@@ -25,7 +24,7 @@ struct RecordingView: View {
                         .foregroundColor(Theme.semiblack)
                         .padding(.top, 34)
                         .padding(.bottom, 3)
-                    Text("“\(history.expression)”")
+                    Text("“\(cvm.dummyExpression[cvm.expressionIndex].forceCharWrapping)”")
                         .font(.title3 .weight(.bold))
                         .foregroundColor(Theme.black)
                         .padding(.bottom, 115)
@@ -75,12 +74,12 @@ struct RecordingView: View {
                             } else {
                                 HapticManager.shared.generateHaptic(.medium(times: 1))
                                 avfoundationManager.isRecording = true
-                                avfoundationManager.startRecording(fileName: history.date.dateToString())
+                                avfoundationManager.startRecording(fileName: cvm.todaysHistory!.date.dateToString())
                             }
                         }
                     }
                     .navigationDestination(isPresented: $navigationToNextView) {
-                        ReviewRecordingView(showModal: $showModal, history: history)
+                        ReviewRecordingView(cvm: cvm)
                     }
                     .onChange(of: avfoundationManager.audioLevel) { oldValue, newValue in
                         HapticManager.shared.generateHaptic(.light(times: 1))
@@ -99,14 +98,14 @@ struct RecordingView: View {
                     Button("취소") {
                         avfoundationManager.stopRecording()
                         avfoundationManager.deleteRecording()
-                        showModal = false
+                        cvm.showModal = false
                     }
                     .tint(Theme.point)
                 }
                 .onAppear {
                     avfoundationManager.requestPermission { success in
                         if !success {
-                            showModal = false
+                            cvm.showModal = false
                             print("마이크 권한이 없습니다.")
                         }
                     }
@@ -114,9 +113,4 @@ struct RecordingView: View {
             }
         }
     }
-}
-
-#Preview {
-    RecordingView(showModal: .constant(true), history: History(date: Date(), streak: 0, challengeStep: .challengeCompleted, expression: "ds", audioURL: URL(string: "https://www.example.com")!, audioLevels: Array(repeating: CGFloat(0.1), count: 30), audioLength: 0, target: .acquaintance, feelingValue: .neutral, reactionValue: .neutral))
-        .environment(AVFoundationManager())
 }

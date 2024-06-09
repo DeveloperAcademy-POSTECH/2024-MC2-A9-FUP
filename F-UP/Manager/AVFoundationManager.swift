@@ -140,7 +140,6 @@ final class AVFoundationManager: NSObject {
     func playRecorded(audioFilename: URL) {
         do {
             audioPlayer = try AVAudioPlayer(contentsOf: audioFilename)
-            let asset = AVAsset(url: audioFilename)
             
             audioPlayer?.delegate = self
             audioPlayer?.play()
