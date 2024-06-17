@@ -188,7 +188,6 @@ extension HistoryDetailView {
         HistoryDetailView(history: History(date: Date(), streak: 0, challengeStep: .challengeCompleted, expression: "나무디 화이팅이에요!", audioURL: URL(string: "https://www.example.com")!, audioLevels: Array(repeating: CGFloat(0.1), count: 30), audioLength: 0, target: .acquaintance, feelingValue: .comfortable, reactionValue: .bad))
             .environment(AVFoundationManager())
             .environment(SwiftDataManager())
-            .environment(RefreshTrigger())
     }
 }
 
