@@ -182,5 +182,4 @@ extension ChallengeView {
         .modelContainer(for: History.self, inMemory: true)
         .environment(AVFoundationManager())
         .environment(SwiftDataManager())
-        .environment(RefreshTrigger())
 }

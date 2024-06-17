@@ -12,7 +12,6 @@ struct ReviewRecordingView: View {
     @Environment(\.modelContext) var modelContext
     @Environment(AVFoundationManager.self) var avFoundationManager
     @Environment(SwiftDataManager.self) var swiftDataManager
-    @Environment(RefreshTrigger.self) var refreshTrigger
     
     @State var cvm: ChallengeViewModel
     
@@ -84,7 +83,6 @@ struct ReviewRecordingView: View {
                 Button {
                     avFoundationManager.stopPlaying()
                     swiftDataManager.updateHistoryAfterRecording(modelContext: modelContext, history: cvm.todaysHistory!, audioURL: avFoundationManager.getCurrentRecordingPath()!, audioLevels: avFoundationManager.audioLevels, audioLength: avFoundationManager.recordLength)
-                    refreshTrigger.trigger.toggle()
                     cvm.showModal = false
                     HapticManager.shared.generateHaptic(.success)
                 } label : {

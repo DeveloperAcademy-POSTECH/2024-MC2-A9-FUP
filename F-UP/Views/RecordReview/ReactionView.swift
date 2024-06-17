@@ -12,7 +12,6 @@ struct ReactionView: View {
     @Environment(\.dismiss) private var dismiss
     @Environment(\.modelContext) var modelContext
     @Environment(SwiftDataManager.self) var swiftDataManager
-    @Environment(RefreshTrigger.self) var refreshTrigger
     
     @State var cvm: ChallengeViewModel
     @State private var sliderValue: Double = 0
@@ -79,7 +78,6 @@ struct ReactionView: View {
                     default:
                         swiftDataManager.updateHistoryAfterChallenge(modelContext: modelContext, history: cvm.todaysHistory!, streak: cvm.streak!, target: target, specificTarget: specificTarget, feelingValue: feelingValue, reactionValue: .veryBad)
                     }
-                    refreshTrigger.trigger.toggle()
                     cvm.showModal = false
                     HapticManager.shared.generateHaptic(.success)
                 } label : {
