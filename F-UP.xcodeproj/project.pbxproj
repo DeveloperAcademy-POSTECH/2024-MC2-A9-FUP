@@ -32,7 +32,6 @@
 		CCC074272BFB1F2E00401B25 /* HistoryDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCC074262BFB1F2E00401B25 /* HistoryDetailView.swift */; };
 		CCC074292BFB1F5000401B25 /* HistoryFilterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCC074282BFB1F5000401B25 /* HistoryFilterView.swift */; };
 		CCC0A14B2BFCFD4B00C14B8C /* NotificationManger.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCC0A14A2BFCFD4B00C14B8C /* NotificationManger.swift */; };
-		DF0ABEC42BFCE6A1000F2C03 /* RefreshTrigger.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF0ABEC32BFCE6A1000F2C03 /* RefreshTrigger.swift */; };
 		DF0B1C6F2C04C97F0081CEA5 /* ChallengeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF0B1C6E2C04C97F0081CEA5 /* ChallengeViewModel.swift */; };
 		DF32E17F2BFA1B730084B28C /* DottedDivider.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF32E17E2BFA1B730084B28C /* DottedDivider.swift */; };
 		DF32E1822BFA40780084B28C /* SwiftDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF32E1812BFA40780084B28C /* SwiftDataManager.swift */; };
@@ -104,7 +103,6 @@
 		CCC074262BFB1F2E00401B25 /* HistoryDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryDetailView.swift; sourceTree = "<group>"; };
 		CCC074282BFB1F5000401B25 /* HistoryFilterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryFilterView.swift; sourceTree = "<group>"; };
 		CCC0A14A2BFCFD4B00C14B8C /* NotificationManger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationManger.swift; sourceTree = "<group>"; };
-		DF0ABEC32BFCE6A1000F2C03 /* RefreshTrigger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RefreshTrigger.swift; sourceTree = "<group>"; };
 		DF0B1C6E2C04C97F0081CEA5 /* ChallengeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChallengeViewModel.swift; sourceTree = "<group>"; };
 		DF32E17E2BFA1B730084B28C /* DottedDivider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DottedDivider.swift; sourceTree = "<group>"; };
 		DF32E1812BFA40780084B28C /* SwiftDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftDataManager.swift; sourceTree = "<group>"; };
@@ -167,7 +165,6 @@
 				DFBE0BD92BF4DB4E00246814 /* Enums.swift */,
 				DFBE0BC62BF32CB400246814 /* History.swift */,
 				173B49DB2BF72C5600FC4FEC /* Theme.swift */,
-				DF0ABEC32BFCE6A1000F2C03 /* RefreshTrigger.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -470,7 +467,6 @@
 				CCC074272BFB1F2E00401B25 /* HistoryDetailView.swift in Sources */,
 				CC3B1F7E2C00199C002818F2 /* SplashView.swift in Sources */,
 				DF32E17F2BFA1B730084B28C /* DottedDivider.swift in Sources */,
-				DF0ABEC42BFCE6A1000F2C03 /* RefreshTrigger.swift in Sources */,
 				17B7627B2BFB347100BE8599 /* MyMoodView.swift in Sources */,
 				DF32E1822BFA40780084B28C /* SwiftDataManager.swift in Sources */,
 				17AB3C152BF7D12C00A725B7 /* ReviewRecordingView.swift in Sources */,
