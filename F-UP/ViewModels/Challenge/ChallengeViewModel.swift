@@ -144,5 +144,6 @@ final class ChallengeViewModel {
         } else {
             streak = 1
         }
+        UserDefaults(suiteName: "group.f_up.group.com")?.set(streak, forKey: "streak")
     }
 }
