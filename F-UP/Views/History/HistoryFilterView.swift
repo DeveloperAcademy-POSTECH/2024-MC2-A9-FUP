@@ -36,48 +36,48 @@ struct HistoryFilterView: View {
                 }
             }
             
-            HStack {
-                Text("월")
-                    .foregroundStyle(Theme.black)
-                    .font(.headline .weight(.bold))
-                    .padding(.leading, 26)
-                    .padding(.top, 25)
-                    .padding(.bottom, 10)
-                Spacer()
-            }
+//            HStack {
+//                Text("월")
+//                    .foregroundStyle(Theme.black)
+//                    .font(.headline .weight(.bold))
+//                    .padding(.leading, 26)
+//                    .padding(.top, 25)
+//                    .padding(.bottom, 10)
+//                Spacer()
+//            }
             
-            Menu {
-                ForEach(historyViewModel.months, id: \.self) { month in
-                    Button {
-                        HapticManager.shared.generateHaptic(.light(times: 1))
-                        historyViewModel.selectedMonth = month
-                    } label: {
-                        Text(month)
-                    }
-                }
-            } label: {
-                RoundedRectangle(cornerRadius: Theme.round)
-                    .fill(.white)
-                    .frame(maxWidth: .infinity)
-                    .frame( height: 50)
-                    .overlay {
-                        RoundedRectangle(cornerRadius: Theme.round)
-                            .stroke( Theme.subblack ,lineWidth: 1)
-                            .frame(maxWidth: .infinity)
-                            .frame( height: 50)
-                        HStack(spacing: 0) {
-                            Text(historyViewModel.selectedMonth)
-                                .foregroundStyle(Theme.black)
-                                .padding(Theme.padding)
-                            Spacer()
-                            Image(systemName: "chevron.down")
-                                .padding(.trailing, Theme.padding)
-                                .foregroundStyle(Theme.black)
-                        }
-                    }
-            }
-            .padding(.horizontal, Theme.padding)
-            
+//            Menu {
+//                ForEach(historyViewModel.months, id: \.self) { month in
+//                    Button {
+//                        HapticManager.shared.generateHaptic(.light(times: 1))
+//                        historyViewModel.selectedMonth = month
+//                    } label: {
+//                        Text(month)
+//                    }
+//                }
+//            } label: {
+//                RoundedRectangle(cornerRadius: Theme.round)
+//                    .fill(.white)
+//                    .frame(maxWidth: .infinity)
+//                    .frame( height: 50)
+//                    .overlay {
+//                        RoundedRectangle(cornerRadius: Theme.round)
+//                            .stroke( Theme.subblack ,lineWidth: 1)
+//                            .frame(maxWidth: .infinity)
+//                            .frame( height: 50)
+//                        HStack(spacing: 0) {
+//                            Text(historyViewModel.selectedMonth)
+//                                .foregroundStyle(Theme.black)
+//                                .padding(Theme.padding)
+//                            Spacer()
+//                            Image(systemName: "chevron.down")
+//                                .padding(.trailing, Theme.padding)
+//                                .foregroundStyle(Theme.black)
+//                        }
+//                    }
+//            }
+//            .padding(.horizontal, Theme.padding)
+//            
             Button {
                 HapticManager.shared.generateHaptic(.success)
                 historyViewModel.isShowingModal.toggle()
