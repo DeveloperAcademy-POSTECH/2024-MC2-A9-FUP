@@ -20,7 +20,7 @@ struct HistoryView: View {
             .sheet(isPresented: $historyViewModel.isShowingModal, content: {
                 HistoryFilterView(historyViewModel: historyViewModel)
                     .presentationDetents(
-                        [.height(330)]
+                        [.height(250)]
                     )
                     .onDisappear {
                         historyViewModel.combinedFilter()
@@ -77,9 +77,9 @@ extension HistoryView {
                         if historyViewModel.selectedTarget != nil {
                             CurrentTargetFilter()
                         }
-                        if historyViewModel.selectedMonth !=  "전체" {
-                            CurrentMonthFilter()
-                        }
+//                        if historyViewModel.selectedMonth !=  "전체" {
+//                            CurrentMonthFilter()
+//                        }
                     }
                     .padding(.trailing, 8)
                     
@@ -149,6 +149,16 @@ extension HistoryView {
                     
                     Spacer()
                     
+                    HStack(spacing: 8) {
+                        if historyViewModel.selectedTarget != nil {
+                            CurrentTargetFilter()
+                        }
+                    //    if historyViewModel.selectedMonth != "전체" {
+                    //        CurrentMonthFilter()
+                    //    }
+                    }
+                    .padding(.trailing, 8)
+                    
                     Button {
                         historyViewModel.isShowingModal.toggle()
                     } label: {
@@ -183,18 +193,18 @@ extension HistoryView {
         }
     }
     
-    private func CurrentMonthFilter() -> some View {
-        return VStack {
-            RoundedRectangle(cornerRadius: Theme.round)
-                .fill(Theme.point)
-                .frame(width: 37, height: 20)
-                .overlay {
-                    Text("\(historyViewModel.selectedMonth)")
-                        .font(.caption2 .weight(.bold))
-                        .foregroundStyle(Theme.white)
-                }
-        }
-    }
+//    private func CurrentMonthFilter() -> some View {
+//        return VStack {
+//            RoundedRectangle(cornerRadius: Theme.round)
+//                .fill(Theme.point)
+//                .frame(width: 37, height: 20)
+//                .overlay {
+//                    Text("\(historyViewModel.selectedMonth)")
+//                        .font(.caption2 .weight(.bold))
+//                        .foregroundStyle(Theme.white)
+//                }
+//        }
+//    }
 }
 
 #Preview {
