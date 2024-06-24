@@ -17,34 +17,23 @@ struct ChallengeView: View {
             
             //Title
             VStack(spacing: 0) {
-                HStack {
+                HStack(spacing: 8) {
                     Text("챌린지")
                         .font(.title)
                         .foregroundStyle(Theme.black)
                         .fontWeight(.bold)
                         .padding(.leading, 20)
-                    //streak
-                    HStack(alignment: .center, spacing: 10) {
-                        HStack(spacing: 2) {
-                            Image(systemName: "flame.fill")
-                                .font(.footnote .weight(.semibold))
-                                .foregroundColor(challengeViewModel.streak == 0 ? Theme.subblack : Theme.point)
-                            Text("\(challengeViewModel.streak ?? 0)") //streak 변수
-                                .font(.footnote .weight(.semibold))
-                                .foregroundColor(challengeViewModel.streak == 0 ? Theme.subblack : Theme.point)
-                        }
-                    }
-                    .padding(.horizontal, 9)
-                    .padding(.vertical, 4)
-                    .background(Theme.background)
-                    .clipShape(
-                        RoundedRectangle(cornerRadius: 12.5)
-                    )
-                    .overlay(
-                        RoundedRectangle(cornerRadius: 12.5)
-                            .inset(by: 0.65)
-                            .stroke(challengeViewModel.streak == 0 ? Theme.subblack : Theme.point, lineWidth: 1.3)
-                    )
+                    HStack(spacing: 3) {
+                        Text("\(challengeViewModel.streak ?? 0)일째 도전 성공")
+                            .font(.caption)
+                            .bold()
+                            .foregroundStyle(challengeViewModel.streak == 0 ? Theme.subblack : Theme.point)
+                        Image(systemName: "flame.fill")
+                            .resizable()
+                            .scaledToFit()
+                            .frame(height: 11)
+                            .foregroundStyle(challengeViewModel.streak == 0 ? Theme.subblack : Theme.point)
+                    }.padding(.top, 3)
                     Spacer()
                 }
                 .padding(.bottom, 20)
