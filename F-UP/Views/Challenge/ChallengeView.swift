@@ -10,6 +10,7 @@ import SwiftData
 
 struct ChallengeView: View {
     @State var challengeViewModel = ChallengeViewModel()
+
     
     var body: some View {
         ZStack(alignment: .top){

@@ -51,8 +51,8 @@ class NotificationManger {
         content.sound = .default
         
         var dateComponents = DateComponents()
-        dateComponents.hour = 10
-        dateComponents.minute = 00
+        dateComponents.hour = 13
+        dateComponents.minute = 01
         
         let trigger = UNCalendarNotificationTrigger(dateMatching: dateComponents, repeats: true)
         let request = UNNotificationRequest(identifier: "dailyNotification", content: content, trigger: trigger)
