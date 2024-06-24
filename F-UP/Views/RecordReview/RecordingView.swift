@@ -85,9 +85,17 @@ struct RecordingView: View {
                         HapticManager.shared.generateHaptic(.light(times: 1))
                     }
                     
-                    Text(avfoundationManager.isRecording ? "듣고 있어요" : "오늘의 표현을 실제로 따라해보세요")
-                        .font(.body .weight(.bold))
-                        .foregroundStyle(avfoundationManager.isRecording ? Theme.black : Theme.semiblack)
+                    Text(avfoundationManager.isRecording ? "듣고 있어요!" : "말해보세요!")
+                        .font(.title3)
+                        .bold()
+                        .foregroundStyle(Theme.black)
+                    
+                    Text(avfoundationManager.isRecording ? "마이크 버튼을 한번 더 눌러\n녹음을 종료해 주세요!" : "마이크 버튼을 눌러 오늘의 표현을\n실제로 말해보세요!")
+                        .font(.subheadline)
+                        .bold()
+                        .foregroundStyle(Theme.semiblack)
+                        .multilineTextAlignment(.center)
+                        .padding(.top, 19)
                     
                     Spacer()
                 }
