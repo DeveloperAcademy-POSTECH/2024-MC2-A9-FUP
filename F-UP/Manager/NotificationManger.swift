@@ -37,33 +37,18 @@ class NotificationManger {
     func setDailyNoti(expressionIndex: Int, currentChallengeStep: ChallengeStep) {
         print("setDailyNoti")
         UNUserNotificationCenter.current().removePendingNotificationRequests(withIdentifiers: ["dailyNotification"])
-        self.setNotiContent(expressionIndex: expressionIndex, currentChallengeStep: currentChallengeStep)
+        self.setNotiContent(expressionIndex: expressionIndex)
     }
     
-    func setNotiContent(expressionIndex: Int, currentChallengeStep: ChallengeStep) {
+    func setNotiContent(expressionIndex: Int) {
         print("setNotiContent")
        
         let index = expressionIndex
-        let step = currentChallengeStep.rawValue
-        print(step)
         let content = UNMutableNotificationContent()
         
-        switch step {
-        case 0 :
-            content.title = "오늘의 챌린지를 수행해보세요"
-            content.body = "\"\(dummyExpression[index])\""
-            content.sound = .default
-        case 1 :
-            content.title = "오늘의 표현을 실제로 사용해보세요"
-            content.body = "\"\(dummyExpression[index])\""
-            content.sound = .default
-        case 2 :
-            content.title = "챌린지를 수행하셨군요?"
-            content.body = "오늘의 표현을 다시 보러갈까요?"
-            content.sound = .default
-        default:
-            return
-        }
+        content.title = "오늘의 챌린지를 수행하셨나요?"
+        content.body = "\"\(dummyExpression[index])\""
+        content.sound = .default
         
         var dateComponents = DateComponents()
         dateComponents.hour = 10
